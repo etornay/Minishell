@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/25 10:02:26 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:03:10 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	free_split(char **tmp)
+{
+	int	i;
+
+	i = 0;
+	while (tmp[i])
+	{
+		free(tmp[i]);
+		i++;
+	}
+	free (tmp);
+}
 
 int	get_path(t_paco *p, char **env)
 {
@@ -19,7 +32,7 @@ int	get_path(t_paco *p, char **env)
 	i = 0;
 	while (ft_strncmp(env[i], "PATH", 4) != 0)
 		i++;
-	p->path = ft_split(env[i] + 5, ":");
+	p->path = ft_split(env[i] + 5, ':');
 	if (!p->path)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
@@ -38,15 +51,15 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp)
 		new->index = 0;
 		new->next_env = NULL;
 	}
-	first = lst;
+	first = *lst;
 	if (first == NULL)
 	{
 		first = new;
 		return ;
 	}
-	while (first->next != NULL)
-		first = first->next;
-	first->next = new;
+	while (first->next_env != NULL)
+		first = first->next_env;
+	first->next_env = new;
 	return ;
 }
 
@@ -56,7 +69,7 @@ void	init_env(t_paco *p, char **env, int i)
 
 	p->l_env = calloc(1, sizeof(t_env));
 	if (!p->l_env)
-		return (EXIT_FAILURE);
+		return ;
 	tmp = ft_split(env[i], '=');
 	if (!tmp)
 		return ;
@@ -73,8 +86,8 @@ void	init_env(t_paco *p, char **env, int i)
 		tmp = ft_split(env[i], '=');
 		if (!tmp)
 			return ;
-		lst_addenv_back(&p->envp, p->aux, tmp);
+		lst_addenv_back(&p->l_env, p->aux, tmp);
 		free_split(tmp);
 	}
-	
+	return ;
 }

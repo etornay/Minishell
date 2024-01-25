@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:44:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/24 09:36:05 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:06:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_paco_sanz2(void)
 	ft_printf(" | |____| |____| |____ \n");
 	ft_printf("|_| /_/    \\_\\_____\\____/|_____/|_| ");
 	ft_printf(" |_|______|______|______|\n");
+	ft_printf("\n\n");
 }
 
 void	ft_paco_sanz(void)
@@ -47,6 +48,7 @@ void	ft_paco_sanz(void)
 	ft_printf("⣿⣿⣿⣿⠿⠿⣿⣿⣧⡈⣿⠏⣀⠕⠁⠀⠀⢀⠜⠉⠻⠀⣿⢆⠀⠀⠀⠀⠀⠀\n");
 	ft_printf("⣿⣿⣿⡇⠀⠀⢸⣿⣿⣿⠟⠽⠳⠀⠀⠀⠈⠀⠀⠴⣤⣿⣿⡞⠷⣤⣤⡀⠀⠀\n");
 	ft_printf("⠛⠛⣿⡇⠀⡀⠈⢛⣻⠏⠀⠀⠋⠀⠀⠀⠀⠀⠀⠀⣹⢿⣿⣷⠣⣬⡾⣙⡗⠀\n");
+	ft_printf("\n");
 	ft_paco_sanz2();
 }
 
