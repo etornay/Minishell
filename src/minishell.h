@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/11 16:36:57 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/01/25 09:41:37 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,23 @@
 # define PURPLE_T "\033[35m"
 # define RESET_COLOR "\x1b[0m"
 
+typedef struct s_env
+{
+	char			*name;
+	char			*content;
+	int				index;
+	struct s_env	*next_env;
+}	t_env;
+
 typedef struct s_paco
 {
 	char	*shell;
 	char	*line;
+	char	**path;
+	t_env	*l_env;
+	t_env	*aux;
 }	t_paco;
+
+int	get_path(t_paco *p, char **env);
 
 #endif

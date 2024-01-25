@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/11 16:47:08 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:04:12 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,16 @@
 int	minishell(t_paco *p, char **env)
 {
 	ft_paco_sanz();
+	if (get_path(p, env) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
+	init_env(p, env, 0);
 	while (33)
 	{
 		if (prompt(p) == EXIT_FAILURE)
 			exit (EXIT_FAILURE);
 		if (ft_strncmp(p->line, "\0", 1) == EXIT_FAILURE)
 			add_history(p->line);
+		
 	}
 }
 
