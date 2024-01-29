@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/29 09:12:36 by ncruz-ga         ###   ########.fr       */
+/*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
+/*   Updated: 2024/01/29 09:03:54 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void	pwd(t_paco *p)
+void	init_struct(t_paco *p)
 {
-	char	dir[500];
-
-	p->act_dir = getcwd(dir, 500);
-	if (p->act_dir == NULL)
-		return ;
-	ft_printf("%s\n", p->act_dir);
-}
-
-void	echo(t_paco *p, int flag)
-{
-	
+	p->shell = NULL;
+	p->act_dir = NULL;
+	p->aux = NULL;
+	p->l_env = NULL;
+	p->line = NULL;
+	p->path = NULL;
 }
