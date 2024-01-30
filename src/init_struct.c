@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/29 09:03:54 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:24:32 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,5 @@ void	init_struct(t_paco *p)
 	p->l_env = NULL;
 	p->line = NULL;
 	p->path = NULL;
+	p->lex = NULL;
 }

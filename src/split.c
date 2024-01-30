@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/29 16:22:33 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:34:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,24 +32,19 @@ static void	free_split(char **s, int j)
 static int	word_len(char *s, char limit)
 {
 	int	i;
-	int	word;
 
 	i = 0;
-	while (s[i] != '\0')
+	while (s[i] != '\0' && s[i] != limit)
 	{
-		if (s[i] == limit && s[i] != '\0')
-			i++;
-		else if (s[i] != limit && s[i] != '\0')
-			i++;
-		else if (s[i] != limit && (s[i++] == limit || s[i++] != '\0'))
+		if (s[i] == '\'' || s[i] == '\"')
 		{
 			i++;
-			word++;
+			while (s[i] != '\0' && s[i] != '\"' && s[i] != '\'')
+				i++;
 		}
-		i++;
+		else
+			i++;
 	}
-	while (s[i] != limit && s[i] != '\0')
-		i++;
 	return (i);
 }
 
@@ -74,11 +69,11 @@ static char	**split_loop(char *s, char limit, char **str)
 			free_split(str, j);
 			return (NULL);
 		}
-		ft_strlcpy(str[j], (char *)s[i], len + 1);
+		ft_strlcpy(str[j], s, len + 1);
 		i += len;
 		j++;
 	}
-	str[j] == NULL;
+	str[j] = NULL;
 	return (str);
 }
 
@@ -105,13 +100,11 @@ static int	count_words(char *s, char limit)
 			if (s[i] != '\0')
 				c++;
 		}
-		while (s[i] != limit && s[i] != '\0')
-			i++;
 	}
 	return (c);
 }
 
-char	**split_line(const char *s, char limit)
+char	**split_line(char *s, char limit)
 {
 	char	**str;
 

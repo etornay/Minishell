@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/25 14:44:04 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:31:35 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_paco
 	char	*line;
 	char	**path;
 	char	*act_dir;
+	char	**lex;
 	t_env	*l_env;
 	t_env	*aux;
 }	t_paco;
@@ -47,5 +48,7 @@ void	pwd(t_paco *p);
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
 void	ft_paco_sanz2(void);
-
+char	**split_line(char *s, char limit);
+int		input(char *input, t_paco *p, char **env);
+void	init_struct(t_paco *p);
 #endif

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/29 09:12:36 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/30 13:30:02 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	pwd(t_paco *p)
 	ft_printf("%s\n", p->act_dir);
 }
 
-void	echo(t_paco *p, int flag)
+/* void	echo(t_paco *p, int flag)
 {
 	
-}
+} */

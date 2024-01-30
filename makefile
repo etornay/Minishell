@@ -6,6 +6,7 @@ FILES = src/minishell.c\
 src/prompt.c\
 src/builtins/builtins.c\
 src/builtins/env_utils/get_path.c\
+src/split.c\
 
 OBJECTS = $(FILES:.c=.o)
 
