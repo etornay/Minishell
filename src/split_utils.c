@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_struct.c                                      :+:      :+:    :+:   */
+/*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/30 18:04:56 by etornay-         ###   ########.fr       */
+/*   Created: 2024/01/31 14:20:20 by etornay-          #+#    #+#             */
+/*   Updated: 2024/01/31 14:25:13 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	init_struct(t_paco *p)
+void	free_mini_split(char **s, int j)
 {
-	p->shell = NULL;
-	p->act_dir = NULL;
-	p->aux = NULL;
-	p->l_env = NULL;
-	p->line = NULL;
-	p->path = NULL;
-	p->lex = NULL;
-	p->i = 0;
-	p->c = 0;
+	int	i;
+
+	i = 0;
+	if (s != NULL)
+	{
+		while (i < j)
+		{
+			if (s[i])
+				free(s[i]);
+			i++;
+		}
+		free(s);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/30 13:29:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/30 18:15:07 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,16 @@
 
 int	input(char *input, t_paco *p, char **env)
 {
+	int	i;
+
+	i = 0;
 	(void)env;
-	p->lex = split_line(input, ' ');
+	p->lex = split_line(input, ' ', p);
+	while (p->lex[i] != NULL)
+	{
+		ft_printf("%s\n", p->lex[i]);
+		i++;
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -28,7 +36,7 @@ int	minishell(t_paco *p, char **env)
 	while (33)
 	{
 		if (prompt(p) == EXIT_FAILURE)
-			exit (EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 		if (ft_strncmp(p->line, "\0", 1) == EXIT_FAILURE)
 			add_history(p->line);
 		if (input(p->line, p, env) == EXIT_FAILURE)

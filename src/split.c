@@ -3,52 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/30 13:34:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/01/31 18:49:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_split(char **s, int j)
+static void	word_len2(char *s, char d, t_paco *p)
 {
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	p->c = p->i;
+	if (s[p->i] == '\"')
 	{
-		while (i < j)
-		{
-			if (s[i])
-				free(s[i]);
-			i++;
-		}
-		free(s);
+		p->i++;
+		while (s[p->i] != '\0' && s[p->i] != '\"')
+			p->i++;
+		if (s[p->i] != '\0')
+			p->i++;
+	}
+	else if (s[p->i] == '\'')
+	{
+		p->i++;
+		while (s[p->i] != '\0' && (s[p->i] != '\'' || s[p->i + 1] != d))
+			p->i++;
+		p->i++;
+		p->c = p->i;
 	}
 }
 
-static int	word_len(char *s, char limit)
+static int	word_len(char *s, char d, t_paco *p)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0' && s[i] != limit)
+	while (s[p->i] != '\0')
 	{
-		if (s[i] == '\'' || s[i] == '\"')
+		while (s[p->i] == d && s[p->i] != '\0')
+			p->i++;
+		if (s[p->i] == '\"' || s[p->i] == '\'')
+			word_len2(s, d, p);
+		if (s[p->i] != '\0' && s[p->i] != d && (s[p->i] != '\"' || s[p->i] != '\''))
 		{
-			i++;
-			while (s[i] != '\0' && s[i] != '\"' && s[i] != '\'')
-				i++;
+			p->c = p->i;
+			while (s[p->i] != d && s[p->i] != '\0')
+				p->i++;
 		}
-		else
-			i++;
+		if (s[p->i] == d)
+		{
+			s += p->i;
+			break ;
+		}
 	}
-	return (i);
+	return (p->i - p->c);
 }
 
-static char	**split_loop(char *s, char limit, char **str)
+static char	**split_loop(char *s, char limit, char **str, t_paco *p)
 {
 	int	i;
 	int	j;
@@ -56,67 +64,69 @@ static char	**split_loop(char *s, char limit, char **str)
 
 	i = 0;
 	j = 0;
+	p->c = 0;
 	while (s[i] != '\0')
 	{
 		while (s[i] == limit && s[i] != '\0')
 			i++;
 		if (s[i] == '\0')
 			break ;
-		len = word_len(s, limit);
+		len = word_len(s, limit, p);
 		str[j] = malloc((len + 1) * sizeof(char *));
 		if (!str[j])
 		{
-			free_split(str, j);
+			free_mini_split(str, j);
 			return (NULL);
 		}
-		ft_strlcpy(str[j], s, len + 1);
+		ft_strlcpy(str[j], s + p->c, len + 1);
 		i += len;
 		j++;
 	}
-	str[j] = NULL;
-	return (str);
+	return (str[j] = NULL, str);
 }
 
-static int	count_words(char *s, char limit)
+static int	count_words(char *s, char d, t_paco *p)
 {
-	int	i;
-	int	c;
-
-	i = 0;
-	c = 0;
-	while (s[i] != '\0')
+	while (s[p->i] != '\0')
 	{
-		if (s[i] == '\"' || s[i] == '\'')
+		while (s[p->i] == d && s[p->i] != '\0')
+			p->i++;
+		if (s[p->i] == '\"' || s[p->i] == '\'')
 		{
-			i++;
-			while (s[i] != '\0' && s[i] != '\"' && s[i] != '\'')
-				i++;
-			c++;
+			if (s[p->i] == '\"')
+			{
+				p->i++;
+				while (s[p->i] != '\0' && (s[p->i] != '\"' || s[p->i + 1] != d))
+					p->i++;
+			}
+			else if (s[p->i] == '\'')
+			{
+				p->i++;
+				while (s[p->i] != '\0' && (s[p->i] != '\'' || s[p->i + 1] != d))
+					p->i++;
+			}
 		}
-		else
-		{
-			while (s[i] == limit && s[i] != '\0')
-				i++;
-			if (s[i] != '\0')
-				c++;
-		}
+		if (s[p->i] != '\0')
+			p->c++;
+		while (s[p->i] != d && s[p->i] != '\0')
+			p->i++;
 	}
-	return (c);
+	return (p->i = 0, p->c);
 }
 
-char	**split_line(char *s, char limit)
+char	**split_line(char *s, char limit, t_paco *p)
 {
 	char	**str;
 
 	if (!s)
 		return (NULL);
-	str = malloc((count_words(s, limit) + 1) * sizeof(char **));
+	str = malloc((count_words(s, limit, p) + 1) * sizeof(char **));
 	if (!str)
 		return (NULL);
-	str = split_loop(s, limit, str);
+	str = split_loop(s, limit, str, p);
 	if (!str)
 	{
-		free_split(str, count_words(s, limit));
+		free_mini_split(str, count_words(s, limit, p));
 		return (NULL);
 	}
 	return (str);
