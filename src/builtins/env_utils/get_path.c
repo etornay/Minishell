@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/01/25 15:03:10 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:09:05 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,4 +90,14 @@ void	init_env(t_paco *p, char **env, int i)
 		free_split(tmp);
 	}
 	return ;
+}
+
+void	exec_env(t_paco *p)
+{
+	p->aux = p->l_env;
+	while (p->aux->next_env != NULL)
+	{
+		printf ("%s%s\n", p->aux->name, p->aux->content);
+		p->aux = p->aux->next_env;
+	}
 }
