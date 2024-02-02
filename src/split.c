@@ -3,28 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/01 19:25:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:58:12 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* static void	word_len2(char *s, char d, t_paco *p)
+static void	free_mini_split(char **s, int j)
 {
-	p->c = p->i;
-	if (s[p->i] == '\"' || s[p->i] == '\'')
-		p->i++;
-	while (s[p->i] != '\0')
+	int	i;
+
+	i = 0;
+	if (s != NULL)
 	{
-		while (((s[p->i] != '\"' && p->double_flag) || s[p->i] != d) && s[p->i] != '\0')
-			p->i++;
-		if (s[p->i] == d)
-			break ;
+		while (i < j)
+		{
+			if (s[i])
+				free(s[i]);
+			i++;
+		}
+		free(s);
 	}
-} */
+}
 
 static int	word_len(char *s, char d, t_paco *p)
 {
@@ -33,20 +36,20 @@ static int	word_len(char *s, char d, t_paco *p)
 		while (s[p->i] == d && s[p->i] != '\0')
 			p->i++;
 		if (s[p->i] == '\"' && p->simple_flag == 0)
-		{
 			p->double_flag = !p->double_flag;
-		}
 		if (s[p->i] == '\'' && p->double_flag == 0)
-		{
 			p->simple_flag = !p->simple_flag;
-		}
 		p->c = p->i;
 		if (s[p->i] == '\"' || s[p->i] == '\'')
 			p->i++;
 		while (s[p->i] != '\"' && p->double_flag)
 			p->i++;
+		while (s[p->i] != '\'' && p->simple_flag)
+			p->i++;
 		if (s[p->i] == '\"')
 			p->double_flag = !p->double_flag;
+		if (s[p->i] == '\'')
+			p->simple_flag = !p->simple_flag;
 		while (s[p->i] != d && s[p->i] != '\0')
 			p->i++;
 		if (s[p->i] == d || s[p->i] == '\0')

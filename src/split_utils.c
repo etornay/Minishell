@@ -3,28 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   split_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:20:20 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/31 14:25:13 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/02 11:57:58 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_mini_split(char **s, int j)
+/* static void	word_len2(char *s, char d, t_paco *p)
 {
-	int	i;
-
-	i = 0;
-	if (s != NULL)
+	p->c = p->i;
+	if (s[p->i] == '\"' || s[p->i] == '\'')
+		p->i++;
+	while (s[p->i] != '\0')
 	{
-		while (i < j)
-		{
-			if (s[i])
-				free(s[i]);
-			i++;
-		}
-		free(s);
+		while (((s[p->i] != '\"' && p->double_flag) || s[p->i] != d) && s[p->i] != '\0')
+			p->i++;
+		if (s[p->i] == d)
+			break ;
 	}
-}
+} */
