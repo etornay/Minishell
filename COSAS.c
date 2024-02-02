@@ -6,10 +6,11 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:58:12 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/01 18:09:54 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/02 12:47:31 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+echo "hello  there" how you "you"doing?
 echo "hello  there" how you "you"doing?
 
 static void	word_len2(char *s, char d, t_paco *p)

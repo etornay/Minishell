@@ -1,27 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split_utils.c                                      :+:      :+:    :+:   */
+/*   builtins_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:20:20 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/02 11:57:58 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:31:57 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-/* static void	word_len2(char *s, char d, t_paco *p)
+int	ft_env_size(t_env *lst)
 {
-	p->c = p->i;
-	if (s[p->i] == '\"' || s[p->i] == '\'')
-		p->i++;
-	while (s[p->i] != '\0')
+	int	size;
+
+	size = 0;
+	while (lst)
 	{
-		while (((s[p->i] != '\"' && p->double_flag) || s[p->i] != d) && s[p->i] != '\0')
-			p->i++;
-		if (s[p->i] == d)
-			break ;
+		lst = lst->next_env;
+		size++;
 	}
-} */
+	return (size);
+}
+
+int	ft_exp_cmp(const char *s1, const char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] != '\0' || s2[i] != '\0')
+	{
+		if (s1[i] > s2[i])
+			return (1);
+		if (s1[i] < s2[i])
+			return (-1);
+		i++;
+	}
+	return (0);
+}

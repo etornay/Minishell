@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/02 12:01:49 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:46:57 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,63 @@ void	pwd(t_paco *p)
 	ft_printf("%s\n", p->act_dir);
 }
 
-void	exec_echo(char **s, int size)
+void	exec_export(t_paco *p)
+{
+	int		index;
+
+	p->aux = p->l_env;
+	index = 1;
+	while (index <= ft_env_size(p->aux))
+	{
+		if (p->aux->index == index)
+		{
+			ft_printf("%s%s\n", p->aux->name, p->aux->content);
+			p->aux = p->l_env;
+			index++;
+		}
+		else
+			p->aux = p->aux->next_env;
+	}
+}
+
+void	set_env_index(t_paco *p)
+{
+	int		index;
+	t_env	*first;
+
+	index = 0;
+	p->aux = p->l_env;
+	while (index <= ft_env_size(p->l_env))
+	{
+		while (p->aux != NULL)
+		{
+			if (ft_exp_cmp(p->l_env->name, p->aux->name) < 0
+				&& p->aux->index == 0)
+			{
+				first = p->aux;
+				p->aux = first;
+			}
+			p->aux = p->aux->next_env;
+		}
+		p->aux = p->l_env;
+		first->index = index;
+		p->aux = p->l_env;
+		index++;
+	}
+}
+
+/* void	exec_echo(char **s, int size)
 {
 	int	i;
 
 	i = 0;
 	while (s[size][i])
 	{
-		
+		ft_printf()
 	}
 }
 
-void	echo(char **s, int flag)
+void	pecho(char **s, int flag)
 {
 	int	i;
 
@@ -56,5 +101,6 @@ void	echo(char **s, int flag)
 		}
 	}
 	if (flag == 0)
-		printf("\n");
+		ft_printf("\n");
 }
+ */

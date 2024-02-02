@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/02 11:58:12 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/02 13:05:09 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ static int	word_len(char *s, char d, t_paco *p)
 		p->c = p->i;
 		if (s[p->i] == '\"' || s[p->i] == '\'')
 			p->i++;
-		while (s[p->i] != '\"' && p->double_flag)
+		while (s[p->i] != '\"' && p->double_flag && s[p->i] != '\0')
 			p->i++;
-		while (s[p->i] != '\'' && p->simple_flag)
+		while (s[p->i] != '\'' && p->simple_flag && s[p->i] != '\0')
 			p->i++;
 		if (s[p->i] == '\"')
 			p->double_flag = !p->double_flag;

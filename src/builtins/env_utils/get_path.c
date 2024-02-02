@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/02 12:09:05 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:34:00 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp)
 		return ;
 	if (tmp != NULL)
 	{
-		new->name = tmp[0];
-		new->content = tmp[1];
+		new->name = ft_strdup(tmp[0]);
+		new->content = ft_strjoin("=", tmp[1]);
 		new->index = 0;
 		new->next_env = NULL;
 	}
@@ -77,9 +77,9 @@ void	init_env(t_paco *p, char **env, int i)
 	p->l_env->content = ft_strjoin("=", tmp[1]);
 	p->l_env->next_env = NULL;
 	p->l_env->index = 0;
-	free_split(tmp);
-	while (tmp[++i] != NULL)
+	while (env[++i] != NULL)
 	{
+		free_split(tmp);
 		p->aux = ft_calloc(1, sizeof(t_env));
 		if (!p->aux)
 			return ;
@@ -87,9 +87,8 @@ void	init_env(t_paco *p, char **env, int i)
 		if (!tmp)
 			return ;
 		lst_addenv_back(&p->l_env, p->aux, tmp);
-		free_split(tmp);
 	}
-	return ;
+	set_env_index(p);
 }
 
 void	exec_env(t_paco *p)

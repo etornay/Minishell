@@ -8,7 +8,7 @@ src/builtins/builtins.c\
 src/builtins/env_utils/get_path.c\
 src/split.c\
 src/init_struct.c\
-src/split_utils.c\
+src/builtins/builtins_utils.c\
 
 OBJECTS = $(FILES:.c=.o)
 

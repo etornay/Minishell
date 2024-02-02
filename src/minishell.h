@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/02 11:58:21 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/02 15:48:55 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,17 @@ int		get_path(t_paco *p, char **env);
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
 void	pwd(t_paco *p);
+void	pecho(char **s, int flag);
+void	exec_env(t_paco *p);
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
 void	ft_paco_sanz2(void);
 char	**split_line(char *s, char limit, t_paco *p);
 int		input(char *input, t_paco *p, char **env);
 void	init_struct(t_paco *p);
+int		ft_exp_cmp(const char *s1, const char *s2);
+void	set_env_index(t_paco *p);
+int		ft_env_size(t_env *lst);
+void	exec_export(t_paco *p);
 
 #endif
