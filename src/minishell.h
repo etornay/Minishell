@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/02 15:48:55 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/05 09:04:33 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	ft_paco_sanz2(void);
 char	**split_line(char *s, char limit, t_paco *p);
 int		input(char *input, t_paco *p, char **env);
 void	init_struct(t_paco *p);
-int		ft_exp_cmp(const char *s1, const char *s2);
 void	set_env_index(t_paco *p);
 int		ft_env_size(t_env *lst);
 void	exec_export(t_paco *p);

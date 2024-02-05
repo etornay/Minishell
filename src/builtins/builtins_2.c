@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins_utils.c                                   :+:      :+:    :+:   */
+/*   builtins_2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/31 14:20:20 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/05 09:04:22 by ncruz-ga         ###   ########.fr       */
+/*   Created: 2024/02/05 09:33:49 by ncruz-ga          #+#    #+#             */
+/*   Updated: 2024/02/05 12:02:25 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int	ft_env_size(t_env *lst)
+void	exec_echo(t_paco *p, int flag)
 {
-	int	size;
+	int	i;
+	int	j;
 
-	size = 0;
-	while (lst)
+	i = 0;
+	j = 0;
+	while (p->lex[i] != NULL)
+		i++;
+	while (p->lex[i][j] != '\0')
 	{
-		lst = lst->next_env;
-		size++;
+		
 	}
-	return (size);
+	if (flag == 1)
+		printf("\n");
 }
