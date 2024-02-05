@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/05 09:31:43 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/05 19:05:23 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	pwd(t_paco *p)
-{
-	char	dir[500];
-
-	p->act_dir = getcwd(dir, 500);
-	if (p->act_dir == NULL)
-		return ;
-	ft_printf("%s\n", p->act_dir);
-}
 
 void	exec_export(t_paco *p)
 {
@@ -47,48 +37,94 @@ void	set_env_index(t_paco *p)
 	t_env	*first;
 
 	index = 1;
-	p->aux = p->l_env;
 	first = p->l_env;
+	p->aux = p->l_env;
 	while (index <= ft_env_size(p->l_env))
 	{
 		while (p->aux != NULL)
 		{
-			if (ft_strncmp(p->aux->name, first->name,
-					ft_strlen(p->aux->name)) < 0 && p->aux->index == 0)
+			if (ft_exp_cmp(p->l_env->name, p->aux->name) < 0
+				&& p->aux->index == 0)
 				first = p->aux;
 			p->aux = p->aux->next_env;
 		}
-		p->aux = p->l_env;
 		first->index = index;
+		p->aux = p->l_env;
 		index++;
 	}
 }
 
-void	exec_unset(t_paco *p, char *name)
+static void	exec_echo2(char **s, int size, t_paco *p, int *j)
 {
-	t_env	*aux;
-	t_env	*del;
-	t_env	*prev;
-
-	if (!name)
-		return ;
-	aux = p->l_env;
-	prev = NULL;
-	while (aux != NULL)
+	while (s[size][*j])
 	{
-		if (!ft_strncmp(aux->name, name, ft_strlen(name)))
+		if (s[size][*j] == '\"' && p->double_flag && !p->simple_flag)
+			(*j)++;
+		else if (s[size][*j] == '\'' && p->simple_flag && !p->double_flag)
+			(*j)++;
+		else if (s[size][*j] == '\"' && !p->double_flag && p->simple_flag)
 		{
-			del = aux;
-			if (prev)
-				prev->next_env = aux->next_env;
-			else
-				p->l_env = aux->next_env;
-			free(del->name);
-			free(del->content);
-			free(del);
-			break ;
+			ft_printf("%c", s[size][*j]);
+			(*j)++;
 		}
-		prev = aux;
-		aux = aux->next_env;
+		else if (s[size][*j] == '\'' && !p->simple_flag && p->double_flag)
+		{
+			ft_printf("%c", s[size][*j]);
+			(*j)++;
+		}
+		else
+		{
+			ft_printf("%c", s[size][*j]);
+			(*j)++;
+		}
 	}
+}
+
+static void	exec_echo(char **s, int size, t_paco *p)
+{
+	int	j;
+
+	j = 0;
+	if (s[size][j] == '\0')
+		ft_printf("%c", s[size][j]);
+	else if (s[size][j] == '\"' && !p->simple_flag)
+	{
+		j++;
+		p->double_flag = !p->double_flag;
+	}
+	else if (s[size][j] == '\'' && !p->double_flag)
+	{
+		j++;
+		p->simple_flag = !p->simple_flag;
+	}
+	exec_echo2(s, size, p, &j);
+}
+
+void	pecho(char **s, int flag, t_paco *p)
+{
+	while (s[p->j])
+		p->j++;
+	if (p->j > 1)
+	{
+		if (ft_strncmp (s[1], "-n\0", 3) == EXIT_SUCCESS)
+		{
+			flag = 1;
+			p->j = 2;
+		}
+		else
+			p->j = 1;
+		while (s[p->j] != NULL)
+		{
+			exec_echo(s, p->j, p);
+			if (s[p->j + 1])
+				ft_printf(" ");
+			p->j++;
+			if (p->double_flag == 1)
+				p->double_flag = 0;
+			if (p->simple_flag == 1)
+				p->simple_flag = 0;
+		}
+	}
+	if (flag == 0)
+		ft_printf("\n");
 }

@@ -5,6 +5,7 @@ MINISHELL = minishell.a
 FILES = src/minishell.c\
 src/prompt.c\
 src/builtins/builtins.c\
+src/builtins/builtins2.c\
 src/builtins/env_utils/get_path.c\
 src/split.c\
 src/init_struct.c\

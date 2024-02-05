@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/02 13:05:09 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:16:47 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_mini_split(char **s, int j)
+void	free_mini_split(char **s, int j)
 {
 	int	i;
 

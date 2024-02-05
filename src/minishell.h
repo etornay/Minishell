@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/05 09:04:33 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:55:05 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_paco
 	char	**lex;
 	int		i;
 	int		c;
+	int		j;
 	int		double_flag;
 	int		simple_flag;
 	t_env	*l_env;
@@ -59,7 +60,7 @@ int		get_path(t_paco *p, char **env);
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
 void	pwd(t_paco *p);
-void	pecho(char **s, int flag);
+void	pecho(char **s, int flag, t_paco *p);
 void	exec_env(t_paco *p);
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
@@ -67,8 +68,11 @@ void	ft_paco_sanz2(void);
 char	**split_line(char *s, char limit, t_paco *p);
 int		input(char *input, t_paco *p, char **env);
 void	init_struct(t_paco *p);
+int		ft_exp_cmp(const char *s1, const char *s2);
 void	set_env_index(t_paco *p);
 int		ft_env_size(t_env *lst);
 void	exec_export(t_paco *p);
+void	exec_unset(t_paco *p, char *name);
+void	free_mini_split(char **s, int j);
 
 #endif

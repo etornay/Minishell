@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/05 11:52:35 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/05 18:17:37 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,24 @@ int	input(char *input, t_paco *p, char **env)
 	i = 0;
 	(void)env;
 	p->lex = split_line(input, ' ', p);
-	while (p->lex[i] != NULL)
+	if (p->lex[0] == NULL)
+		return (EXIT_SUCCESS);
+	if (ft_strncmp(p->line, "pwd", 3) == EXIT_SUCCESS)
+		pwd(p);
+	if (ft_strncmp(p->line, "exit", 4) == EXIT_SUCCESS)
+		exit(EXIT_SUCCESS);
+	if (ft_strncmp(p->line, "env", 3) == EXIT_SUCCESS)
+		exec_env(p);
+	if (ft_strncmp(p->line, "export", 6) == EXIT_SUCCESS)
+		exec_export(p);
+	if (ft_strncmp(p->lex[0], "unset", 5) == EXIT_SUCCESS)
+		exec_unset(p, p->lex[1]);
+	if (ft_strncmp(p->line, "echo", 4) == EXIT_SUCCESS)
 	{
-		ft_printf("%s\n", p->lex[i]);
-		i++;
+		if (ft_strncmp(p->line, "echo -n", 7) == EXIT_SUCCESS)
+			pecho(p->lex, 1, p);
+		else
+			pecho(p->lex, 0, p);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -39,23 +53,8 @@ int	minishell(t_paco *p, char **env)
 			exit(EXIT_FAILURE);
 		if (ft_strncmp(p->line, "\0", 1) == EXIT_FAILURE)
 			add_history(p->line);
-		/*if (input(p->line, p, env) == EXIT_FAILURE)
-			return (EXIT_FAILURE);*/
-		if (ft_strncmp(p->line, "pwd", 3) == EXIT_SUCCESS)
-			pwd(p);
-		if (ft_strncmp(p->line, "exit", 4) == EXIT_SUCCESS)
-			exit(EXIT_SUCCESS);
-		if (ft_strncmp(p->line, "env", 3) == EXIT_SUCCESS)
-			exec_env(p);
-		if (ft_strncmp(p->line, "export", 6) == EXIT_SUCCESS)
-			exec_export(p);
-		if (ft_strncmp(p->line, "echo", 4) == EXIT_SUCCESS)
-		{
-			if (ft_strncmp(p->line, "echo -n", 7) == EXIT_SUCCESS)
-				exec_echo(p, 1);
-			else
-				exec_echo(p, 0);
-		}
+		if (input(p->line, p, env) == EXIT_FAILURE)
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
