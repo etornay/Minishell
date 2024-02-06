@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/05 19:05:23 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:20:31 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	set_env_index(t_paco *p)
 	{
 		while (p->aux != NULL)
 		{
-			if (ft_exp_cmp(p->l_env->name, p->aux->name) < 0
+			if (ft_exp_cmp(first->name, p->aux->name) < 0
 				&& p->aux->index == 0)
 				first = p->aux;
 			p->aux = p->aux->next_env;

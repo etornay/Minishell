@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/05 18:17:37 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 09:06:00 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,7 @@ int	input(char *input, t_paco *p, char **env)
 	if (ft_strncmp(p->lex[0], "unset", 5) == EXIT_SUCCESS)
 		exec_unset(p, p->lex[1]);
 	if (ft_strncmp(p->line, "echo", 4) == EXIT_SUCCESS)
-	{
-		if (ft_strncmp(p->line, "echo -n", 7) == EXIT_SUCCESS)
-			pecho(p->lex, 1, p);
-		else
-			pecho(p->lex, 0, p);
-	}
+		pecho(p->lex, 0, p);
 	return (EXIT_SUCCESS);
 }
 
