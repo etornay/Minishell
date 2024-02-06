@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/06 11:18:57 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:37:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,17 @@ int	input(char *input, t_paco *p, char **env)
 	p->lex = split_line(input, ' ', p);
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
-	if (ft_strncmp(p->line, "pwd", 3) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
 		pwd(p);
-	if (ft_strncmp(p->line, "exit", 4) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
-	if (ft_strncmp(p->line, "env", 3) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
 		exec_env(p);
-	if (ft_strncmp(p->line, "export", 6) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "export\0", 7) == EXIT_SUCCESS)
 		exec_export(p);
-	if (ft_strncmp(p->lex[0], "unset", 5) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "unset\0", 6) == EXIT_SUCCESS)
 		exec_unset(p, p->lex[1]);
-	if (ft_strncmp(p->line, "echo", 4) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex[0], "echo\0", 5) == EXIT_SUCCESS)
 		pecho(p->lex, 0, p);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 14:20:20 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/02 15:31:57 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:45:49 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ int	ft_exp_cmp(const char *s1, const char *s2)
 	{
 		if (s1[i] > s2[i])
 			return (1);
-		if (s1[i] < s2[i])
+		else if (s1[i] < s2[i])
 			return (-1);
-		i++;
+		else
+			i++;
 	}
 	return (0);
 }

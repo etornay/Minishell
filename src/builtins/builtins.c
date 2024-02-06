@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/06 12:12:59 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/06 16:29:55 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@ void	exec_export(t_paco *p)
 
 	p->aux = p->l_env;
 	index = 1;
+	printf("size = %d  \n", ft_env_size(p->aux));
 	while (index <= ft_env_size(p->aux))
 	{
 		if (p->aux->index == index)
 		{
-			ft_printf("%s%s\n", p->aux->name, p->aux->content);
+			ft_printf("%s%s   %i\n", p->aux->name, p->aux->content, p->aux->index);
 			p->aux = p->l_env;
 			index++;
 		}
@@ -34,22 +35,21 @@ void	exec_export(t_paco *p)
 void	set_env_index(t_paco *p)
 {
 	int		index;
-	t_env	*first;
 
 	index = 1;
-	first = p->l_env;
 	p->aux = p->l_env;
 	while (index <= ft_env_size(p->l_env))
 	{
+		p->first = p->l_env;
+		p->aux = p->l_env;
 		while (p->aux != NULL)
 		{
-			if (ft_strncmp(first->name, p->aux->name, ft_strlen(first->name))
-				< 0 && p->aux->index == 0)
-				first = p->aux;
+			if (ft_exp_cmp(p->first->name, p->aux->name) > 0
+				&& p->aux->index == 0)
+				p->first = p->aux;
 			p->aux = p->aux->next_env;
 		}
-		first->index = index;
-		p->aux = p->l_env;
+		p->first->index = index;
 		index++;
 	}
 }
@@ -106,9 +106,13 @@ void	pecho(char **s, int flag, t_paco *p)
 		p->j++;
 	if (p->j > 1)
 	{
-		p->j = 0;
-		while (s[++p->j] && !ft_strncmp (s[1], "-n\0", 3))
+		if (ft_strncmp (s[1], "-n\0", 3) == EXIT_SUCCESS)
+		{
 			flag = 1;
+			p->j = 2;
+		}
+		else
+			p->j = 1;
 		while (s[p->j] != NULL)
 		{
 			exec_echo(s, p->j, p);
@@ -122,5 +126,5 @@ void	pecho(char **s, int flag, t_paco *p)
 		}
 	}
 	if (flag == 0)
-		printf("\n");
+		ft_printf("\n");
 }

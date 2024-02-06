@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/06 12:03:14 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/06 14:41:02 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,9 +97,9 @@ void	init_env(t_paco *p, char **env, int i)
 void	exec_env(t_paco *p)
 {
 	p->aux = p->l_env;
-	while (p->aux->next_env != NULL)
+	while (p->aux != NULL)
 	{
-		printf ("%s%s\n", p->aux->name, p->aux->content);
+		printf ("%s%s     %d\n", p->aux->name, p->aux->content, p->aux->index);
 		p->aux = p->aux->next_env;
 	}
 }

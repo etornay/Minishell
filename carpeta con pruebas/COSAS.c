@@ -6,9 +6,12 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:58:12 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/02 12:47:31 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 17:12:46 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+- ARREGLAR COMANDOS AL ESCRIBIR DE MAS
+- ECHARLE UN OJO AL GET_MAX
 
 echo "hello  there" how you "you"doing?
 echo "hello  there" how you "you"doing?
@@ -77,4 +80,33 @@ static int	word_len(char *s, char d, t_paco *p)
 		}
 	}
 	return (p->i - p->c);
+}
+
+void	pecho(char **s, int flag, t_paco *p)
+{
+	while (s[p->j])
+		p->j++;
+	if (p->j > 1)
+	{
+		if (ft_strncmp (s[1], "-n\0", 3) == EXIT_SUCCESS)
+		{
+			flag = 1;
+			p->j = 2;
+		}
+		else
+			p->j = 1;
+		while (s[p->j] != NULL)
+		{
+			exec_echo(s, p->j, p);
+			if (s[p->j + 1])
+				ft_printf(" ");
+			p->j++;
+			if (p->double_flag == 1)
+				p->double_flag = 0;
+			if (p->simple_flag == 1)
+				p->simple_flag = 0;
+		}
+	}
+	if (flag == 0)
+		ft_printf("\n");
 }

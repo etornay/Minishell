@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/05 18:55:05 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 13:21:05 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_paco
 	int		simple_flag;
 	t_env	*l_env;
 	t_env	*aux;
+	t_env	*first;
 }	t_paco;
 
 int		get_path(t_paco *p, char **env);
