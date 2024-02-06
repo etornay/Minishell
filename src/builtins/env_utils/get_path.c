@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/02 15:34:00 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:03:14 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp)
 	if (tmp != NULL)
 	{
 		new->name = ft_strdup(tmp[0]);
-		new->content = ft_strjoin("=", tmp[1]);
+		if (tmp[1] == NULL)
+			new->content = ft_strdup("=");
+		else
+			new->content = ft_strjoin("=", tmp[1]);
 		new->index = 0;
 		new->next_env = NULL;
 	}

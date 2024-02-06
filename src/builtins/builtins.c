@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/06 09:20:31 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:12:59 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	set_env_index(t_paco *p)
 	{
 		while (p->aux != NULL)
 		{
-			if (ft_exp_cmp(first->name, p->aux->name) < 0
-				&& p->aux->index == 0)
+			if (ft_strncmp(first->name, p->aux->name, ft_strlen(first->name))
+				< 0 && p->aux->index == 0)
 				first = p->aux;
 			p->aux = p->aux->next_env;
 		}
@@ -106,13 +106,9 @@ void	pecho(char **s, int flag, t_paco *p)
 		p->j++;
 	if (p->j > 1)
 	{
-		if (ft_strncmp (s[1], "-n\0", 3) == EXIT_SUCCESS)
-		{
+		p->j = 0;
+		while (s[++p->j] && !ft_strncmp (s[1], "-n\0", 3))
 			flag = 1;
-			p->j = 2;
-		}
-		else
-			p->j = 1;
 		while (s[p->j] != NULL)
 		{
 			exec_echo(s, p->j, p);
@@ -126,5 +122,5 @@ void	pecho(char **s, int flag, t_paco *p)
 		}
 	}
 	if (flag == 0)
-		ft_printf("\n");
+		printf("\n");
 }
