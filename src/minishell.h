@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 12:08:06 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/07 13:27:49 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,6 @@ int		ft_env_size(t_env *lst);
 void	exec_export(t_paco *p);
 void	exec_unset(t_paco *p, char *name);
 void	free_mini_split(char **s, int j);
+char	*get_cd_path(t_paco *p, char *s);
 
 #endif

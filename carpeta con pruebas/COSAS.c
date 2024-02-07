@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   COSAS.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:58:12 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/06 17:12:46 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:10:24 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 - ARREGLAR COMANDOS AL ESCRIBIR DE MAS
-- ECHARLE UN OJO AL GET_MAX
 
 echo "hello  there" how you "you"doing?
 echo "hello  there" how you "you"doing?
