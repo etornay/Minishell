@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 13:27:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:17:01 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	exec_unset(t_paco *p, char *name)
 	}
 }
 
-void	pwd(t_paco *p)
+void	exec_pwd(t_paco *p)
 {
 	char	dir[500];
 
@@ -53,15 +53,19 @@ void	pwd(t_paco *p)
 
 void	exec_cd(t_paco *p, char **s)
 {
-	char	*path;
-
-	if (ft_strncmp(s[0], "cd\0", 3) && s[1] == NULL)
+	if (!ft_strncmp(s[0], "cd\0", 3) && s[1] == NULL)
 	{
-		path = get_env(p, "HOME");
+		get_cd_path(p, "HOME");
+		change_oldpwd (p);
+		chdir(p->tmp);
+		change_pwd(p);
 	}
-	else if (ft_strncmp(s[0], "cd\0", 3) && ft_strncmp(s[1], "-\0", 2))
+	else if (!ft_strncmp(s[0], "cd\0", 3) && ft_strncmp(s[1], "-\0", 2))
 	{
-		
+		get_cd_path(p, "OLDPWD");
+		change_oldpwd (p);
+		chdir(p->tmp);
+		change_pwd(p);
 	}
 	else if (ft_strncmp(s[0], "cd\0", 3) && s[2] != NULL)
 	{

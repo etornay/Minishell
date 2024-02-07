@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 12:08:17 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:46:44 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	input(char *input, t_paco *p, char **env)
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
 	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
-		pwd(p);
+		exec_pwd(p);
 	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
 		exit(EXIT_SUCCESS);
 	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
@@ -33,6 +33,8 @@ int	input(char *input, t_paco *p, char **env)
 		exec_unset(p, p->lex[1]);
 	if (ft_strncmp(p->lex[0], "echo\0", 5) == EXIT_SUCCESS)
 		flag_echo(p->lex, 0, p);
+	if (ft_strncmp(p->lex[0], "cd\0", 3) == EXIT_SUCCESS)
+		exec_cd(p, p->lex);
 	return (EXIT_SUCCESS);
 }
 

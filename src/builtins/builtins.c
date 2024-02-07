@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/07 12:08:00 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:11:18 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	exec_export(t_paco *p)
 	{
 		if (p->aux->index == index)
 		{
-			ft_printf("%s%s\n", p->aux->name, p->aux->content);
+			ft_printf("declare -x %s%s\n", p->aux->name, p->aux->content);
 			p->aux = p->l_env;
 			index++;
 		}

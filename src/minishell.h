@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 13:27:49 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:48:42 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_paco
 	char	**path;
 	char	*act_dir;
 	char	**lex;
+	char	*tmp;
 	int		i;
 	int		c;
 	int		j;
@@ -60,7 +61,7 @@ typedef struct s_paco
 int		get_path(t_paco *p, char **env);
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
-void	pwd(t_paco *p);
+void	exec_pwd(t_paco *p);
 void	flag_echo(char **s, int flag, t_paco *p);
 void	exec_env(t_paco *p);
 int		prompt(t_paco *p);
@@ -75,6 +76,9 @@ int		ft_env_size(t_env *lst);
 void	exec_export(t_paco *p);
 void	exec_unset(t_paco *p, char *name);
 void	free_mini_split(char **s, int j);
-char	*get_cd_path(t_paco *p, char *s);
+void	get_cd_path(t_paco *p, char *s);
+void	change_oldpwd(t_paco *p);
+void	exec_cd(t_paco *p, char **s);
+void	change_pwd(t_paco *p);
 
 #endif
