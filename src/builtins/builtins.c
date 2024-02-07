@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/06 16:29:55 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:08:00 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,39 +18,16 @@ void	exec_export(t_paco *p)
 
 	p->aux = p->l_env;
 	index = 1;
-	printf("size = %d  \n", ft_env_size(p->aux));
-	while (index <= ft_env_size(p->aux))
+	while (p->aux != NULL)
 	{
 		if (p->aux->index == index)
 		{
-			ft_printf("%s%s   %i\n", p->aux->name, p->aux->content, p->aux->index);
+			ft_printf("%s%s\n", p->aux->name, p->aux->content);
 			p->aux = p->l_env;
 			index++;
 		}
-		else
+		else if (p->aux->index != index)
 			p->aux = p->aux->next_env;
-	}
-}
-
-void	set_env_index(t_paco *p)
-{
-	int		index;
-
-	index = 1;
-	p->aux = p->l_env;
-	while (index <= ft_env_size(p->l_env))
-	{
-		p->first = p->l_env;
-		p->aux = p->l_env;
-		while (p->aux != NULL)
-		{
-			if (ft_exp_cmp(p->first->name, p->aux->name) > 0
-				&& p->aux->index == 0)
-				p->first = p->aux;
-			p->aux = p->aux->next_env;
-		}
-		p->first->index = index;
-		index++;
 	}
 }
 
@@ -100,7 +77,7 @@ static void	exec_echo(char **s, int size, t_paco *p)
 	exec_echo2(s, size, p, &j);
 }
 
-void	pecho(char **s, int flag, t_paco *p)
+void	flag_echo(char **s, int flag, t_paco *p)
 {
 	while (s[p->j])
 		p->j++;

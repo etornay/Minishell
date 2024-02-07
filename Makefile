@@ -10,6 +10,7 @@ src/builtins/env_utils/get_path.c\
 src/split.c\
 src/init_struct.c\
 src/builtins/builtins_utils.c\
+src/builtins/export_utils.c\
 
 OBJECTS = $(FILES:.c=.o)
 
@@ -20,14 +21,14 @@ LIBFT = ./Libft/libft.a
 LIB_SYS = -Iinclude -lreadline -L "/Users/etornay-/.brew/opt/readline/include"
 
 $(NAME):			$(OBJECTS) $(LIBFT)
-						ar rcs $(MINISHELL) $(OBJECTS)
-						gcc $(FLAGS) $(MINISHELL) $(LIBFT) $(LIB_SYS) -o $(NAME) -lreadline
+						@ ar rcs $(MINISHELL) $(OBJECTS)
+						@ gcc $(FLAGS) $(MINISHELL) $(LIBFT) $(LIB_SYS) -o $(NAME) -lreadline
 
 $(OBJECTS):			src/%.o : src/%.c
-						gcc $(FLAGS) -c $< -o $@
+						@ gcc $(FLAGS) -c $< -o $@
 
 $(LIBFT):
-					make -s -C ./Libft
+					@ make -s -C ./Libft
 
 all:				$(NAME)
 

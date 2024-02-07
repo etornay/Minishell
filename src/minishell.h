@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/06 13:21:05 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:08:06 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int		get_path(t_paco *p, char **env);
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
 void	pwd(t_paco *p);
-void	pecho(char **s, int flag, t_paco *p);
+void	flag_echo(char **s, int flag, t_paco *p);
 void	exec_env(t_paco *p);
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
