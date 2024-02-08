@@ -6,11 +6,16 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 15:46:44 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:18:01 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_leaks()
+{
+	system("leaks -q minishell");
+}
 
 int	input(char *input, t_paco *p, char **env)
 {
@@ -62,11 +67,12 @@ int	main(int argc, char **argv, char **env)
 
 	(void)argc;
 	(void)argv;
+	atexit(ft_leaks);
 	p = ft_calloc(1, sizeof(t_paco));
 	if (p == NULL)
 		exit (EXIT_FAILURE);
 	init_struct(p);
 	if (minishell(p, env) == EXIT_FAILURE)
 		exit (EXIT_FAILURE);
-	exit (EXIT_SUCCESS);
+	exit (free_all(p), EXIT_SUCCESS);
 }

@@ -12,6 +12,7 @@ src/init_struct.c\
 src/builtins/builtins_utils.c\
 src/builtins/export_utils.c\
 src/builtins/cd_utils.c\
+src/builtins/cd_utils2.c\
 
 OBJECTS = $(FILES:.c=.o)
 

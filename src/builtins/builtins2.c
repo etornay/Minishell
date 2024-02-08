@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 16:17:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:04:56 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,29 @@ void	exec_pwd(t_paco *p)
 
 void	exec_cd(t_paco *p, char **s)
 {
+	char	dir[500];
+	int		flag;
+
 	if (!ft_strncmp(s[0], "cd\0", 3) && s[1] == NULL)
+		change_cd(p, 0);
+	else if (!ft_strncmp(s[0], "cd\0", 3) && s[1])
 	{
-		get_cd_path(p, "HOME");
-		change_oldpwd (p);
-		chdir(p->tmp);
-		change_pwd(p);
-	}
-	else if (!ft_strncmp(s[0], "cd\0", 3) && ft_strncmp(s[1], "-\0", 2))
-	{
-		get_cd_path(p, "OLDPWD");
-		change_oldpwd (p);
-		chdir(p->tmp);
-		change_pwd(p);
-	}
-	else if (ft_strncmp(s[0], "cd\0", 3) && s[2] != NULL)
-	{
-		
+		getcwd(dir, 500);
+		flag = chdir(s[1]);
+		if (flag == -1)
+		{
+			p->tmp = ft_strjoin("bash: cd: ", s[1]);
+			if (!p->tmp)
+				return ;
+			p->cd_error = ft_strjoin(p->tmp, ": No such file or directory");
+			if (!p->cd_error)
+				return ;
+			ft_putendl_fd(p->cd_error, 2);
+		}
+		if (flag == 0)
+		{
+			change_oldpwd2(p, dir);
+			change_pwd(p);
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 15:48:42 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:00:54 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_paco
 	char	*act_dir;
 	char	**lex;
 	char	*tmp;
+	char	*cd_error;
 	int		i;
 	int		c;
 	int		j;
@@ -78,7 +79,13 @@ void	exec_unset(t_paco *p, char *name);
 void	free_mini_split(char **s, int j);
 void	get_cd_path(t_paco *p, char *s);
 void	change_oldpwd(t_paco *p);
+void	change_oldpwd2(t_paco *p, char *dir);
 void	exec_cd(t_paco *p, char **s);
 void	change_pwd(t_paco *p);
+void	change_cd(t_paco *p, int option);
+void	restart_index(t_paco *p);
+void	lstadd_oldpwd(t_paco *p);
+void	gen_oldpwd(t_paco *p);
+int	check_oldpwd(t_paco *p);
 
 #endif

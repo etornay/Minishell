@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/07 15:59:37 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 12:59:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,42 @@ void	change_oldpwd(t_paco *p)
 			break ;
 		}
 		p->aux = p->aux->next_env;
+	}
+}
+
+void	change_oldpwd2(t_paco *p, char *dir)
+{
+	p->aux = p->l_env;
+	while (p->aux)
+	{
+		if (ft_strncmp(p->aux->name, "OLDPWD", 6) == 0)
+		{
+			free(p->aux->content);
+			p->aux->content = ft_strjoin("=", dir);
+			if (!p->aux->content)
+				return ;
+			break ;
+		}
+		p->aux = p->aux->next_env;
+	}
+}
+
+void	change_cd(t_paco *p, int option)
+{
+	if (check_oldpwd(p) == EXIT_FAILURE)
+		gen_oldpwd(p);
+	if (option == 0)
+	{
+		get_cd_path(p, "HOME");
+		change_oldpwd (p);
+		chdir(p->tmp);
+		change_pwd(p);
+	}
+	else if (option == 1)
+	{
+		get_cd_path(p, "OLDPWD");
+		change_oldpwd (p);
+		chdir(p->tmp);
+		change_pwd(p);
 	}
 }
