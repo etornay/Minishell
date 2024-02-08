@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 11:54:45 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/08 13:01:39 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 18:38:39 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ void	lstadd_oldpwd(t_paco *p)
 	old = malloc(sizeof(t_env));
 	if (!old)
 		return ;
+	getcwd(dir, 500);
 	old->next_env = NULL;
-	old->content = getcwd(dir, 500);
+	old->content = ft_strjoin("=", dir);
 	old->name = "OLDPWD";
 	old->index = 0;
 	p->aux = p->l_env;
-	while (p->aux)
+	while (p->aux->next_env)
 		p->aux = p->aux->next_env;
 	p->aux->next_env = old;
 }
