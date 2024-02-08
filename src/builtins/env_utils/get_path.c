@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/08 11:22:53 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 15:09:23 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ void	init_env(t_paco *p, char **env, int i)
 			return ;
 		lst_addenv_back(&p->l_env, p->aux, tmp);
 	}
+	free_split(tmp);
 	set_env_index(p);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/08 13:18:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:59:57 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ int	input(char *input, t_paco *p, char **env)
 		return (EXIT_SUCCESS);
 	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
 		exec_pwd(p);
-	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
-		exit(EXIT_SUCCESS);
 	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
 		exec_env(p);
 	if (ft_strncmp(p->lex[0], "export\0", 7) == EXIT_SUCCESS)
@@ -40,6 +38,11 @@ int	input(char *input, t_paco *p, char **env)
 		flag_echo(p->lex, 0, p);
 	if (ft_strncmp(p->lex[0], "cd\0", 3) == EXIT_SUCCESS)
 		exec_cd(p, p->lex);
+	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
+	{
+		free_path(p);
+		exit(EXIT_SUCCESS);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -57,6 +60,10 @@ int	minishell(t_paco *p, char **env)
 			add_history(p->line);
 		if (input(p->line, p, env) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
+		if (p->lex != NULL)
+			free_lex(p);
+		if (p->line != NULL)
+			free(p->line);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -73,6 +80,9 @@ int	main(int argc, char **argv, char **env)
 		exit (EXIT_FAILURE);
 	init_struct(p);
 	if (minishell(p, env) == EXIT_FAILURE)
-		exit (EXIT_FAILURE);
-	exit (free_all(p), EXIT_SUCCESS);
+	{
+		free_all(p);
+		exit(EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
 }

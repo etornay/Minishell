@@ -13,6 +13,7 @@ src/builtins/builtins_utils.c\
 src/builtins/export_utils.c\
 src/builtins/cd_utils.c\
 src/builtins/cd_utils2.c\
+src/free.c\
 
 OBJECTS = $(FILES:.c=.o)
 

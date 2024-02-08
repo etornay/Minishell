@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/08 13:00:54 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:50:02 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,11 @@ void	change_cd(t_paco *p, int option);
 void	restart_index(t_paco *p);
 void	lstadd_oldpwd(t_paco *p);
 void	gen_oldpwd(t_paco *p);
-int	check_oldpwd(t_paco *p);
+int		check_oldpwd(t_paco *p);
+void	free_lex(t_paco *p);
+void	free_all(t_paco *p);
+void	ft_env_clear(t_env **lst);
+void	ft_lstdel_env(t_env *lst);
+void	free_path(t_paco *p);
 
 #endif
