@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 14:31:13 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 15:56:00 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,12 @@ void	exec_env(t_paco *p)
 	p->aux = p->l_env;
 	while (p->aux != NULL)
 	{
-		printf ("%s=%s\n", p->aux->name, p->aux->content);
-		p->aux = p->aux->next_env;
+		if (ft_strncmp(p->aux->content, "\"\"\0", 3) == EXIT_SUCCESS)
+			p->aux = p->aux->next_env;
+		else
+		{
+			printf ("%s=%s\n", p->aux->name, p->aux->content);
+			p->aux = p->aux->next_env;
+		}
 	}
 }

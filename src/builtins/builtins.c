@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 15:03:34 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 17:32:52 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,11 @@ void	exec_export(t_paco *p, char **s)
 		{
 			if (p->aux->index == index)
 			{
-				if (ft_strncmp(p->aux->content, "\"\"\0", 3))
+				if (ft_strncmp(p->aux->content, "\"\"\0", 3) == EXIT_SUCCESS)
 					ft_printf("declare -x %s=%s\n",
 						p->aux->name, p->aux->content);
 				else
-					ft_printf("declare -x %s=%s\n",
+					ft_printf("declare -x %s=\"%s\"\n",
 						p->aux->name, p->aux->content);
 				p->aux = p->l_env;
 				index++;
@@ -73,25 +73,17 @@ static void	exec_echo2(char **s, int size, t_paco *p, int *j)
 {
 	while (s[size][*j])
 	{
-		if (s[size][*j] == '\"' && p->double_flag && !p->simple_flag)
-			(*j)++;
-		else if (s[size][*j] == '\'' && p->simple_flag && !p->double_flag)
-			(*j)++;
-		else if (s[size][*j] == '\"' && !p->double_flag && p->simple_flag)
-		{
+		if (s[size][*j] == '\"' && !p->simple_flag)
+			p->double_flag = !p->double_flag;
+		else if (s[size][*j] == '\'' && !p->double_flag)
+			p->simple_flag = !p->simple_flag;
+		else if (s[size][*j] == '\"' && p->simple_flag)
 			ft_printf("%c", s[size][*j]);
-			(*j)++;
-		}
-		else if (s[size][*j] == '\'' && !p->simple_flag && p->double_flag)
-		{
+		else if (s[size][*j] == '\'' && p->double_flag)
 			ft_printf("%c", s[size][*j]);
-			(*j)++;
-		}
 		else
-		{
 			ft_printf("%c", s[size][*j]);
-			(*j)++;
-		}
+		(*j)++;
 	}
 }
 
