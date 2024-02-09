@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/08 14:59:57 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:36:30 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	input(char *input, t_paco *p, char **env)
 	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
 		exec_env(p);
 	if (ft_strncmp(p->lex[0], "export\0", 7) == EXIT_SUCCESS)
-		exec_export(p);
+		exec_export(p, p->lex);
 	if (ft_strncmp(p->lex[0], "unset\0", 6) == EXIT_SUCCESS)
 		exec_unset(p, p->lex[1]);
 	if (ft_strncmp(p->lex[0], "echo\0", 5) == EXIT_SUCCESS)
@@ -63,7 +63,10 @@ int	minishell(t_paco *p, char **env)
 		if (p->lex != NULL)
 			free_lex(p);
 		if (p->line != NULL)
+		{
 			free(p->line);
+			p->line = NULL;
+		}
 	}
 	return (EXIT_SUCCESS);
 }

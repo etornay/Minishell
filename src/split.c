@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/05 18:16:47 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:52:26 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ char	**split_line(char *s, char limit, t_paco *p)
 
 	if (!s)
 		return (NULL);
+	p->i = 0;
 	str = malloc((count_words(s, limit, p) + 1) * sizeof(char **));
 	if (!str)
 		return (NULL);

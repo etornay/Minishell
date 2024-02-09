@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/08 14:50:02 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:50:52 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ void	init_struct(t_paco *p);
 int		ft_exp_cmp(const char *s1, const char *s2);
 void	set_env_index(t_paco *p);
 int		ft_env_size(t_env *lst);
-void	exec_export(t_paco *p);
+void	exec_export(t_paco *p, char **s);
+void	exec_export2(t_paco *p, char *s);
 void	exec_unset(t_paco *p, char *name);
 void	free_mini_split(char **s, int j);
 void	get_cd_path(t_paco *p, char *s);
@@ -92,5 +93,6 @@ void	free_all(t_paco *p);
 void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
 void	free_path(t_paco *p);
+void	free_split(char **tmp);
 
 #endif

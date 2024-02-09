@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/08 13:04:56 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/09 13:58:05 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void	exec_cd(t_paco *p, char **s)
 	{
 		getcwd(dir, 500);
 		flag = chdir(s[1]);
-		if (flag == -1)
+		if (flag == 0)
+			change_pwd(p);
+		else if (flag == -1)
 		{
 			p->tmp = ft_strjoin("bash: cd: ", s[1]);
 			if (!p->tmp)
@@ -71,11 +73,6 @@ void	exec_cd(t_paco *p, char **s)
 			if (!p->cd_error)
 				return ;
 			ft_putendl_fd(p->cd_error, 2);
-		}
-		if (flag == 0)
-		{
-			change_oldpwd2(p, dir);
-			change_pwd(p);
 		}
 	}
 }

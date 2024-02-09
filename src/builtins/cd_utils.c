@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/08 12:59:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:58:30 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,19 +83,9 @@ void	change_oldpwd2(t_paco *p, char *dir)
 
 void	change_cd(t_paco *p, int option)
 {
-	if (check_oldpwd(p) == EXIT_FAILURE)
-		gen_oldpwd(p);
 	if (option == 0)
 	{
 		get_cd_path(p, "HOME");
-		change_oldpwd (p);
-		chdir(p->tmp);
-		change_pwd(p);
-	}
-	else if (option == 1)
-	{
-		get_cd_path(p, "OLDPWD");
-		change_oldpwd (p);
 		chdir(p->tmp);
 		change_pwd(p);
 	}

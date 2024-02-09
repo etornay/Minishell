@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:44:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/01/25 15:06:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:50:17 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void	ft_paco_sanz(void)
 
 int	prompt(t_paco *p)
 {
-	p->shell = ft_strjoin(RED_T, "PACOSHELL: " YELLOW_T);
+	p->shell = ft_strdup("PACOSHELL: ");
 	if (p->shell == NULL)
-		free (p->shell);
+		return (EXIT_FAILURE);
 	p->line = readline(p->shell);
 	free(p->shell);
+	p->shell = NULL;
 	if (p->line == NULL)
-		exit (EXIT_FAILURE);
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

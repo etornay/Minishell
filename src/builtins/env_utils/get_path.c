@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/08 15:09:23 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:31:13 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp)
 		if (tmp[1] == NULL)
 			new->content = ft_strdup("=");
 		else
-			new->content = ft_strjoin("=", tmp[1]);
+			new->content = ft_strdup(tmp[1]);
 		new->index = 0;
 		new->next_env = NULL;
 	}
@@ -77,7 +77,7 @@ void	init_env(t_paco *p, char **env, int i)
 	if (!tmp)
 		return ;
 	p->l_env->name = ft_strdup(tmp[0]);
-	p->l_env->content = ft_strjoin("=", tmp[1]);
+	p->l_env->content = ft_strdup(tmp[1]);
 	p->l_env->next_env = NULL;
 	p->l_env->index = 0;
 	while (env[++i] != NULL)
@@ -100,7 +100,7 @@ void	exec_env(t_paco *p)
 	p->aux = p->l_env;
 	while (p->aux != NULL)
 	{
-		printf ("%s%s\n", p->aux->name, p->aux->content);
+		printf ("%s=%s\n", p->aux->name, p->aux->content);
 		p->aux = p->aux->next_env;
 	}
 }

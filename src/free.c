@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:17 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/08 14:49:51 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/09 12:05:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,12 @@ void	free_lex(t_paco *p)
 	if (p->lex != NULL)
 	{
 		while (p->lex[i])
-			free(p->lex[i++]);
+		{
+			free(p->lex[i]);
+			p->lex[i++] = NULL;
+		}
 		free(p->lex);
+		p->lex = NULL;
 	}
 }
 

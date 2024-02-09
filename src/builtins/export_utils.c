@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:40:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/07 11:01:33 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/09 14:59:16 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	restart_index(t_paco *p)
+{
+	p->aux = p->l_env;
+	while (p->aux)
+	{
+		p->aux->index = 0;
+		p->aux = p->aux->next_env;
+	}
+}
 
 static t_env	*get_first(t_paco *p)
 {
