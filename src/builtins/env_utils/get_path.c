@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 15:56:00 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:09:56 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-void	free_split(char **tmp)
-{
-	int	i;
-
-	i = 0;
-	while (tmp[i])
-	{
-		free(tmp[i]);
-		i++;
-	}
-	free (tmp);
-}
 
 int	get_path(t_paco *p, char **env)
 {

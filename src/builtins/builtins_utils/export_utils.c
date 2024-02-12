@@ -6,11 +6,11 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:40:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/12 09:16:37 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:11:17 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	restart_index(t_paco *p)
 {

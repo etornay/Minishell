@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/12 10:05:27 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:07:55 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ void	exec_export(t_paco *p, char **s);
 void	exec_export2(t_paco *p, char *s, char **tmp);
 void	exec_unset(t_paco *p, char *name);
 void	exec_cd(t_paco *p, char **s);
+void	flag_echo(char **s, int flag, t_paco *p);
 
 /*--- BUILTINS UTILS ---*/
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
-void	flag_echo(char **s, int flag, t_paco *p);
 void	init_env(t_paco *p, char **env, int i);
 void	get_cd_path(t_paco *p, char *s);
 void	change_pwd(t_paco *p);

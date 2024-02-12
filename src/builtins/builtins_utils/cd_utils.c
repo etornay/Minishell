@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 14:58:30 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:11:12 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
 void	get_cd_path(t_paco *p, char *s)
 {
