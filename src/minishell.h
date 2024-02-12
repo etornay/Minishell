@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/09 14:50:52 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:28:13 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		ft_exp_cmp(const char *s1, const char *s2);
 void	set_env_index(t_paco *p);
 int		ft_env_size(t_env *lst);
 void	exec_export(t_paco *p, char **s);
-void	exec_export2(t_paco *p, char *s);
+void	exec_export2(t_paco *p, char *s, char **tmp);
 void	exec_unset(t_paco *p, char *name);
 void	free_mini_split(char **s, int j);
 void	get_cd_path(t_paco *p, char *s);
@@ -94,5 +94,6 @@ void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);
+int		check_node(t_paco *p, char **s);
 
 #endif

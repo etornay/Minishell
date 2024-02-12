@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:40:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 14:59:16 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:16:37 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,31 @@ void	set_env_index(t_paco *p)
 		p->first = get_first(p);
 		index++;
 	}
+}
+
+static void	change_content(t_env *node, char *s)
+{
+	if (node->content != NULL)
+	{
+		free(node->content);
+		node->content = ft_strdup(s);
+	}
+	else
+		node->content = ft_strdup(s);
+}
+
+int	check_node(t_paco *p, char **s)
+{
+	p->aux = p->l_env;
+	while (p->aux)
+	{
+		if (ft_strncmp(p->aux->name, s[0], ft_strlen(s[0])) == EXIT_SUCCESS)
+		{
+			change_content(p->aux, s[1]);
+			return (EXIT_SUCCESS);
+		}
+		else
+			p->aux = p->aux->next_env;
+	}
+	return (EXIT_FAILURE);
 }

@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/09 17:32:52 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/12 09:27:59 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	exec_export2(t_paco *p, char *s)
+void	exec_export2(t_paco *p, char *s, char **tmp)
 {
-	char	**tmp;
 	t_env	*new;
 
 	tmp = split_line(s, '=', p);
 	if (!tmp)
 		return ;
+	if (check_node(p, tmp) == EXIT_SUCCESS)
+	{
+		free_split(tmp);
+		return ;
+	}
 	new = malloc(sizeof(t_env));
 	if (!new)
 		return ;
@@ -34,10 +38,7 @@ void	exec_export2(t_paco *p, char *s)
 		p->aux = p->aux->next_env;
 	p->aux->next_env = new;
 	new->next_env = NULL;
-	restart_index(p);
-	set_env_index(p);
 	free_split(tmp);
-	return ;
 }
 
 void	exec_export(t_paco *p, char **s)
@@ -47,7 +48,7 @@ void	exec_export(t_paco *p, char **s)
 	p->aux = p->l_env;
 	index = 1;
 	if (s[1] != NULL)
-		exec_export2(p, s[1]);
+		exec_export2(p, s[1], NULL);
 	else if (s[1] == NULL)
 	{
 		while (p->aux != NULL)
