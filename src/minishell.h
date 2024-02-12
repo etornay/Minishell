@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/12 09:28:13 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/12 10:05:27 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,41 +59,50 @@ typedef struct s_paco
 	t_env	*first;
 }	t_paco;
 
-int		get_path(t_paco *p, char **env);
-void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
-void	init_env(t_paco *p, char **env, int i);
-void	exec_pwd(t_paco *p);
-void	flag_echo(char **s, int flag, t_paco *p);
-void	exec_env(t_paco *p);
+/*--- MINISHELL ---*/
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
 void	ft_paco_sanz2(void);
-char	**split_line(char *s, char limit, t_paco *p);
 int		input(char *input, t_paco *p, char **env);
+int		get_path(t_paco *p, char **env);
+char	**split_line(char *s, char limit, t_paco *p);
+
+/*--- INIT MINISHELL ---*/
 void	init_struct(t_paco *p);
-int		ft_exp_cmp(const char *s1, const char *s2);
-void	set_env_index(t_paco *p);
-int		ft_env_size(t_env *lst);
+
+/*--- BUILTINS ---*/
+void	exec_pwd(t_paco *p);
+void	exec_env(t_paco *p);
 void	exec_export(t_paco *p, char **s);
 void	exec_export2(t_paco *p, char *s, char **tmp);
 void	exec_unset(t_paco *p, char *name);
-void	free_mini_split(char **s, int j);
-void	get_cd_path(t_paco *p, char *s);
-void	change_oldpwd(t_paco *p);
-void	change_oldpwd2(t_paco *p, char *dir);
 void	exec_cd(t_paco *p, char **s);
+
+/*--- BUILTINS UTILS ---*/
+void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
+void	flag_echo(char **s, int flag, t_paco *p);
+void	init_env(t_paco *p, char **env, int i);
+void	get_cd_path(t_paco *p, char *s);
 void	change_pwd(t_paco *p);
 void	change_cd(t_paco *p, int option);
-void	restart_index(t_paco *p);
-void	lstadd_oldpwd(t_paco *p);
-void	gen_oldpwd(t_paco *p);
-int		check_oldpwd(t_paco *p);
-void	free_lex(t_paco *p);
-void	free_all(t_paco *p);
+void	change_oldpwd(t_paco *p);
+void	change_oldpwd2(t_paco *p, char *dir);
+int		ft_exp_cmp(const char *s1, const char *s2);
+void	set_env_index(t_paco *p);
+int		ft_env_size(t_env *lst);
+int		check_node(t_paco *p, char **s);
 void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
+void	gen_oldpwd(t_paco *p);
+int		check_oldpwd(t_paco *p);
+void	restart_index(t_paco *p);
+void	lstadd_oldpwd(t_paco *p);
+
+/*--- FREE MINISHELL ---*/
+void	free_mini_split(char **s, int j);
+void	free_lex(t_paco *p);
+void	free_all(t_paco *p);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);
-int		check_node(t_paco *p, char **s);
 
 #endif
