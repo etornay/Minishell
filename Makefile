@@ -15,6 +15,7 @@ src/builtins/builtins_utils/cd_utils.c\
 src/builtins/env_utils/get_path.c\
 src/free/free.c\
 src/free/free_2.c\
+src/ft_split_mini.c
 
 OBJECTS = $(FILES:.c=.o)
 

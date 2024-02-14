@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/14 15:16:10 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:45:40 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ int	input(char *input, t_paco *p, char **env)
 	i = 0;
 	(void)env;
 
-	p->lex = split_line(input, ' ', p);
+	//p->lex = split_line(input, ' ', p);
+	p->lex = ft_split_mini(input, ' ');
+	expand(p);
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
-	expand(p);
 	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
 		exec_pwd(p);
 	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)

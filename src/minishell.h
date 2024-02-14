@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/14 12:37:03 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 19:45:29 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_paco
 	int		i;
 	int		c;
 	int		j;
+	int		k;
 	int		double_flag;
 	int		simple_flag;
 	t_env	*l_env;
@@ -103,4 +104,7 @@ void	free_all(t_paco *p);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);
 
+
+/*---BORRAR---*/
+char	**ft_split_mini(const char *s, char delimiter);
 #endif
