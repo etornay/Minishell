@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/20 16:00:53 by etornay-          #+#    #+#             */
-/*   Updated: 2023/09/26 12:30:59 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:43:31 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,34 @@ int	ft_strchr_gnl(const char *s, char c)
 		i++;
 	}
 	return (0);
+}
+
+char	*ft_strjoin_gnl2(char *s1, char *s2)
+{
+	char	*s3;
+	int		s1_len;
+	int		i;
+
+	if (s1 == NULL)
+	{
+		s1 = ft_calloc_gnl(1, sizeof(char));
+		if (s1 == NULL)
+			return (free(s1), s1 = NULL, NULL);
+	}
+	if (s2 == NULL)
+		return (free(s1), s1 = NULL, NULL);
+	s1_len = ft_strlen_gnl(s1);
+	s3 = ft_calloc_gnl(s1_len + ft_strlen_gnl(s2) + 1, sizeof(char));
+	if (s3 == NULL)
+		return (free(s1), s1 = NULL, NULL);
+	i = -1;
+	while (s1[++i] != '\0')
+		s3[i] = s1[i];
+	i = -1;
+	while (s2[++i] != '\0')
+		s3[s1_len + i] = s2[i];
+	s3[s1_len + i] = '\0';
+	return (free(s1), free(s2), s2 = NULL, s3);
 }
 
 char	*ft_strjoin_gnl(char *s1, char *s2)

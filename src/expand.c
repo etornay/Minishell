@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:59 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/14 13:25:00 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:01:59 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	expand_1(t_paco *p, int	*i, int *flag, char **expand)
 	{
 		if (p->lex[p->i][p->j + 1] == '\0' || p->lex[p->i][p->j + 1] == ' ')
 		{
-			*expand = ft_strjoin_gnl(*expand, ft_strdup("$"));
+			*expand = ft_strjoin_gnl2(*expand, ft_strdup("$"));
 			p->j++;
 		}
 		else
@@ -44,7 +44,7 @@ static void	expand_1(t_paco *p, int	*i, int *flag, char **expand)
 				&& p->lex[p->i][p->j] != '\"')
 				p->j++;
 			tmp = ft_substr(p->lex[p->i], *i, p->j - *i);
-			*expand = ft_strjoin_gnl(*expand, get_env_content(p, tmp));
+			*expand = ft_strjoin_gnl2(*expand, get_env_content(p, tmp));
 			free(tmp);
 			tmp = NULL;
 		}
@@ -59,7 +59,7 @@ static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
 	{
 		if (p->lex[p->i][p->j] == '\'')
 			*flag = !*flag;
-		*exp = ft_strjoin_gnl(*exp, get_env_content(p, "HOME"));
+		*exp = ft_strjoin_gnl2(*exp, get_env_content(p, "HOME"));
 		p->j++;
 	}
 	else
@@ -72,7 +72,7 @@ static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
 				*flag = !*flag;
 			p->j++;
 		}
-		*exp = ft_strjoin_gnl(*exp, ft_substr(p->lex[p->i], *i, p->j - *i));
+		*exp = ft_strjoin_gnl2(*exp, ft_substr(p->lex[p->i], *i, p->j - *i));
 	}
 }
 
@@ -101,4 +101,5 @@ void	expand(t_paco *p)
 		expand = NULL;
 	}
 	p->i = 0;
+	p->j = 0;
 }

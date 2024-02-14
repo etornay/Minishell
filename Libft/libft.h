@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 14:51:02 by etornay-          #+#    #+#             */
-/*   Updated: 2023/11/07 16:12:39 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:44:41 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ char	*get_next_line(int fd);
 int		ft_strlen_gnl(const char *str);
 void	*ft_calloc_gnl(size_t num, size_t size);
 int		ft_strchr_gnl(const char *s, char c);
+char	*ft_strjoin_gnl2(char *s1, char *s2);
 char	*ft_strjoin_gnl(char *s1, char *s2);
 
 typedef struct s_list

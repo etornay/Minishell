@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/14 12:36:56 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 14:29:30 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	flag_echo(char **s, int flag, t_paco *p)
 {
 	while (s[p->j])
 		p->j++;
-	if (p->j > 1)
+	if (p->j > 1 && s[1] != NULL)
 	{
 		if (ft_strncmp (s[1], "-n\0", 3) == EXIT_SUCCESS)
 		{

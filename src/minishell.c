@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/14 13:40:04 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 15:16:10 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ int	input(char *input, t_paco *p, char **env)
 
 	i = 0;
 	(void)env;
+
 	p->lex = split_line(input, ' ', p);
 	if (p->lex[0] == NULL)
-		return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
 	expand(p);
 	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
 		exec_pwd(p);
@@ -90,5 +91,5 @@ int	main(int argc, char **argv, char **env)
 		free_all(p);
 		exit(EXIT_FAILURE);
 	}
-	return (EXIT_SUCCESS);
+	return (free_all(p), EXIT_SUCCESS);
 }
