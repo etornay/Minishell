@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/12 10:07:55 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:37:03 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	ft_paco_sanz2(void);
 int		input(char *input, t_paco *p, char **env);
 int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
+void	expand(t_paco *p);
 
 /*--- INIT MINISHELL ---*/
 void	init_struct(t_paco *p);
@@ -74,7 +75,6 @@ void	init_struct(t_paco *p);
 void	exec_pwd(t_paco *p);
 void	exec_env(t_paco *p);
 void	exec_export(t_paco *p, char **s);
-void	exec_export2(t_paco *p, char *s, char **tmp);
 void	exec_unset(t_paco *p, char *name);
 void	exec_cd(t_paco *p, char **s);
 void	flag_echo(char **s, int flag, t_paco *p);
@@ -93,10 +93,8 @@ int		ft_env_size(t_env *lst);
 int		check_node(t_paco *p, char **s);
 void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
-void	gen_oldpwd(t_paco *p);
 int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
-void	lstadd_oldpwd(t_paco *p);
 
 /*--- FREE MINISHELL ---*/
 void	free_mini_split(char **s, int j);

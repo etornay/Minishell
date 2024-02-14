@@ -12,6 +12,8 @@
                 "../src/*.c",
                 "../src/builtins/*.c",
                 "../src/builtins/env_utils/*.c",
+				"../src/builtins/builtins_utils/*.c",
+                "../src/free/*.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],

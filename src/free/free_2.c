@@ -6,11 +6,11 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/12 10:10:00 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/14 12:32:53 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	free_split(char **tmp)
 {
