@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/14 19:45:40 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/15 11:22:23 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	input(char *input, t_paco *p, char **env)
 	i = 0;
 	(void)env;
 
-	//p->lex = split_line(input, ' ', p);
-	p->lex = ft_split_mini(input, ' ');
+	p->lex = split_line(input, ' ', p);
+	//p->lex = ft_split_mini(input, ' ');
 	expand(p);
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
