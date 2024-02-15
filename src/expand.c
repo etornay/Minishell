@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:59 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/14 20:26:16 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/15 14:42:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,15 +53,12 @@ static void	expand_1(t_paco *p, int	*i, int *flag, char **expand)
 
 static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
 {
-	char	*tmp;
-	char	*tmp2;
-	int		o;
-
 	if ((!*flag && p->lex[p->i][p->k] == '~')
 		&& ((p->lex[p->i][p->k - 1] == ' ' && p->lex[p->i][p->k + 1] == ' ')
-		|| (p->lex[p->i][p->k + 1] == '\0') || (p->lex[p->i][p->k + 1] == '/')))
+		|| (p->lex[p->i][p->k + 1] == '\0')
+		|| (p->lex[p->i][p->k + 1] == '/')))
 	{
-		if (p->lex[p->i][p->k] == '\'')
+		if (p->lex[p->i][p->j] == '\'')
 			*flag = !*flag;
 		*exp = ft_strjoin_gnl2(*exp, get_env_content(p, "HOME"));
 		p->k++;
@@ -74,29 +71,9 @@ static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
 		{
 			if (p->lex[p->i][p->k] == '\'')
 				*flag = !*flag;
-			if (p->lex[p->i][p->k] == '$' && !*flag)
-			{
-				p->k++;
-				o = p->k;
-				if (*flag)
-					*exp = ft_strjoin_gnl2(*exp, ft_substr(p->lex[p->i], *i, o - *i - 1));
-				while ((p->lex[p->i][p->k] != ' ' && p->lex[p->i][p->k] != '$'
-				&& p->lex[p->i][p->k] != '\0') && p->lex[p->i][p->k] != '\''
-				&& p->lex[p->i][p->k] != '\"')
-					p->k++;
-				tmp = ft_substr(p->lex[p->i], o, p->k - o);
-				tmp2 = get_env_content(p, tmp);
-				free(tmp);
-				*exp = ft_strjoin_gnl2(*exp, tmp2);
-				if (*flag)
-					*exp = ft_strjoin_gnl2(*exp, ft_strdup("'"));
-			}
-			/* if (p->lex[p->i][p->k] == '\'')
-				*flag = !*flag; */
 			p->k++;
 		}
-		if (!*flag)
-			*exp = ft_strjoin_gnl2(*exp, ft_substr(p->lex[p->i], *i, p->k - *i));
+		*exp = ft_strjoin_gnl2(*exp, ft_substr(p->lex[p->i], *i, p->k - *i));
 	}
 }
 

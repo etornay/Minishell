@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   COSAS.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:58:12 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/07 12:10:24 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/15 13:03:41 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,4 +108,33 @@ void	pecho(char **s, int flag, t_paco *p)
 	}
 	if (flag == 0)
 		ft_printf("\n");
+}
+
+static char	**split_loop(char *s, char limit, char **str, t_paco *p)
+{
+	int	i;
+	int	j;
+	int	len;
+
+	i = 0;
+	j = 0;
+	p->c = 0;
+	while (s[i] != '\0')
+	{
+		while (s[i] == limit && s[i] != '\0')
+			i++;
+		if (s[i] == '\0')
+			break ;
+		len = word_len(s, limit, p);
+		str[j] = malloc((len + 1) * sizeof(char *));
+		if (!str[j])
+		{
+			free_mini_split(str, j);
+			return (NULL);
+		}
+		ft_strlcpy(str[j], s + p->c, len + 1);
+		i += len;
+		j++;
+	}
+	return (str[j] = NULL, str);
 }

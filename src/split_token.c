@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split.c                                            :+:      :+:    :+:   */
+/*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/15 14:02:53 by etornay-         ###   ########.fr       */
+/*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
+/*   Updated: 2024/02/15 15:18:54 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ static int	count_words(char *s, char d)
 	return (count);
 }
 
-char	**split_line(char *s, char limit, t_paco *p)
+char	**split_line(char **s, char limit, t_paco *p)
 {
 	char	**str;
 
