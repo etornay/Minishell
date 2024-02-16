@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/15 14:41:19 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:21:04 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	input(char *input, t_paco *p, char **env)
 	i = 0;
 	(void)env;
 	p->lex = split_line(input, ' ', p);
-	/* p->lex = ft_split_mini(input, ' '); */
 	expand(p);
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
@@ -39,7 +38,7 @@ int	input(char *input, t_paco *p, char **env)
 	if (ft_strncmp(p->lex[0], "echo\0", 5) == EXIT_SUCCESS)
 		flag_echo(p->lex, 0, p);
 	if (ft_strncmp(p->lex[0], "cd\0", 3) == EXIT_SUCCESS)
-		exec_cd(p, p->lex);
+		exec_cd(p, p->lex, 0);
 	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
 		free_path(p);

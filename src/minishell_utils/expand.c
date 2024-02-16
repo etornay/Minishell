@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:59 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/15 14:42:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:00:31 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 static char	*get_env_content(t_paco *p, char *s)
 {

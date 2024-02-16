@@ -3,10 +3,10 @@ NAME = minishell
 MINISHELL = minishell.a
 
 FILES = src/minishell.c\
-src/prompt.c\
-src/init_struct.c\
-src/split.c\
-src/expand.c\
+src/minishell_utils/prompt.c\
+src/minishell_utils/split.c\
+src/minishell_utils/expand.c\
+src/minishell_utils/init_struct.c\
 src/builtins/builtins.c\
 src/builtins/builtins2.c\
 src/builtins/builtins_utils/builtins_utils.c\
@@ -15,7 +15,6 @@ src/builtins/builtins_utils/cd_utils.c\
 src/builtins/env_utils/get_path.c\
 src/free/free.c\
 src/free/free_2.c\
-src/ft_split_mini.c
 
 OBJECTS = $(FILES:.c=.o)
 

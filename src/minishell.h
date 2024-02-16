@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/15 14:04:52 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:24:25 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	exec_pwd(t_paco *p);
 void	exec_env(t_paco *p);
 void	exec_export(t_paco *p, char **s);
 void	exec_unset(t_paco *p, char *name);
-void	exec_cd(t_paco *p, char **s);
+void	exec_cd(t_paco *p, char **s, int flag);
 void	flag_echo(char **s, int flag, t_paco *p);
 
 /*--- BUILTINS UTILS ---*/
@@ -85,7 +85,7 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
 void	get_cd_path(t_paco *p, char *s);
 void	change_pwd(t_paco *p);
-void	change_cd(t_paco *p, int option);
+void	change_cd(t_paco *p);
 void	change_oldpwd(t_paco *p);
 void	change_oldpwd2(t_paco *p, char *dir);
 int		ft_exp_cmp(const char *s1, const char *s2);
@@ -103,8 +103,6 @@ void	free_lex(t_paco *p);
 void	free_all(t_paco *p);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);
+void	free_cd_error(t_paco *p);
 
-
-/*---BORRAR---*/
-char	**ft_split_mini(const char *s, char delimiter);
 #endif

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:44:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/09 12:50:17 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/16 13:00:38 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
 void	ft_paco_sanz2(void)
 {
