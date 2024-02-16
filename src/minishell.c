@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 13:21:04 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:21:03 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,8 @@ void	ft_leaks()
 	system("leaks -q minishell");
 }
 
-int	input(char *input, t_paco *p, char **env)
+static int	exec_builtins(t_paco *p)
 {
-	int	i;
-
-	i = 0;
-	(void)env;
-	p->lex = split_line(input, ' ', p);
-	expand(p);
-	if (p->lex[0] == NULL)
-		return (EXIT_SUCCESS);
 	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
 		exec_pwd(p);
 	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
@@ -44,6 +36,20 @@ int	input(char *input, t_paco *p, char **env)
 		free_path(p);
 		exit(EXIT_SUCCESS);
 	}
+	return (EXIT_SUCCESS);
+}
+
+int	input(char *input, t_paco *p, char **env)
+{
+	int	i;
+
+	i = 0;
+	(void)env;
+	p->lex = split_line(input, ' ', p);
+	expand(p);
+	if (p->lex[0] == NULL)
+		return (EXIT_SUCCESS);
+	exec_builtins(p);
 	return (EXIT_SUCCESS);
 }
 
