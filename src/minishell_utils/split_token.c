@@ -6,33 +6,71 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/19 11:20:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:11:20 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	word_len(char *s, char d)
+static int	count_words2(char **s, int *fq_simple, int *fq_double, t_paco *p)
 {
-	size_t	len;
+	if (s[p->i][p->j] == '\'' && !*fq_double)
+	{
+		if (*fq_simple)
+		{
+			p->count++;
+			p->wc = 0;
+		}
+		*fq_simple = !*fq_simple;
+	}
+	if (s[p->i][p->j] == '\"' && !*fq_simple)
+	{
+		if (*fq_double)
+		{
+			p->count++;
+			p->wc = 0;
+		}
+		*fq_double = !*fq_double;
+	}
+	if (s[p->i][p->j] != '\'' && s[p->i][p->j] != '\"' && s[p->i][p->j] != '|'
+		&& s[p->i][p->j] != '>' && s[p->i][p->j] != '<' && p->wc && !*fq_double
+		&& !*fq_simple)
+	{
+		p->count++;
+		p->wc = !p->wc;
+	}
+}
+
+static int	count_words(char **s, char d, t_paco *p)
+{
 	int		fq_simple;
 	int		fq_double;
 
-	len = 0;
 	fq_simple = 0;
 	fq_double = 0;
-	while ((s[len] != d || (fq_double || fq_simple)) && s[len] != '\0')
+	p->i = 0;
+	p->count = 0;
+	while (s[p->i] != NULL)
 	{
-		if (s[len] == '\'' && !fq_double)
-			fq_simple = !fq_simple;
-		else if (s[len] == '\"' && !fq_simple)
-			fq_double = !fq_double;
-		len++;
+		p->j = 0;
+		p->wc = 1;
+		while (s[p->i][p->j])
+		{
+			count_words2(s, &fq_simple, &fq_double, p);
+			if ((s[p->i][p->j] == '<' || s[p->i][p->j] == '|'
+				|| s[p->i][p->j] == '>') && !fq_simple && !fq_double)
+			{
+				p->count++;
+				p->wc = 1;
+			}
+			p->j++;
+		}
+		p->i++;
 	}
-	return (len);
+	return (p->count);
 }
 
-static char	**split_loop(char *s, char limit, char **str)
+static char	**split_loop(char **s, char limit, char **str)
 {
 	size_t	i;
 	size_t	len;
@@ -59,37 +97,32 @@ static char	**split_loop(char *s, char limit, char **str)
 	return (str);
 }
 
-static int	count_words2(char **s, int *fq_simple, int *fq_double, t_paco *p)
+static int	word_len(char *s, char d)
 {
-	
-}
-
-static int	count_words(char **s, char d, t_paco *p)
-{
-	size_t	count;
+	size_t	len;
 	int		fq_simple;
 	int		fq_double;
 
-	count = 0;
+	len = 0;
 	fq_simple = 0;
 	fq_double = 0;
-	p->i = 0;
-	while (s[p->i] != NULL)
+	while ((s[len] != d || (fq_double || fq_simple)) && s[len] != '\0')
 	{
-		p->j = 0;
-		while (s[p->i][p->j])
-		{
-			count_words2(s, &fq_simple, &fq_double, p);
-			if ((s[p->i][p->j] == '<' || s[p->i][p->j] == '|'
-				|| s[p->i][p->j] == '>') && !fq_simple && !fq_double)
-			{
-				count++;
-			}
-			p->j++;
-		}
-		p->i++;
+		if (s[len] == '\'' && !fq_double)
+			fq_simple = !fq_simple;
+		if (s[len] == '\"' && !fq_simple)
+			fq_double = !fq_double;
+		if ((s[len] == '|' || s[len] == '>' || s[len] == '<')
+			&& (!fq_double && !fq_simple))
+			return (1);
+		else if ((s[len] != '|' || s[len] != '>' || s[len] != '<')
+			&& (fq_double && fq_simple))
+			len++;
+		if ((s[len + 1] == '|' || s[len + 1] == '>' || s[len + 1] == '<')
+			&& (!fq_double && !fq_simple))
+			return (len);
 	}
-	return (count);
+	return (len);
 }
 
 char	**split_pipe(char **s, char limit, t_paco *p)

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 13:24:25 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 13:11:24 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,24 +55,27 @@ typedef struct s_paco
 	int		k;
 	int		double_flag;
 	int		simple_flag;
+	int		count;
+	int		wc;
 	t_env	*l_env;
 	t_env	*aux;
 	t_env	*first;
 }	t_paco;
 
-/*--- MINISHELL ---*/
+/*--- <MINISHELL> ---*/
 int		prompt(t_paco *p);
 void	ft_paco_sanz(void);
 void	ft_paco_sanz2(void);
 int		input(char *input, t_paco *p, char **env);
 int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
+char	**split_pipe(char **s, char limit, t_paco *p);
 void	expand(t_paco *p);
 
-/*--- INIT MINISHELL ---*/
+/*--- <INIT MINISHELL> ---*/
 void	init_struct(t_paco *p);
 
-/*--- BUILTINS ---*/
+/*--- <BUILTINS> ---*/
 void	exec_pwd(t_paco *p);
 void	exec_env(t_paco *p);
 void	exec_export(t_paco *p, char **s);
@@ -80,7 +83,7 @@ void	exec_unset(t_paco *p, char *name);
 void	exec_cd(t_paco *p, char **s, int flag);
 void	flag_echo(char **s, int flag, t_paco *p);
 
-/*--- BUILTINS UTILS ---*/
+/*--- <BUILTINS UTILS> ---*/
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
 void	init_env(t_paco *p, char **env, int i);
 void	get_cd_path(t_paco *p, char *s);
@@ -97,7 +100,7 @@ void	ft_lstdel_env(t_env *lst);
 int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
 
-/*--- FREE MINISHELL ---*/
+/*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
 void	free_lex(t_paco *p);
 void	free_all(t_paco *p);
