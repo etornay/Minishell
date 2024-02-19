@@ -6,28 +6,11 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 13:00:43 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 11:20:08 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-void	free_mini_split(char **s, int j)
-{
-	int	i;
-
-	i = 0;
-	if (s != NULL)
-	{
-		while (i < j)
-		{
-			if (s[i])
-				free(s[i]);
-			i++;
-		}
-		free(s);
-	}
-}
 
 static int	word_len(char *s, char d)
 {
@@ -76,7 +59,12 @@ static char	**split_loop(char *s, char limit, char **str)
 	return (str);
 }
 
-static int	count_words(char *s, char d)
+static int	count_words2(char **s, int *fq_simple, int *fq_double, t_paco *p)
+{
+	
+}
+
+static int	count_words(char **s, char d, t_paco *p)
 {
 	size_t	count;
 	int		fq_simple;
@@ -85,38 +73,39 @@ static int	count_words(char *s, char d)
 	count = 0;
 	fq_simple = 0;
 	fq_double = 0;
-	while (*s != '\0')
+	p->i = 0;
+	while (s[p->i] != NULL)
 	{
-		while (*s == d && *s != '\0')
-			s++;
-		if (*s != '\0')
-			count++;
-		while ((*s != d || (*s == d && (fq_double || fq_simple))) && *s != '\0')
+		p->j = 0;
+		while (s[p->i][p->j])
 		{
-			if (*s == '\'' && !fq_double)
-				fq_simple = !fq_simple;
-			else if (*s == '\"' && !fq_simple)
-				fq_double = !fq_double;
-			s++;
+			count_words2(s, &fq_simple, &fq_double, p);
+			if ((s[p->i][p->j] == '<' || s[p->i][p->j] == '|'
+				|| s[p->i][p->j] == '>') && !fq_simple && !fq_double)
+			{
+				count++;
+			}
+			p->j++;
 		}
+		p->i++;
 	}
 	return (count);
 }
 
-char	**split_line(char **s, char limit, t_paco *p)
+char	**split_pipe(char **s, char limit, t_paco *p)
 {
 	char	**str;
 
 	if (!s)
 		return (NULL);
 	p->i = 0;
-	str = malloc((count_words(s, limit) + 1) * sizeof(char **));
+	str = malloc((count_words(s, limit, p) + 1) * sizeof(char **));
 	if (!str)
 		return (NULL);
 	str = split_loop(s, limit, str);
 	if (!str)
 	{
-		free_mini_split(str, count_words(s, limit));
+		free_mini_split(str, count_words(s, limit, p));
 		return (NULL);
 	}
 	return (str);
