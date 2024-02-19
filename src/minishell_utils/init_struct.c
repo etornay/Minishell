@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/19 12:22:16 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 15:48:33 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	init_struct(t_paco *p)
 	p->line = NULL;
 	p->path = NULL;
 	p->lex = NULL;
+	p->lex2 = NULL;
 	p->tmp = NULL;
 	p->cd_error = NULL;
 	p->double_flag = 0;
@@ -30,4 +31,7 @@ void	init_struct(t_paco *p)
 	p->j = 0;
 	p->count = 0;
 	p->wc = 1;
+	p->wordle = 0;
+	p->n_split = 0;
+	p->l = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/19 13:11:24 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:42:28 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,16 +47,20 @@ typedef struct s_paco
 	char	**path;
 	char	*act_dir;
 	char	**lex;
+	char	**lex2;
 	char	*tmp;
 	char	*cd_error;
 	int		i;
 	int		c;
 	int		j;
 	int		k;
+	int		l;
+	int		n_split;
 	int		double_flag;
 	int		simple_flag;
 	int		count;
 	int		wc;
+	size_t	wordle;
 	t_env	*l_env;
 	t_env	*aux;
 	t_env	*first;
@@ -69,7 +73,7 @@ void	ft_paco_sanz2(void);
 int		input(char *input, t_paco *p, char **env);
 int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
-char	**split_pipe(char **s, char limit, t_paco *p);
+char	**split_pipe(char **s, t_paco *p);
 void	expand(t_paco *p);
 
 /*--- <INIT MINISHELL> ---*/
@@ -103,6 +107,7 @@ void	restart_index(t_paco *p);
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
 void	free_lex(t_paco *p);
+void	free_lex2(t_paco *p);
 void	free_all(t_paco *p);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);

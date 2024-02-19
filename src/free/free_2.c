@@ -6,11 +6,28 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/16 13:22:02 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:41:58 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	free_lex2(t_paco *p)
+{
+	int	i;
+
+	i = 0;
+	if (p->lex2 != NULL)
+	{
+		while (p->lex2[i])
+		{
+			free(p->lex2[i]);
+			p->lex2[i++] = NULL;
+		}
+		free(p->lex2);
+		p->lex2 = NULL;
+	}
+}
 
 void	free_split(char **tmp)
 {

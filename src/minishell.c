@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 14:21:03 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/19 16:42:05 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ int	input(char *input, t_paco *p, char **env)
 	(void)env;
 	p->lex = split_line(input, ' ', p);
 	expand(p);
+	p->lex2 = split_pipe(p->lex, p);
+	while (p->lex2[i])
+	{
+		printf("%s\n", p->lex2[i]);
+		i++;
+	}
 	if (p->lex[0] == NULL)
 		return (EXIT_SUCCESS);
 	exec_builtins(p);
@@ -69,6 +75,8 @@ int	minishell(t_paco *p, char **env)
 			return (EXIT_FAILURE);
 		if (p->lex != NULL)
 			free_lex(p);
+		if (p->lex2 != NULL)
+			free_lex2(p);
 		if (p->line != NULL)
 		{
 			free(p->line);
