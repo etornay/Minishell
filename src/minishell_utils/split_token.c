@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/20 15:45:04 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:32:02 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	word_len(char *s, t_paco *p)
 			return (len + 1);
 		else
 			len++;
-		/* if ((s[p->l + 1] == '|' || s[p->l + 1] == '>' || s[p->l + 1] == '<')
+		if ((s[p->l + 1] == '|' || s[p->l + 1] == '>' || s[p->l + 1] == '<')
 			&& (!fq_double && !fq_simple))
-			return (len); */
+			return (len);
 	}
 	return (len);
 }

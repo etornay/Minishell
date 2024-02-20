@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/16 13:12:24 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/20 16:09:52 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	change_pwd(t_paco *p)
 		if (ft_strncmp(p->aux->name, "PWD", 3) == EXIT_SUCCESS)
 		{
 			free(p->aux->content);
-			p->aux->content = ft_strjoin("=", getcwd(dir, 500));
+			p->aux->content = ft_strdup(getcwd(dir, 500));
 			if (!p->aux->content)
 				return ;
 			break ;
@@ -55,7 +55,7 @@ void	change_oldpwd(t_paco *p)
 		if (ft_strncmp(p->aux->name, "OLDPWD", 6) == EXIT_SUCCESS)
 		{
 			free(p->aux->content);
-			p->aux->content = ft_strjoin("=", getcwd(dir, 500));
+			p->aux->content = ft_strdup(getcwd(dir, 500));
 			if (!p->aux->content)
 				return ;
 			break ;
@@ -72,7 +72,7 @@ void	change_oldpwd2(t_paco *p, char *dir)
 		if (ft_strncmp(p->aux->name, "OLDPWD", 6) == 0)
 		{
 			free(p->aux->content);
-			p->aux->content = ft_strjoin("=", dir);
+			p->aux->content = ft_strdup(dir);
 			if (!p->aux->content)
 				return ;
 			break ;
