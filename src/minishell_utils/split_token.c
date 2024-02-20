@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/19 16:39:45 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:45:04 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,12 @@ static int	word_len(char *s, t_paco *p)
 			fq_double = !fq_double;
 		if ((s[p->l] == '|' || s[p->l] == '>' || s[p->l] == '<')
 			&& (!fq_double && !fq_simple))
-			return (1);
-		else if ((s[p->l] != '|' && s[p->l] != '>' && s[p->l] != '<')
-			&& (!fq_double && !fq_simple))
+			return (len + 1);
+		else
 			len++;
-		if ((s[p->l + 1] == '|' || s[p->l + 1] == '>' || s[p->l + 1] == '<')
+		/* if ((s[p->l + 1] == '|' || s[p->l + 1] == '>' || s[p->l + 1] == '<')
 			&& (!fq_double && !fq_simple))
-			return (len);
+			return (len); */
 	}
 	return (len);
 }

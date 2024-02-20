@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/31 12:58:12 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/15 13:03:41 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/20 15:54:33 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,3 +138,12 @@ static char	**split_loop(char *s, char limit, char **str, t_paco *p)
 	}
 	return (str[j] = NULL, str);
 }
+
+
+/* ((s[p->l] != '|' && s[p->l] != '>' && s[p->l] != '<')
+				&& (!fq_double || !fq_simple)) || ((fq_double || fq_simple)
+				&& (s[p->l] != '|' && s[p->l] != '>' && s[p->l] != '<')) */
+
+/* if ((s[p->l + 1] == '|' || s[p->l + 1] == '>' || s[p->l + 1] == '<')
+	&& (!fq_double && !fq_simple))
+	return (len); */
