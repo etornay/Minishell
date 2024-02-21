@@ -15,7 +15,7 @@ src/builtins/builtins_utils/export_utils.c\
 src/builtins/builtins_utils/cd_utils.c\
 src/builtins/env_utils/get_path.c\
 src/free/free.c\
-src/free/free_2.c\
+src/free/free2.c\
 
 OBJECTS = $(FILES:.c=.o)
 

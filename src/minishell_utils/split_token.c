@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/20 16:32:02 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:26:08 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,17 +98,11 @@ static int	count_words(char **s, t_paco *p)
 	return (p->count);
 }
 
-char	**split_pipe(char **s, t_paco *p)
+char	**split_pipe(char **s, t_paco *p, int i, int j)
 {
 	char	**str;
-	int		i;
-	int		j;
 
-	i = -1;
-	j = 0;
 	p->n_split = 0;
-	if (!s)
-		return (NULL);
 	str = malloc((count_words(s, p) + 1) * sizeof(char **));
 	if (!str)
 		return (NULL);

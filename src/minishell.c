@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/20 16:24:44 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:26:02 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,19 @@ void	ft_leaks()
 
 static int	exec_builtins(t_paco *p)
 {
-	if (ft_strncmp(p->lex[0], "pwd\0", 4) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex2[0], "pwd\0", 4) == EXIT_SUCCESS)
 		exec_pwd(p);
-	if (ft_strncmp(p->lex[0], "env\0", 4) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex2[0], "env\0", 4) == EXIT_SUCCESS)
 		exec_env(p);
-	if (ft_strncmp(p->lex[0], "export\0", 7) == EXIT_SUCCESS)
-		exec_export(p, p->lex);
-	if (ft_strncmp(p->lex[0], "unset\0", 6) == EXIT_SUCCESS)
-		exec_unset(p, p->lex[1]);
-	if (ft_strncmp(p->lex[0], "echo\0", 5) == EXIT_SUCCESS)
-		flag_echo(p->lex, 0, p);
-	if (ft_strncmp(p->lex[0], "cd\0", 3) == EXIT_SUCCESS)
-		exec_cd(p, p->lex, 0);
-	if (ft_strncmp(p->lex[0], "exit\0", 5) == EXIT_SUCCESS)
+	if (ft_strncmp(p->lex2[0], "export\0", 7) == EXIT_SUCCESS)
+		exec_export(p, p->lex2);
+	if (ft_strncmp(p->lex2[0], "unset\0", 6) == EXIT_SUCCESS)
+		exec_unset(p, p->lex2[1]);
+	if (ft_strncmp(p->lex2[0], "echo\0", 5) == EXIT_SUCCESS)
+		flag_echo(p->lex2, 0, p);
+	if (ft_strncmp(p->lex2[0], "cd\0", 3) == EXIT_SUCCESS)
+		exec_cd(p, p->lex2, 0);
+	if (ft_strncmp(p->lex2[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
 		free_path(p);
 		exit(EXIT_SUCCESS);
@@ -47,13 +47,14 @@ int	input(char *input, t_paco *p, char **env)
 	(void)env;
 	p->lex = split_line(input, ' ', p);
 	expand(p);
-	p->lex2 = split_pipe(p->lex, p);
-	while (p->lex2[i])
+	if (p->lex != NULL)
+		p->lex2 = split_pipe(p->lex, p, -1, 0);
+	/*while (p->lex2[i])
 	{
 		printf("%s\n", p->lex2[i]);
 		i++;
-	}
-	if (p->lex[0] == NULL)
+	}*/
+	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
 	exec_builtins(p);
 	return (EXIT_SUCCESS);

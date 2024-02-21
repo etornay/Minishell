@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/19 16:42:28 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/21 09:26:22 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	ft_paco_sanz2(void);
 int		input(char *input, t_paco *p, char **env);
 int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
-char	**split_pipe(char **s, t_paco *p);
+char	**split_pipe(char **s, t_paco *p, int i, int j);
 void	expand(t_paco *p);
 
 /*--- <INIT MINISHELL> ---*/
