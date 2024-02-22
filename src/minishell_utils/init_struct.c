@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/22 12:04:53 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:04:51 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_struct(t_paco *p)
 	p->dup_stdin = dup(STDIN_FILENO);
 	p->double_flag = 0;
 	p->simple_flag = 0;
+	p->pipe_flag = 0;
 	p->i = 0;
 	p->c = 0;
 	p->j = 0;

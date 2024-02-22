@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 12:01:06 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:04:35 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ typedef struct s_paco
 	int		wc;
 	int		heredoc_tmp;
 	int		heredoc_flag;
+	int		pipe_flag;
 	size_t	wordle;
 	t_env	*l_env;
 	t_env	*aux;
 	t_env	*first;
 	t_list	*clean;
+	t_list	*lst_cmd;
 }	t_paco;
 
 typedef struct s_parser

@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/22 12:37:16 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:59:03 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,11 +92,11 @@ void	parser_cmd(t_paco *p)
 		node->infile = 0;
 		if (p->lex2[i][0] != '|' && p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
 		{
-			if (p->lex2)
+			if (p->lex2[i])
 				get_cmd(p, node);
 			if (node->full_cmd)
 				path_cmd(p, node, &i, &j);
-			while (p->lex2[i][0] != '|' && p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
+			while (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
 				i++;
 			if (p->lex2[i] && p->lex2[i][0] == '>' && p->lex[i + 1][0] == '>')
 				append(p, node, &i);
@@ -107,8 +107,36 @@ void	parser_cmd(t_paco *p)
 				if (node->outfile < 0)
 					return ;
 			}
-			else if (p->lex2 && p->lex2[i][0] == '<' && p->lex2[i + 1][0] == '<')
+			else if (p->lex2[i] && p->lex2[i][0] == '<' && p->lex2[i + 1][0] == '<')
 				exec_heredoc(p, node, &i);
+			else if (p->lex2[i] && p->lex2[i][0] == '<' && p->lex2[i + 1])
+			{
+				node->infile = open(p->lex2[i + 1], O_RDONLY);
+				if (node->infile < 0)
+					return ;
+			}
+			ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
+			if (p->lex2[i] && p->lex2[i][0] == '|')
+			{
+				p->pipe_flag = 1;
+				i++;
+			}
+			else if (p->lex2[i] && ((p->lex2[i][0] == '>' && p->lex2[i + 1][0] == '>' && p->lex2[i + 2]) || (p->lex2[i][0] == '<' && p->lex2[i + 1][0] == '<' && p->lex2[i + 2])))
+				i += 3;
+			else if ((p->lex2[i] && p->lex2[i][0] == '>' && p->lex[i + 1]) || (p->lex2[i] && p->lex2[i][0] == '<' && p->lex[i + 1]))
+				i += 2;
+		}
+		else if (p->lex2[i] && (p->lex2[i][0] == '<' && p->lex2[i][0] == '>'))
+		{
+			if (p->lex2[i] && p->lex2[i][0] == '<' && p->lex2[i][0] == '>')
+				append(p, node, &i);
+			else if (p->lex[i] && p->lex[i][0] == '>' && p->lex[i + 1])
+			{
+				node->outfile = open(p->lex2[i + 1], O_WRONLY | O_CREAT
+						| O_TRUNC, 0644);
+				if (node->outfile < 0)
+					return ;
+			}
 		}
 	}
 }
