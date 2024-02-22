@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/19 15:48:33 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:04:53 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ void	init_struct(t_paco *p)
 	p->lex2 = NULL;
 	p->tmp = NULL;
 	p->cd_error = NULL;
+	p->eof = NULL;
+	p->heredoc_line = NULL;
+	p->dup_stdin = dup(STDIN_FILENO);
 	p->double_flag = 0;
 	p->simple_flag = 0;
 	p->i = 0;
@@ -34,4 +37,6 @@ void	init_struct(t_paco *p)
 	p->wordle = 0;
 	p->n_split = 0;
 	p->l = 0;
+	p->heredoc_flag = 0;
+	p->heredoc_flag = 0;
 }

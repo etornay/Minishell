@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/22 10:20:29 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:43:57 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_cmd_list(t_list *lst)
+void	free_cmd_list(t_list **lst)
 {
 	t_list	*aux;
 	int		i;
@@ -23,18 +23,18 @@ void	free_cmd_list(t_list *lst)
 	{
 		aux = (*lst)->next;
 		i = -1;
-		if (((t_mini *)((*lst)->value))->full_cmd)
+		if (((t_parser *)((*lst)->content))->full_cmd)
 		{
-			while (((t_mini *)((*lst)->value))->full_cmd[++i])
-				free(((t_mini *)((*lst)->value))->full_cmd[i]);
+			while (((t_parser *)((*lst)->content))->full_cmd[++i])
+				free(((t_parser *)((*lst)->content))->full_cmd[i]);
 		}
-		free(((t_mini *)((*lst)->value))->full_cmd);
-		free(((t_mini *)((*lst)->value))->full_path);
-		if (((t_mini *)((*lst)->value))->infile != 0)
-			close(((t_mini *)((*lst)->value))->infile);
-		if (((t_mini *)((*lst)->value))->outfile != 1)
-			close(((t_mini *)((*lst)->value))->outfile);
-		free(((t_mini *)((*lst)->value)));
+		free(((t_parser *)((*lst)->content))->full_cmd);
+		free(((t_parser *)((*lst)->content))->full_path);
+		if (((t_parser *)((*lst)->content))->infile != 0)
+			close(((t_parser *)((*lst)->content))->infile);
+		if (((t_parser *)((*lst)->content))->outfile != 1)
+			close(((t_parser *)((*lst)->content))->outfile);
+		free(((t_parser *)((*lst)->content)));
 		free((*lst));
 		*lst = aux;
 	}

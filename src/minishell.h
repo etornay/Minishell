@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 10:23:59 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:01:06 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ typedef struct s_paco
 	char	*tmp_cmd;
 	char	*tmp_path;
 	char	*cd_error;
+	char	*eof;
+	char	*heredoc_line;
+	char	*dup_stdin;
 	int		i;
 	int		c;
 	int		j;
@@ -62,6 +65,8 @@ typedef struct s_paco
 	int		simple_flag;
 	int		count;
 	int		wc;
+	int		heredoc_tmp;
+	int		heredoc_flag;
 	size_t	wordle;
 	t_env	*l_env;
 	t_env	*aux;

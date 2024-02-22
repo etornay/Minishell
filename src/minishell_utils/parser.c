@@ -6,55 +6,56 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/22 10:27:15 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:37:16 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	append(t_paco *p, t_parser *node, int i)
+void	append(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[i + 2])
+	if (p->lex2[*i + 2])
 	{
-		node->outfile = open(p->lex2[i + 2], O_WRONLY | O_CREAT | O_APPEND, 0644);
+		node->outfile = open(p->lex2[*i + 2], O_WRONLY | O_CREAT
+				| O_APPEND, 0644);
 		if (node->outfile > 0)
 			return ;
 	}
 	else
 	{
 		p->clean = ft_lstnew(node);
-		free_cmd_list(p->clean);
+		free_cmd_list(&p->clean);
 		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
 	}
 }
 
-void	path_cmd(t_paco *p, t_parser *node, int i, int j)
+void	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
 {
-	node->full_path = ft_calloc(len, sizeof(char *));
+	node->full_path = ft_calloc(1, sizeof(char *));
 	if (!node->full_path)
 		return (EXIT_FAILURE);
-	while (node->full_cmd[i] != NULL)
+	while (node->full_cmd[*i] != NULL)
 	{
 		j = -1;
 		while (p->path[++p->j] != NULL)
 		{
-			p->tmp_cmd = ft_strjoin(p->path[j], "/");
-			p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[i][0]);
+			p->tmp_cmd = ft_strjoin(p->path[*j], "/");
+			p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[*i][0]);
 			if (!p->tmp_path || !p->tmp_cmd)
 				return (EXIT_FAILURE);
 			free(p->tmp_cmd);
 			if (access(p->tmp_path, F_OK) == 0
 				&& access(p->tmp_path, X_OK) == 0)
 			{
-				node->full_path[i] = p->tmp_path;
+				node->full_path[*i] = p->tmp_path;
 				p->tmp_path = NULL;
 				break ;
 			}
 			free(p->tmp_path);
 		}
 	}
-	return (node->full_path[i] = NULL, EXIT_SUCCESS);
+	return (node->full_path[*i] = NULL, EXIT_SUCCESS);
 }
 
 void	get_cmd(t_paco *p, t_parser *node)
@@ -86,7 +87,7 @@ void	parser_cmd(t_paco *p)
 	j = 0;
 	while (p->lex2[i])
 	{
-		node = ft_calloc(1, sizeof(parser));
+		node = ft_calloc(1, sizeof(t_parser));
 		node->outfile = 1;
 		node->infile = 0;
 		if (p->lex2[i][0] != '|' && p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
@@ -94,13 +95,20 @@ void	parser_cmd(t_paco *p)
 			if (p->lex2)
 				get_cmd(p, node);
 			if (node->full_cmd)
-				path_cmd(p, node, i, j);
+				path_cmd(p, node, &i, &j);
 			while (p->lex2[i][0] != '|' && p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
 				i++;
 			if (p->lex2[i] && p->lex2[i][0] == '>' && p->lex[i + 1][0] == '>')
+				append(p, node, &i);
+			else if (p->lex2[i] && p->lex2[i][0] == '>' && p->lex2[i + 1])
 			{
-				append()
+				node->outfile = open(p->lex2[i + 1], O_WRONLY | O_CREAT
+						| O_TRUNC, 0644);
+				if (node->outfile < 0)
+					return ;
 			}
+			else if (p->lex2 && p->lex2[i][0] == '<' && p->lex2[i + 1][0] == '<')
+				exec_heredoc(p, node, &i);
 		}
 	}
 }
