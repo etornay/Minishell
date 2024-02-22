@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 09:04:32 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:28:45 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,15 +67,16 @@ typedef struct s_paco
 }	t_paco;
 
 /*--- <MINISHELL> ---*/
-int		prompt(t_paco *p);
-void	ft_paco_sanz(void);
-void	ft_paco_sanz2(void);
 int		input(char *input, t_paco *p, char **env);
 int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
-char	**split_pipe(char **s, t_paco *p, int i, int j);
 void	expand(t_paco *p);
-void	ft_exit(void);
+char	**split_pipe(char **s, t_paco *p, int i, int j);
+
+/*--- <MINISHELL DESIGN> ---*/
+int		prompt(t_paco *p);
+void	ft_paco_sanz(void);
+void	ft_paco_sanz2(void);
 
 /*--- <INIT MINISHELL> ---*/
 void	init_struct(t_paco *p);
