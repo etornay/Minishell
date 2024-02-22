@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 08:39:41 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:10:40 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	exec_builtins(t_paco *p)
 	if (ft_strncmp(p->lex2[0], "env\0", 4) == EXIT_SUCCESS)
 		exec_env(p);
 	if (ft_strncmp(p->lex2[0], "export\0", 7) == EXIT_SUCCESS)
-		exec_export(p, p->lex2);
+		exec_export(p, p->lex2, 1);
 	if (ft_strncmp(p->lex2[0], "unset\0", 6) == EXIT_SUCCESS)
 		exec_unset(p, p->lex2[1]);
 	if (ft_strncmp(p->lex2[0], "echo\0", 5) == EXIT_SUCCESS)
@@ -48,7 +48,10 @@ int	input(char *input, t_paco *p, char **env)
 	p->lex = split_line(input, ' ', p);
 	expand(p);
 	if (p->lex != NULL)
+	{
 		p->lex2 = split_pipe(p->lex, p, -1, 0);
+		free_lex(p);
+	}
 	/*while (p->lex2[i])
 	{
 		printf("%s\n", p->lex2[i]);
@@ -74,8 +77,6 @@ int	minishell(t_paco *p, char **env)
 			add_history(p->line);
 		if (input(p->line, p, env) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (p->lex != NULL)
-			free_lex(p);
 		if (p->lex2 != NULL)
 			free_lex2(p);
 		if (p->line != NULL)
@@ -83,8 +84,6 @@ int	minishell(t_paco *p, char **env)
 			free(p->line);
 			p->line = NULL;
 		}
-		restart_index(p);
-		set_env_index(p);
 	}
 	return (EXIT_SUCCESS);
 }

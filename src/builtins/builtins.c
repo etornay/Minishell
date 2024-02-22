@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/14 15:55:11 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:05:55 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,9 @@ static void	exec_export2(t_paco *p, char *s, char **tmp)
 	free_split(tmp);
 }
 
-void	exec_export(t_paco *p, char **s)
+void	exec_export(t_paco *p, char **s, int index)
 {
-	int		index;
-
 	p->aux = p->l_env;
-	index = 1;
 	if (s[1] != NULL)
 		exec_export2(p, s[1], NULL);
 	else if (s[1] == NULL)
@@ -68,6 +65,8 @@ void	exec_export(t_paco *p, char **s)
 				p->aux = p->aux->next_env;
 		}
 	}
+	restart_index(p);
+	set_env_index(p);
 }
 
 static void	exec_echo2(char **s, int size, t_paco *p, int *j)

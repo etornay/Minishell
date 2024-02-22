@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 08:38:35 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:04:32 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	init_struct(t_paco *p);
 /*--- <BUILTINS> ---*/
 void	exec_pwd(t_paco *p);
 void	exec_env(t_paco *p);
-void	exec_export(t_paco *p, char **s);
+void	exec_export(t_paco *p, char **s, int index);
 void	exec_unset(t_paco *p, char *name);
 void	exec_cd(t_paco *p, char **s, int flag);
 void	flag_echo(char **s, int flag, t_paco *p);
