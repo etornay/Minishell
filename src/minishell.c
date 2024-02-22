@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 09:10:40 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 09:30:13 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	main(int argc, char **argv, char **env)
 	(void)argc;
 	(void)argv;
 	atexit(ft_leaks);
-	atexit(ft_exit);
 	p = ft_calloc(1, sizeof(t_paco));
 	if (p == NULL)
 		exit (EXIT_FAILURE);
