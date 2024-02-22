@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/21 09:26:22 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 08:38:35 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int		get_path(t_paco *p, char **env);
 char	**split_line(char *s, char limit, t_paco *p);
 char	**split_pipe(char **s, t_paco *p, int i, int j);
 void	expand(t_paco *p);
+void	ft_exit(void);
 
 /*--- <INIT MINISHELL> ---*/
 void	init_struct(t_paco *p);
