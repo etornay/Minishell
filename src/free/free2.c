@@ -1,16 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_2.c                                           :+:      :+:    :+:   */
+/*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/19 16:41:58 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:20:29 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	free_cmd_list(t_list *lst)
+{
+	t_list	*aux;
+	int		i;
+
+	if (!*lst)
+		return ;
+	while (*lst)
+	{
+		aux = (*lst)->next;
+		i = -1;
+		if (((t_mini *)((*lst)->value))->full_cmd)
+		{
+			while (((t_mini *)((*lst)->value))->full_cmd[++i])
+				free(((t_mini *)((*lst)->value))->full_cmd[i]);
+		}
+		free(((t_mini *)((*lst)->value))->full_cmd);
+		free(((t_mini *)((*lst)->value))->full_path);
+		if (((t_mini *)((*lst)->value))->infile != 0)
+			close(((t_mini *)((*lst)->value))->infile);
+		if (((t_mini *)((*lst)->value))->outfile != 1)
+			close(((t_mini *)((*lst)->value))->outfile);
+		free(((t_mini *)((*lst)->value)));
+		free((*lst));
+		*lst = aux;
+	}
+	*lst = NULL;
+}
 
 void	free_lex2(t_paco *p)
 {

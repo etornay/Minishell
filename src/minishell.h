@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 09:28:45 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/22 10:23:59 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,8 @@ typedef struct s_paco
 	char	**lex;
 	char	**lex2;
 	char	*tmp;
+	char	*tmp_cmd;
+	char	*tmp_path;
 	char	*cd_error;
 	int		i;
 	int		c;
@@ -64,7 +66,16 @@ typedef struct s_paco
 	t_env	*l_env;
 	t_env	*aux;
 	t_env	*first;
+	t_list	*clean;
 }	t_paco;
+
+typedef struct s_parser
+{
+	char	**full_cmd;
+	char	*full_path;
+	int		infile;
+	int		outfile;
+}	t_parser;
 
 /*--- <MINISHELL> ---*/
 int		input(char *input, t_paco *p, char **env);
