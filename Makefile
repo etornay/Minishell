@@ -8,6 +8,9 @@ src/minishell_utils/split.c\
 src/minishell_utils/expand.c\
 src/minishell_utils/init_struct.c\
 src/minishell_utils/split_token.c\
+src/minishell_utils/parser.c\
+src/minishell_utils/parser_utils.c\
+src/minishell_utils/heredoc.c\
 src/builtins/builtins.c\
 src/builtins/builtins2.c\
 src/builtins/builtins_utils/builtins_utils.c\

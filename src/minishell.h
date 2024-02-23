@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 15:04:35 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:03:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ void	ft_paco_sanz2(void);
 
 /*--- <INIT MINISHELL> ---*/
 void	init_struct(t_paco *p);
+void	init_struct2(t_paco *p);
 
 /*--- <BUILTINS> ---*/
 void	exec_pwd(t_paco *p);
@@ -123,6 +124,20 @@ void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
 int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
+
+/*--- <PARSER> ---*/
+void	parser_cmd(t_paco *p);
+void	parser_cmd2(t_paco *p, t_parser *node, int *i, int *j);
+void	parser_cmd3(t_paco *p, t_parser *node, int *i, int *j);
+void	p_utils(t_paco *p, t_parser *node, int *i);
+void	get_cmd(t_paco *p, t_parser *node);
+void	path_cmd(t_paco *p, t_parser *node, int *i, int *j);
+void	append(t_paco *p, t_parser *node, int *i);
+void	trunc(t_paco *p, t_parser *node, int *i);
+void	read_only(t_paco *p, t_parser *node, int *i);
+void	flag_pipe(t_paco *p, int *i);
+void	exec_heredoc(t_paco *p, t_parser *node, int *i);
+void	ft_heredoc(t_paco *p, char *limit);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);

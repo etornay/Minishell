@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 12:39:42 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:15:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	msg_error(char *str)
+static int	msg_error(char *str)
 {
 	perror(str);
 	unlink("here_doc.tmp");

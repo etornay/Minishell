@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/22 11:25:27 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:02:41 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int argc, char **argv, char **env)
 	if (p == NULL)
 		exit (EXIT_FAILURE);
 	init_struct(p);
+	init_struct2(p);
 	if (minishell(p, env) == EXIT_FAILURE)
 	{
 		free_all(p);
