@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/23 18:03:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:06:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ typedef struct s_paco
 	char	*cd_error;
 	char	*eof;
 	char	*heredoc_line;
-	char	*dup_stdin;
+	int		dup_stdin;
 	int		i;
 	int		c;
 	int		j;
@@ -127,13 +127,10 @@ void	restart_index(t_paco *p);
 
 /*--- <PARSER> ---*/
 void	parser_cmd(t_paco *p);
-void	parser_cmd2(t_paco *p, t_parser *node, int *i, int *j);
-void	parser_cmd3(t_paco *p, t_parser *node, int *i, int *j);
-void	p_utils(t_paco *p, t_parser *node, int *i);
 void	get_cmd(t_paco *p, t_parser *node);
-void	path_cmd(t_paco *p, t_parser *node, int *i, int *j);
-void	append(t_paco *p, t_parser *node, int *i);
-void	trunc(t_paco *p, t_parser *node, int *i);
+int		path_cmd(t_paco *p, t_parser *node, int *i, int *j);
+void	exec_append(t_paco *p, t_parser *node, int *i);
+void	exec_trunc(t_paco *p, t_parser *node, int *i);
 void	read_only(t_paco *p, t_parser *node, int *i);
 void	flag_pipe(t_paco *p, int *i);
 void	exec_heredoc(t_paco *p, t_parser *node, int *i);

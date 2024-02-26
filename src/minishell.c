@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/23 12:02:41 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 10:58:05 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	input(char *input, t_paco *p, char **env)
 	}*/
 	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
+	parser_cmd(p);
 	exec_builtins(p);
 	return (EXIT_SUCCESS);
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/23 17:51:02 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:06:05 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
+int	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
 {
 	node->full_path = ft_calloc(1, sizeof(char *));
 	if (!node->full_path)

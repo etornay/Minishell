@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/23 17:13:23 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 11:02:10 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	read_only(t_paco *p, t_parser *node, int *i)
 		return ;
 }
 
-void	trunc(t_paco *p, t_parser *node, int *i)
+void	exec_trunc(t_paco *p, t_parser *node, int *i)
 {
 	node->outfile = open(p->lex2[*i + 1], O_WRONLY | O_CREAT
 			| O_TRUNC, 0644);
@@ -33,7 +33,7 @@ void	trunc(t_paco *p, t_parser *node, int *i)
 		return ;
 }
 
-void	append(t_paco *p, t_parser *node, int *i)
+void	exec_append(t_paco *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i + 2])
 	{
