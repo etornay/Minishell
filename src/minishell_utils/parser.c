@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/26 11:58:05 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:13:13 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ static void	p_utils(t_paco *p, t_parser *node, int *i)
 	else if (p->lex[*i] && p->lex[*i][0] == '>' && p->lex[*i + 1])
 		exec_trunc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1][0] == '<')
-		exec_heredoc(p, node, i);
+		exec_heredoc(p, node);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1])
 		read_only(p, node, i);
 }
 
-static void	parser_cmd3(t_paco *p, t_parser *node, int *i, int *j)
+static void	parser_cmd3(t_paco *p, t_parser *node, int *i)
 {
 	p_utils(p, node, i);
 	if (p->lex2[*i] && p->lex2[*i][0] == '|')
@@ -40,7 +40,7 @@ static void	parser_cmd3(t_paco *p, t_parser *node, int *i, int *j)
 		&& p->lex2[*i][0] != '>' && p->lex2[*i])
 		get_cmd(p, node);
 	if (node->full_cmd)
-		path_cmd(p, node, i, j);
+		path_cmd(p, node, i);
 	while (p->lex2[*i] && p->lex2[*i][0] != '|'
 		&& p->lex2[*i][0] != '<' && p->lex2[*i][0] != '>')
 		i++;
@@ -49,13 +49,13 @@ static void	parser_cmd3(t_paco *p, t_parser *node, int *i, int *j)
 	ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 }
 
-static void	parser_cmd2(t_paco *p, t_parser *node, int *i, int *j)
+static void	parser_cmd2(t_paco *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>' && p->lex2[*i])
 		get_cmd(p, node);
 	if (node->full_cmd)
-		path_cmd(p, node, i, j);
+		path_cmd(p, node, i);
 	while (p->lex2[*i] && p->lex2[*i][0] != '|'
 		&& p->lex2[*i][0] != '<' && p->lex2[*i][0] != '>')
 		i++;
@@ -89,9 +89,9 @@ void	parser_cmd(t_paco *p)
 		node->infile = 0;
 		if (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
 			&& p->lex2[i][0] != '>')
-			parser_cmd2(p, node, &i, &j);
+			parser_cmd2(p, node, &i);
 		else if (p->lex2[i] && (p->lex2[i][0] == '<' && p->lex2[i][0] == '>'))
-			parser_cmd3(p, node, &i, &j);
+			parser_cmd3(p, node, &i);
 		else
 			i++;
 	}

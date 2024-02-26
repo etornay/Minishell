@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/23 17:15:38 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:10:46 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_heredoc(t_paco *p, char *limit)
 	p->dup_stdin = dup(STDIN_FILENO);
 }
 
-void	exec_heredoc(t_paco *p, t_parser *node, int *i)
+void	exec_heredoc(t_paco *p, t_parser *node)
 {
 	if (p->lex2[1 + 2])
 	{

@@ -3,26 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 12:09:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:09:01 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
+int	path_cmd(t_paco *p, t_parser *node, int *i)
 {
 	node->full_path = ft_calloc(1, sizeof(char *));
 	if (!node->full_path)
 		return (EXIT_FAILURE);
 	while (node->full_cmd[*i] != NULL)
 	{
-		j = -1;
+		p->j = -1;
 		while (p->path[++p->j] != NULL)
 		{
-			p->tmp_cmd = ft_strjoin(p->path[*j], "/");
+			p->tmp_cmd = ft_strjoin(p->path[p->j], "/");
 			p->tmp_path = ft_strjoin(p->tmp_cmd, &node->full_cmd[*i][0]);
 			if (!p->tmp_path || !p->tmp_cmd)
 				return (EXIT_FAILURE);
@@ -30,14 +30,14 @@ int	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
 			if (access(p->tmp_path, F_OK) == 0
 				&& access(p->tmp_path, X_OK) == 0)
 			{
-				node->full_path[*i] = p->tmp_path;
+				node->full_path = ft_strdup(p->tmp_path);
 				p->tmp_path = NULL;
 				break ;
 			}
 			free(p->tmp_path);
 		}
 	}
-	return (node->full_path[*i] = NULL, EXIT_SUCCESS);
+	return (node->full_path[*i] = '\0', EXIT_SUCCESS);
 }
 
 void	get_cmd(t_paco *p, t_parser *node)

@@ -10,6 +10,7 @@ src/minishell_utils/init_struct.c\
 src/minishell_utils/split_token.c\
 src/minishell_utils/parser.c\
 src/minishell_utils/parser_utils.c\
+src/minishell_utils/parser_utils2.c\
 src/minishell_utils/heredoc.c\
 src/builtins/builtins.c\
 src/builtins/builtins2.c\

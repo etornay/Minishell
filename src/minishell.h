@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 11:58:23 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/26 13:12:23 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,12 +128,12 @@ void	restart_index(t_paco *p);
 /*--- <PARSER> ---*/
 void	parser_cmd(t_paco *p);
 void	get_cmd(t_paco *p, t_parser *node);
-int		path_cmd(t_paco *p, t_parser *node, int *i, int *j);
+int		path_cmd(t_paco *p, t_parser *node, int *i);
 void	exec_append(t_paco *p, t_parser *node, int *i);
 void	exec_trunc(t_paco *p, t_parser *node, int *i);
 void	read_only(t_paco *p, t_parser *node, int *i);
 void	flag_pipe(t_paco *p, int *i);
-void	exec_heredoc(t_paco *p, t_parser *node, int *i);
+void	exec_heredoc(t_paco *p, t_parser *node);
 void	ft_heredoc(t_paco *p, char *limit);
 
 /*--- <FREE MINISHELL> ---*/
@@ -144,5 +144,6 @@ void	free_all(t_paco *p);
 void	free_path(t_paco *p);
 void	free_split(char **tmp);
 void	free_cd_error(t_paco *p);
+void	free_cmd_list(t_list **lst);
 
 #endif

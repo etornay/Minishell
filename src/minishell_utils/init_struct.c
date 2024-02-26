@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/23 17:36:56 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:57:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	init_struct(t_paco *p)
 	p->path = NULL;
 	p->shell = NULL;
 	p->tmp = NULL;
-	p->dup_stdin = dup(STDIN_FILENO);
 }
 
 void	init_struct2(t_paco *p)
@@ -43,4 +42,5 @@ void	init_struct2(t_paco *p)
 	p->simple_flag = 0;
 	p->wc = 1;
 	p->wordle = 0;
+	p->dup_stdin = dup(STDIN_FILENO);
 }
