@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 11:06:05 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:09:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	path_cmd(t_paco *p, t_parser *node, int *i, int *j)
 		while (p->path[++p->j] != NULL)
 		{
 			p->tmp_cmd = ft_strjoin(p->path[*j], "/");
-			p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[*i][0]);
+			p->tmp_path = ft_strjoin(p->tmp_cmd, &node->full_cmd[*i][0]);
 			if (!p->tmp_path || !p->tmp_cmd)
 				return (EXIT_FAILURE);
 			free(p->tmp_cmd);
