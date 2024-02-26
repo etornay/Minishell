@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 13:14:34 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:17:34 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	exec_append(t_paco *p, t_parser *node, int *i)
 	{
 		p->clean = ft_lstnew(node);
 		free_cmd_list(&p->clean);
-		printf("bash: syntax error near unexpected token `newline'\n");
+		printf("bash: syntax error near unexpected token 'newline'\n");
 		return ;
 	}
 }
