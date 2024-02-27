@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/27 17:01:24 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:28:06 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,22 @@ static int	parser_cmd2(t_paco *p, t_parser *node, int *i)
 
 static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i] && p->lex2[0][0] == '>'
+	if (p->lex2[*i] && ((p->lex2[0][0] == '>' && !p->lex2[1])
+		|| (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && !p->lex2[2])
+		|| (p->lex2[0][0] == '<' && !p->lex2[1])
+		|| (p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && !p->lex2[2])))
+	{
+		printf("bash: syntax error near unexpected token `newline'\n");
+		return ;
+	}
+	else if (p->lex2[*i] && p->lex2[0][0] == '>'
 		&& p->lex2[1][0] == '>' && p->lex2[2] && p->lex2[2][0] != '>')
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1]
 		&& p->lex2[1][0] != '>')
 		exec_trunc(p, node, i);
+	else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
+		return ;
 	else if (p->lex2[*i] && p->lex2[0][0] == '<'
 		&& p->lex2[1][0] == '<' && p->lex2[2] && p->lex2[2][0] != '<')
 		exec_heredoc(p, node, i);
@@ -114,8 +124,10 @@ void	parser_cmd(t_paco *p)
 		node = ft_calloc(1, sizeof(t_parser));
 		node->outfile = 1;
 		node->infile = 0;
-		if (p->lex2[i] && ((p->lex2[0][0] == '<' && p->lex2[1][0] == '<'
-			&& p->lex2[2]) || (p->lex2[0][0] == '<' && p->lex2[1])
+		if (p->lex2[i] && ((p->lex2[0][0] == '>' && !p->lex2[1])
+			|| (p->lex2[0][0] == '<' && !p->lex2[1])
+			|| (p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && p->lex2[2])
+			|| (p->lex2[0][0] == '<' && p->lex2[1])
 			|| (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && p->lex2[2])
 			|| (p->lex2[0][0] == '>' && p->lex2[1])))
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 15:19:35 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:30:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	flag_pipe(t_paco *p, int *i)
 {
-	if (p->lex2[*i + 1] == NULL)
+	if (p->lex2[0][0] == '|' || p->lex2[*i + 1] == NULL)
 	{
 		printf("bash: syntax error near unexpected token `|'\n");
 		return (EXIT_FAILURE);
