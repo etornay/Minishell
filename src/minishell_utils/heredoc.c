@@ -6,12 +6,12 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 12:45:28 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:57:30 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-//NO CIERRA EL ARCHIVO TEMPORAL NI DETECTA EL EOF
+//NO CIERRA EL ARCHIVO TEMPORAL
 static int	msg_error(char *str)
 {
 	perror(str);
