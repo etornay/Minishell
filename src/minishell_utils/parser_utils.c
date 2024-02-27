@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 17:48:22 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/27 16:32:44 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	path_cmd(t_paco *p, t_parser *node, int *i)
 {
-	node->full_path = ft_calloc(1, sizeof(char *));
-	if (!node->full_path)
-		return (EXIT_FAILURE);
-	while (node->full_cmd[*i] != NULL)
-	{
+	//node->full_path = ft_calloc(1, sizeof(char *));
+	//if (!node->full_path)
+	//	return (EXIT_FAILURE);
+	//while (node->full_cmd[*i] != NULL)
+	//{
 		p->j = -1;
 		while (p->path[++p->j] != NULL)
 		{
 			p->tmp_cmd = ft_strjoin(p->path[p->j], "/");
-			p->tmp_path = ft_strjoin(p->tmp_cmd, &node->full_cmd[*i][0]);
+			p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[*i]);
 			if (!p->tmp_path || !p->tmp_cmd)
 				return (EXIT_FAILURE);
 			free(p->tmp_cmd);
@@ -36,25 +36,25 @@ int	path_cmd(t_paco *p, t_parser *node, int *i)
 			}
 			free(p->tmp_path);
 		}
-		(*i)++;
-	}
-	return (node->full_path[*i] = '\0', EXIT_SUCCESS);
+	//	(*i)++;
+	//}
+	return (EXIT_SUCCESS);
 }
 
-void	get_cmd(t_paco *p, t_parser *node)
+void	get_cmd(t_paco *p, t_parser *node, int *k)
 {
-	int	i;
 	int	j;
+	int i;
 
-	i = 0;
 	j = 0;
+	i = *k;
 	while (p->lex2 && p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
 		&& p->lex2[i][0] != '>')
 		i++;
 	node->full_cmd = ft_calloc(i + 1, sizeof(char *));
 	while (j < i)
 	{
-		node->full_cmd[j] = ft_strdup(p->lex2[j]);
+		node->full_cmd[j] = ft_strdup(p->lex2[*k]);
 		j++;
 	}
 	node->full_cmd[j] = NULL;

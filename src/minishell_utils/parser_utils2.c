@@ -6,18 +6,22 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 11:56:41 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:19:35 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	flag_pipe(t_paco *p, int *i)
+int	flag_pipe(t_paco *p, int *i)
 {
-	if (p->lex[*i + 1] == NULL)
-		return ;
+	if (p->lex2[*i + 1] == NULL)
+	{
+		printf("bash: syntax error near unexpected token `|'\n");
+		return (EXIT_FAILURE);
+	}
 	p->pipe_flag = 1;
 	(*i)++;
+	return (EXIT_SUCCESS);
 }
 
 void	read_only(t_paco *p, t_parser *node, int *i)
