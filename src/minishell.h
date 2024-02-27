@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/26 19:25:27 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/27 08:59:43 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ void	restart_index(t_paco *p);
 void	parser_cmd(t_paco *p);
 void	get_cmd(t_paco *p, t_parser *node);
 int		path_cmd(t_paco *p, t_parser *node, int *i);
+int		check_builtin(t_paco *p);
 void	exec_append(t_paco *p, t_parser *node, int *i);
 void	exec_trunc(t_paco *p, t_parser *node, int *i);
 void	read_only(t_paco *p, t_parser *node, int *i);

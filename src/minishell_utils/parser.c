@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/26 20:01:41 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:32:52 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ static void	parser_cmd2(t_paco *p, t_parser *node, int *i)
 	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>' && p->lex2[*i])
 		get_cmd(p, node);
-	if (node->full_cmd)
+	if (node->full_cmd && check_builtin(p) == EXIT_FAILURE)
 		path_cmd(p, node, i);
+	else if (check_builtin(p) == EXIT_SUCCESS)
+		node->full_path = NULL;
 	while (p->lex2[*i] && p->lex2[*i][0] != '|'
 		&& p->lex2[*i][0] != '<' && p->lex2[*i][0] != '>')
 		(*i)++;
@@ -76,19 +78,21 @@ static void	parser_cmd2(t_paco *p, t_parser *node, int *i)
 
 static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && p->lex2[2])
+	if (p->lex2[*i] && p->lex2[0][0] == '>'
+		&& p->lex2[1][0] == '>' && p->lex2[2][0] != '>' && p->lex2[3])
 	{
 		printf("hola\n");
 		exec_append(p, node, i);
 	}
-	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1])
+	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1][0] != '>')
 		exec_trunc(p, node, i);
-	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && p->lex2[2])
+	else if (p->lex2[*i] && p->lex2[0][0] == '<'
+		&& p->lex2[1][0] == '<' && p->lex2[2])
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1])
 		(*i)++;
 	return ;
-} /* <--- ESTO HAY QUE AREGLAR */
+}
 
 void	parser_cmd(t_paco *p)
 {
@@ -103,12 +107,16 @@ void	parser_cmd(t_paco *p)
 		node = ft_calloc(1, sizeof(t_parser));
 		node->outfile = 1;
 		node->infile = 0;
-		if (p->lex2[i] && ((p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && p->lex2[2]) || (p->lex2[0][0] == '<' && p->lex2[1]) || (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && p->lex2[2]) || (p->lex2[0][0] == '>' && p->lex2[1])))
+		if (p->lex2[i] && ((p->lex2[0][0] == '<' && p->lex2[1][0] == '<'
+			&& p->lex2[2]) || (p->lex2[0][0] == '<' && p->lex2[1])
+			|| (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && p->lex2[2])
+			|| (p->lex2[0][0] == '>' && p->lex2[1])))
 			parser_cmd_special(p, node, &i);
 		else if (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
 			&& p->lex2[i][0] != '>')
 			parser_cmd2(p, node, &i);
-		else if (p->lex2[i] && (p->lex2[i][0] == '|' || p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
+		else if (p->lex2[i] && (p->lex2[i][0] == '|'
+			|| p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
 			parser_cmd3(p, node, &i);
 		else
 			i++;
