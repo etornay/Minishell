@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 10:29:21 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:56:41 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	flag_pipe(t_paco *p, int *i)
 {
+	if (p->lex[*i + 1] == NULL)
+		return ;
 	p->pipe_flag = 1;
 	(*i)++;
 }
@@ -47,7 +49,7 @@ void	exec_append(t_paco *p, t_parser *node, int *i)
 	else
 	{
 		p->clean = ft_lstnew(node);
-		//free_cmd_list(&p->clean); AQUI SE RAYA POR DOBLE LIBERACION
+		free_cmd_list(&p->clean);
 		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
 	}

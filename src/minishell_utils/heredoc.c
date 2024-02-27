@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 10:37:21 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:45:28 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_heredoc(t_paco *p, char *limit)
 		p->heredoc_line = get_next_line(p->dup_stdin);
 		if (!p->heredoc_line)
 			msg_error("Line");
-		if (ft_strncmp(p->eof, p->heredoc_line, ft_strlen(p->heredoc_line)))
+		if (!ft_strncmp(p->eof, p->heredoc_line, ft_strlen(p->heredoc_line)))
 		{
 			free(p->eof);
 			free(p->heredoc_line);
@@ -48,10 +48,10 @@ void	ft_heredoc(t_paco *p, char *limit)
 
 void	exec_heredoc(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[1 + 2])
+	if (p->lex2[*i + 2])
 	{
 		p->heredoc_flag = 1;
-		ft_heredoc(p, p->lex2[1 + 2]);
+		ft_heredoc(p, p->lex2[*i + 2]);
 		node->infile = p->heredoc_tmp;
 	}
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && p->lex2[2])
@@ -63,8 +63,8 @@ void	exec_heredoc(t_paco *p, t_parser *node, int *i)
 	else
 	{
 		p->clean = ft_lstnew(node);
-		//free_cmd_list(&p->clean); AQUI SE RAYA POR DOBLE LIBERACION
-		printf("bash: syntax error near unexpected token 'newline'\n");
+		free_cmd_list(&p->clean);
+		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
 	}
 }
