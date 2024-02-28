@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/21 09:26:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:19:56 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ char	**split_pipe(char **s, t_paco *p, int i, int j)
 	}
 	if (s[0] && s[0][0] == '\0')
 		str[p->n_split] = ft_strdup("");
-	return (str[p->n_split] = NULL, str);
+	str[p->n_split] = NULL;
+	return (str);
 }

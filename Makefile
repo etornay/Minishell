@@ -23,7 +23,7 @@ src/free/free2.c\
 
 OBJECTS = $(FILES:.c=.o)
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 
 LIBFT = ./Libft/libft.a
 

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 15:00:02 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:22:04 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	input(char *input, t_paco *p, char **env)
 	}*/
 	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
-	parser_cmd(p);
+	parser_cmd(p, 0);
 	exec_builtins(p);
 	return (EXIT_SUCCESS);
 }
@@ -100,11 +100,11 @@ int	main(int argc, char **argv, char **env)
 	if (p == NULL)
 		exit (EXIT_FAILURE);
 	init_struct(p);
-	init_struct2(p);
 	if (minishell(p, env) == EXIT_FAILURE)
 	{
 		free_all(p);
 		exit(EXIT_FAILURE);
 	}
-	return (free_all(p), EXIT_SUCCESS);
+	free_all(p);
+	return (EXIT_SUCCESS);
 }

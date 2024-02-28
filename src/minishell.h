@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 16:19:51 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:21:45 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	ft_paco_sanz2(void);
 
 /*--- <INIT MINISHELL> ---*/
 void	init_struct(t_paco *p);
-void	init_struct2(t_paco *p);
 
 /*--- <BUILTINS> ---*/
 void	exec_pwd(t_paco *p);
@@ -126,9 +125,10 @@ int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
 
 /*--- <PARSER> ---*/
-void	parser_cmd(t_paco *p);
+void	parser_cmd(t_paco *p, int i);
 void	get_cmd(t_paco *p, t_parser *node, int *i);
 int		path_cmd(t_paco *p, t_parser *node, int *i);
+void	p_utils(t_paco *p, t_parser *node, int *i);
 int		check_builtin(t_paco *p);
 void	exec_append(t_paco *p, t_parser *node, int *i);
 void	exec_trunc(t_paco *p, t_parser *node, int *i);

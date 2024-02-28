@@ -6,29 +6,13 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/27 12:04:06 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/28 12:22:16 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	init_struct(t_paco *p)
-{
-	p->act_dir = NULL;
-	p->aux = NULL;
-	p->cd_error = NULL;
-	p->eof = NULL;
-	p->heredoc_line = NULL;
-	p->l_env = NULL;
-	p->lex = NULL;
-	p->lex2 = NULL;
-	p->line = NULL;
-	p->path = NULL;
-	p->shell = NULL;
-	p->tmp = NULL;
-}
-
-void	init_struct2(t_paco *p)
+static void	init_struct2(t_paco *p)
 {
 	p->c = 0;
 	p->i = 0;
@@ -44,3 +28,22 @@ void	init_struct2(t_paco *p)
 	p->wordle = 0;
 	p->dup_stdin = dup(STDIN_FILENO);
 }
+
+void	init_struct(t_paco *p)
+{
+	p->act_dir = NULL;
+	p->aux = NULL;
+	p->cd_error = NULL;
+	p->eof = NULL;
+	p->heredoc_line = NULL;
+	p->l_env = NULL;
+	p->lex = NULL;
+	p->lex2 = NULL;
+	p->line = NULL;
+	p->path = NULL;
+	p->shell = NULL;
+	p->tmp = NULL;
+	init_struct2(p);
+}
+
+
