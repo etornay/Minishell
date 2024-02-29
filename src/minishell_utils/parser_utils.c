@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/28 12:14:38 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 12:50:01 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,14 @@ void	get_cmd(t_paco *p, t_parser *node, int *k)
 	int	i;
 
 	j = 0;
-	i = *k;
-	while (p->lex2 && p->lex2[i] != NULL && p->lex2[i][0] != '|'
-		&& p->lex2[i][0] != '<' && p->lex2[i][0] != '>')
+	i = 0;
+	while (p->lex2 && p->lex2[*k + i] != NULL && p->lex2[*k + i][0] != '|'
+		&& p->lex2[*k + i][0] != '<' && p->lex2[*k + i][0] != '>')
 		i++;
 	node->full_cmd = ft_calloc(i + 1, sizeof(char *));
 	while (j < i)
 	{
-		node->full_cmd[j] = ft_strdup(p->lex2[*k]);
+		node->full_cmd[j] = ft_strdup(p->lex2[*k + j]);
 		j++;
 	}
 	node->full_cmd[j] = NULL;

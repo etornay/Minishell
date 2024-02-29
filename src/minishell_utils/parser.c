@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/28 12:17:47 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 13:03:22 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ static int	parser_cmd3(t_paco *p, t_parser *node, int *i)
 	else if (p->lex2[*i] && ((p->lex2[*i][0] == '>' && p->lex2[*i + 1][0] == '>'
 		&& p->lex2[*i + 2]) || (p->lex2[*i][0] == '<'
 		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2])))
-		(*i) += 3;
+		(*i) += 2;
 	else if ((p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex[*i + 1])
 		|| (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex[*i + 1]))
 		(*i) += 2;
 	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
-		&& p->lex2[*i][0] != '>' && p->lex2[*i])
+		&& p->lex2[*i][0] != '>' && p->lex2[*i] != NULL)
 		get_cmd(p, node, i);
 	if (node->full_cmd)
 		path_cmd(p, node, i);
@@ -65,9 +65,9 @@ static int	parser_cmd2(t_paco *p, t_parser *node, int *i)
 		(*i) += 3;
 	else if ((p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1])
 		|| (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]))
-		(*i) += 2;
-	while (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i][0] == '<')
-		p_utils(p, node, i);
+		(*i) += 3;
+	/* while (p->lex2[*i] && (p->lex2[*i][0] == '>' || p->lex2[*i][0] == '<'))
+		p_utils(p, node, i); */
 	ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 	return (EXIT_SUCCESS);
 }
@@ -144,8 +144,6 @@ void	parser_cmd(t_paco *p, int i)
 				break ;
 			}
 		}
-		else
-			i++;
 		if (i >= p->count)
 			break ;
 	}
