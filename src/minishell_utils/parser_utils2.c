@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/27 18:30:50 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:57:29 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	flag_pipe(t_paco *p, int *i)
 
 void	read_only(t_paco *p, t_parser *node, int *i)
 {
+	if (p->lex2[*i + 1])
+	{
+		printf("bash: syntax error near unexpected token `newline'\n");
+		return ;
+	}
 	node->infile = open(p->lex2[*i + 1], O_RDONLY);
 	if (node->infile < 0)
 		return ;
@@ -34,7 +39,10 @@ void	read_only(t_paco *p, t_parser *node, int *i)
 void	exec_trunc(t_paco *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i + 1] == NULL)
+	{
+		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
+	}
 	node->outfile = open(p->lex2[*i + 1], O_WRONLY | O_CREAT
 			| O_TRUNC, 0644);
 	if (node->outfile < 0)
@@ -43,6 +51,11 @@ void	exec_trunc(t_paco *p, t_parser *node, int *i)
 
 void	exec_append(t_paco *p, t_parser *node, int *i)
 {
+	if (p->lex2[*i + 2][0] == '>')
+	{
+		printf("bash: syntax error near unexpected token `>'\n");
+		return ;
+	}
 	if (p->lex2[*i + 2])
 	{
 		node->outfile = open(p->lex2[*i + 2], O_WRONLY | O_CREAT

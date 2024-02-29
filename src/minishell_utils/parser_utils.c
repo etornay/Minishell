@@ -6,19 +6,22 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 12:50:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:19:25 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	path_cmd(t_paco *p, t_parser *node, int *i)
+int	path_cmd(t_paco *p, t_parser *node)
 {
+	int	k;
+
+	k = 0;
 	p->j = -1;
 	while (p->path[++p->j] != NULL)
 	{
 		p->tmp_cmd = ft_strjoin(p->path[p->j], "/");
-		p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[*i]);
+		p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[k]);
 		if (!p->tmp_path || !p->tmp_cmd)
 			return (EXIT_FAILURE);
 		free(p->tmp_cmd);
@@ -55,13 +58,14 @@ void	get_cmd(t_paco *p, t_parser *node, int *k)
 
 void	p_utils(t_paco *p, t_parser *node, int *i)
 {
+	
 	if (p->lex2[*i] && p->lex2[*i][0] == '>'
-		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2][0] != '>')
+		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2])
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1])
 		exec_trunc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<'
-		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2][0] != '<')
+		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2])
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1])
 		read_only(p, node, i);

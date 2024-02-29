@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 10:30:19 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 15:11:44 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,20 @@ void	ft_heredoc(t_paco *p, char *limit)
 
 void	exec_heredoc(t_paco *p, t_parser *node, int *i)
 {
+	if (p->lex2[*i + 2][0] == '<')
+	{
+		return ;
+	}
 	if (p->lex2[*i + 2])
 	{
 		p->heredoc_flag = 1;
 		ft_heredoc(p, p->lex2[*i + 2]);
 		node->infile = p->heredoc_tmp;
 	}
-	else if (p->lex2[*i] && p->lex2[0][0] == '<'
-		&& p->lex2[1][0] == '<' && p->lex2[2])
-	{
-		p->heredoc_flag = 1;
-		ft_heredoc(p, p->lex2[2]);
-		node->infile = p->heredoc_tmp;
-	}
 	else
 	{
 		p->clean = ft_lstnew(node);
 		free_cmd_list(&p->clean);
-		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
 	}
 }

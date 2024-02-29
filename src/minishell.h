@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/28 12:21:45 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 17:30:57 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ void	restart_index(t_paco *p);
 /*--- <PARSER> ---*/
 void	parser_cmd(t_paco *p, int i);
 void	get_cmd(t_paco *p, t_parser *node, int *i);
-int		path_cmd(t_paco *p, t_parser *node, int *i);
+int		path_cmd(t_paco *p, t_parser *node);
 void	p_utils(t_paco *p, t_parser *node, int *i);
 int		check_builtin(t_paco *p);
 void	exec_append(t_paco *p, t_parser *node, int *i);
@@ -136,6 +136,9 @@ void	read_only(t_paco *p, t_parser *node, int *i);
 int		flag_pipe(t_paco *p, int *i);
 void	exec_heredoc(t_paco *p, t_parser *node, int *i);
 void	ft_heredoc(t_paco *p, char *limit);
+
+/*--- <TOKEN ERROR> ---*/
+int		token_errors(t_paco *p, int *i);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
