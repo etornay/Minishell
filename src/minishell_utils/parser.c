@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/29 16:14:06 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 18:30:44 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,15 +72,17 @@ static int	parser_cmd2(t_paco *p, t_parser *node, int *i)
 
 static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i] && ((p->lex2[0][0] == '>' && !p->lex2[1])
+	/* if (p->lex2[*i] && ((p->lex2[0][0] == '>' && !p->lex2[1])
 		|| (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && !p->lex2[2])
 		|| (p->lex2[0][0] == '<' && !p->lex2[1])
 		|| (p->lex2[0][0] == '<' && p->lex2[1][0] == '<' && !p->lex2[2])))
 	{
+		token_errors(p, i);
+	} */
+	if (token_errors(p, i))
 		return ;
-	}
-	else if (p->lex2[*i] && p->lex2[0][0] == '>'
-		&& p->lex2[1][0] == '>' && p->lex2[2])
+	if (p->lex2[*i] && p->lex2[0][0] == '>'
+		&& p->lex2[1] && p->lex2[1][0] == '>' && p->lex2[2])
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1]
 		&& p->lex2[1][0] != '>')
@@ -88,7 +90,7 @@ static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
 		return ;
 	else if (p->lex2[*i] && p->lex2[0][0] == '<'
-		&& p->lex2[1][0] == '<' && p->lex2[2])
+		&& p->lex2[1] && p->lex2[1][0] == '<' && p->lex2[2])
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1]
 		&& p->lex2[1][0] != '<')

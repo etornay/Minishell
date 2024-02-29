@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 14:57:29 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/02/29 19:01:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,14 @@
 
 int	flag_pipe(t_paco *p, int *i)
 {
-	if (p->lex2[0][0] == '|' || p->lex2[*i + 1] == NULL)
+	if (p->lex2[0][0] == '|' && p->lex2[*i + 1] && p->lex2[*i + 1][0] == '|')
 	{
-		printf("bash: syntax error near unexpected token `|'\n");
+		printf("PACOSHELL: syntax error near unexpected token `||'\n");
+		return (EXIT_FAILURE);
+	}
+	else if (p->lex2[0][0] == '|' || p->lex2[*i + 1] == NULL)
+	{
+		printf("PACOSHELL: syntax error near unexpected token `|'\n");
 		return (EXIT_FAILURE);
 	}
 	p->pipe_flag = 1;
@@ -26,11 +31,11 @@ int	flag_pipe(t_paco *p, int *i)
 
 void	read_only(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i + 1])
+	/* if (p->lex2[*i + 1])
 	{
 		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
-	}
+	} */
 	node->infile = open(p->lex2[*i + 1], O_RDONLY);
 	if (node->infile < 0)
 		return ;
@@ -38,11 +43,11 @@ void	read_only(t_paco *p, t_parser *node, int *i)
 
 void	exec_trunc(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i + 1] == NULL)
+	/* if (p->lex2[*i + 1] == NULL)
 	{
 		printf("bash: syntax error near unexpected token `newline'\n");
 		return ;
-	}
+	} */
 	node->outfile = open(p->lex2[*i + 1], O_WRONLY | O_CREAT
 			| O_TRUNC, 0644);
 	if (node->outfile < 0)
@@ -51,11 +56,11 @@ void	exec_trunc(t_paco *p, t_parser *node, int *i)
 
 void	exec_append(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i + 2][0] == '>')
+	/* if (p->lex2[*i + 2][0] == '>')
 	{
 		printf("bash: syntax error near unexpected token `>'\n");
 		return ;
-	}
+	} */
 	if (p->lex2[*i + 2])
 	{
 		node->outfile = open(p->lex2[*i + 2], O_WRONLY | O_CREAT
@@ -67,7 +72,7 @@ void	exec_append(t_paco *p, t_parser *node, int *i)
 	{
 		p->clean = ft_lstnew(node);
 		free_cmd_list(&p->clean);
-		printf("bash: syntax error near unexpected token `newline'\n");
+		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return ;
 	}
 }
