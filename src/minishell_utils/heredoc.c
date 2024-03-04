@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 17:49:47 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 16:06:36 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,15 +48,14 @@ void	ft_heredoc(t_paco *p, char *limit)
 
 void	exec_heredoc(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i + 2][0] == '<')
-	{
+	if (p->lex2[*i + 2] && p->lex2[*i + 2][0] == '<')
 		return ;
-	}
 	if (p->lex2[*i + 2])
 	{
 		p->heredoc_flag = 1;
 		ft_heredoc(p, p->lex2[*i + 2]);
 		node->infile = p->heredoc_tmp;
+		(*i) += 3;
 	}
 	else
 	{

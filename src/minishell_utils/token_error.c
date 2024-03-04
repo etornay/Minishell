@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:25:07 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/29 18:55:25 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 21:09:25 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ static int	token_errors5(t_paco *p, int *i)
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return (EXIT_FAILURE);
 	}
-	else if (p->lex2[*i] && p->lex2[*i][0] == '>')
+	else if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1] == NULL)
 	{
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return (EXIT_FAILURE);
 	}
-	else if (p->lex2[*i] && p->lex2[*i][0] == '<')
+	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1] == NULL)
 	{
 		printf("PACOSHELL: syntax error near unexpected token `<'\n");
 		return (EXIT_FAILURE);
@@ -36,7 +36,7 @@ static int	token_errors5(t_paco *p, int *i)
 static int	token_errors4(t_paco *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
-		&& p->lex2[*i + 1][0] == '>')
+		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2] == NULL)
 	{
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return (EXIT_FAILURE);
@@ -48,7 +48,7 @@ static int	token_errors4(t_paco *p, int *i)
 		return (EXIT_FAILURE);
 	}
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]
-		&& p->lex2[*i + 1][0] == '<')
+		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2] == NULL)
 	{
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return (EXIT_FAILURE);

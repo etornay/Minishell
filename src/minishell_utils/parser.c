@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/04 15:52:48 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/04 21:00:34 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	parser_cmd3(t_paco *p, t_parser *node, int *i)
 			return (EXIT_FAILURE);
 	}
 	pass_tokens(p, i);
-	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
+	if (p->lex2[*i] && p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>' && p->lex2[*i] != NULL)
 		get_cmd(p, node, i);
 	if (node->full_cmd)
@@ -61,7 +61,9 @@ static int	parser_cmd2(t_paco *p, t_parser *node, int *i)
 
 static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i] && p->lex2[0][0] == '>'
+	if (token_errors(p, i))
+		return ;
+	else if (p->lex2[*i] && p->lex2[0][0] == '>'
 		&& p->lex2[1] && p->lex2[1][0] == '>' && p->lex2[2])
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1]
@@ -84,11 +86,7 @@ static int	parser_cmd_continue(t_paco *p, t_parser *node, int *i)
 		|| (p->lex2[0][0] == '<' && p->lex2[1])
 		|| (p->lex2[0][0] == '>' && p->lex2[1][0] == '>' && p->lex2[2])
 		|| (p->lex2[0][0] == '>' && p->lex2[1])))
-	{
 		parser_cmd_special(p, node, i);
-		free(node);
-		return (EXIT_FAILURE);
-	}
 	if (p->lex2[*i] && p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>')
 	{
@@ -113,12 +111,17 @@ void	parser_cmd(t_paco *p, int i)
 		if (parser_cmd_continue(p, node, &i) == EXIT_FAILURE)
 			break ;
 		if (p->lex2[i] && p->lex2[i][0] == '|')
-		{
 			if (flag_pipe(p, &i) == EXIT_FAILURE)
 				return ;
+		if (p->lex2[i] && (p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
+		{
+			pass_tokens(p, &i);
+			while (p->lex2[i] && (p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
+				i++;
+			continue ;
 		}
-		if (p->lex2[i] && (p->lex2[i][0] == '|'
-			|| p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
+		else if (p->lex2[i] && p->lex2[i][0] != '<'
+			&& p->lex2[i][0] != '>' && p->lex2[i][0] != '|')
 		{
 			if (parser_cmd3(p, node, &i) == EXIT_FAILURE)
 			{

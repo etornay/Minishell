@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/04 15:47:10 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/04 22:02:35 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ static int	exec_builtins(t_paco *p)
 		exec_cd(p, p->lex2, 0);
 	if (ft_strncmp(p->lex2[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
-		free_path(p);
+		free_cmd_list(&p->lst_cmd);
+		//free_path(p);
 		exit(EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);
@@ -41,9 +42,6 @@ static int	exec_builtins(t_paco *p)
 
 int	input(char *input, t_paco *p, char **env)
 {
-	int	i;
-
-	i = 0;
 	(void)env;
 	p->lex = split_line(input, ' ', p);
 	expand(p);
@@ -52,8 +50,6 @@ int	input(char *input, t_paco *p, char **env)
 		p->lex2 = split_pipe(p->lex, p, -1, 0);
 		free_lex(p);
 	}
-	if (p->lex2[0] == NULL)
-		return (EXIT_SUCCESS);
 	parser_cmd(p, 0);
 	t_list	*aux;
 	aux = p->lst_cmd;
@@ -63,10 +59,13 @@ int	input(char *input, t_paco *p, char **env)
 		j = 0;
 		printf("Nodo \n");
 		printf("path: %s\n", ((t_parser *)(aux->content))->full_path);
-		while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
+		if (((t_parser *)(aux->content))->full_cmd != NULL)
 		{
-			printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
-			j++;
+			while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
+			{
+				printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
+				j++;
+			}
 		}
 		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
 		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/04 14:19:00 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/04 19:57:53 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ void	read_only(t_paco *p, t_parser *node, int *i);
 int		flag_pipe(t_paco *p, int *i);
 void	exec_heredoc(t_paco *p, t_parser *node, int *i);
 void	ft_heredoc(t_paco *p, char *limit);
-void	pass_tokens(t_paco *p, int *i);
+void	pass_tokens(t_paco *p, int *k);
 
 /*--- <TOKEN ERROR> ---*/
 int		token_errors(t_paco *p, int *i);
