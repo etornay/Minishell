@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/29 18:30:44 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 12:48:20 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,22 +79,22 @@ static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 	{
 		token_errors(p, i);
 	} */
-	if (token_errors(p, i))
-		return ;
 	if (p->lex2[*i] && p->lex2[0][0] == '>'
 		&& p->lex2[1] && p->lex2[1][0] == '>' && p->lex2[2])
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1]
 		&& p->lex2[1][0] != '>')
 		exec_trunc(p, node, i);
-	else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
-		return ;
+	/* else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
+		return ; */
 	else if (p->lex2[*i] && p->lex2[0][0] == '<'
 		&& p->lex2[1] && p->lex2[1][0] == '<' && p->lex2[2])
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1]
 		&& p->lex2[1][0] != '<')
 		read_only(p, node, i);
+	else if (token_errors(p, i))
+		return ;
 	return ;
 }
 
