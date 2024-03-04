@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/04 12:48:20 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:39:35 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,7 @@ static int	parser_cmd3(t_paco *p, t_parser *node, int *i)
 		if (flag_pipe(p, i) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	else if (p->lex2[*i] && ((p->lex2[*i][0] == '>' && p->lex2[*i + 1][0] == '>'
-		&& p->lex2[*i + 2]) || (p->lex2[*i][0] == '<'
-		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2])))
-		(*i) += 2;
-	else if ((p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex[*i + 1])
-		|| (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex[*i + 1]))
-		(*i) += 2;
+	pass_tokens(p, i);
 	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>' && p->lex2[*i] != NULL)
 		get_cmd(p, node, i);
@@ -59,13 +53,7 @@ static int	parser_cmd2(t_paco *p, t_parser *node, int *i)
 		if (flag_pipe(p, i) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
 	}
-	else if (p->lex2[*i] && ((p->lex2[*i][0] == '>' && p->lex2[*i + 1][0] == '>'
-		&& p->lex2[*i + 2]) || (p->lex2[*i][0] == '<'
-		&& p->lex2[*i + 1][0] == '<' && p->lex2[*i + 2])))
-		(*i) += 2;
-	else if ((p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1])
-		|| (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]))
-		(*i) += 2;
+	pass_tokens(p, i);
 	ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 	return (EXIT_SUCCESS);
 }
@@ -79,22 +67,22 @@ static void	parser_cmd_special(t_paco *p, t_parser *node, int *i)
 	{
 		token_errors(p, i);
 	} */
+	if (token_errors(p, i))
+		return ;
 	if (p->lex2[*i] && p->lex2[0][0] == '>'
 		&& p->lex2[1] && p->lex2[1][0] == '>' && p->lex2[2])
 		exec_append(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '>' && p->lex2[1]
 		&& p->lex2[1][0] != '>')
 		exec_trunc(p, node, i);
-	/* else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
-		return ; */
+	else if (p->lex2[*i] && p->lex2[0][0] == '<' && !p->lex2[1])
+		return ;
 	else if (p->lex2[*i] && p->lex2[0][0] == '<'
 		&& p->lex2[1] && p->lex2[1][0] == '<' && p->lex2[2])
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[0][0] == '<' && p->lex2[1]
 		&& p->lex2[1][0] != '<')
 		read_only(p, node, i);
-	else if (token_errors(p, i))
-		return ;
 	return ;
 }
 
@@ -134,7 +122,12 @@ void	parser_cmd(t_paco *p, int i)
 		node->infile = 0;
 		if (parser_cmd_continue(p, node, &i) == EXIT_FAILURE)
 			break ;
-		else if (p->lex2[i] && (p->lex2[i][0] == '|'
+		if (p->lex2[i] && p->lex2[i][0] == '|')
+		{
+			if (flag_pipe(p, &i) == EXIT_FAILURE)
+				return ;
+		}
+		if (p->lex2[i] && (p->lex2[i][0] == '|'
 			|| p->lex2[i][0] == '<' || p->lex2[i][0] == '>'))
 		{
 			if (parser_cmd3(p, node, &i) == EXIT_FAILURE)
