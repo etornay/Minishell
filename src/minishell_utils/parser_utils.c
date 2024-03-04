@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 17:53:53 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 13:52:44 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,17 @@ void	p_utils(t_paco *p, t_parser *node, int *i)
 		exec_heredoc(p, node, i);
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1])
 		read_only(p, node, i);
+}
+
+void	pass_tokens(t_paco *p, int *k)
+{
+	if (p->lex2[*k] && ((p->lex2[*k][0] == '>' && p->lex2[*k + 1][0] == '>'
+		&& p->lex2[*k + 2] != NULL) || (p->lex2[*k][0] == '<'
+		&& p->lex2[*k + 1][0] == '<' && p->lex2[*k + 2] != NULL)))
+		*k += 3;
+	else if ((p->lex2[*k] && p->lex2[*k][0] == '>' && p->lex2[*k + 1])
+		|| (p->lex2[*k] && p->lex2[*k][0] == '<' && p->lex2[*k + 1]))
+		(*k) += 2;
+	/*if (p->lex2[*i + 1] && ((p->lex2[*i - 1][0] == '>') || (p->lex2[*i - 1][0] == '<')))
+		(*i) += 1;*/
 }
