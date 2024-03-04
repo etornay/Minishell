@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 19:01:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:41:06 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ void	exec_trunc(t_paco *p, t_parser *node, int *i)
 
 void	exec_append(t_paco *p, t_parser *node, int *i)
 {
-	/* if (p->lex2[*i + 2][0] == '>')
-	{
-		printf("bash: syntax error near unexpected token `>'\n");
-		return ;
-	} */
 	if (p->lex2[*i + 2])
 	{
 		node->outfile = open(p->lex2[*i + 2], O_WRONLY | O_CREAT
@@ -71,7 +66,7 @@ void	exec_append(t_paco *p, t_parser *node, int *i)
 	else
 	{
 		p->clean = ft_lstnew(node);
-		free_cmd_list(&p->clean);
+		//free_cmd_list(&p->clean);
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return ;
 	}

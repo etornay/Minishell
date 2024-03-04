@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/29 17:30:57 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/04 14:19:00 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ void	read_only(t_paco *p, t_parser *node, int *i);
 int		flag_pipe(t_paco *p, int *i);
 void	exec_heredoc(t_paco *p, t_parser *node, int *i);
 void	ft_heredoc(t_paco *p, char *limit);
+void	pass_tokens(t_paco *p, int *i);
 
 /*--- <TOKEN ERROR> ---*/
 int		token_errors(t_paco *p, int *i);
