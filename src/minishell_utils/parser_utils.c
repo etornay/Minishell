@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 11:43:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:51:07 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	path_cmd(t_paco *p, t_parser *node)
 			&& access(p->tmp_path, X_OK) == 0)
 		{
 			node->full_path = ft_strdup(p->tmp_path);
+			free(p->tmp_path);
 			p->tmp_path = NULL;
 			break ;
 		}
@@ -56,9 +57,11 @@ void	get_cmd(t_paco *p, t_parser *node, int *k)
 	node->full_cmd[j] = NULL;
 }
 
-void	p_utils(t_paco *p, t_parser *node, int *i)
+int	p_utils(t_paco *p, t_parser *node, int *i)
 {
-	if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
+	if (token_errors(p, i))
+		return (EXIT_FAILURE);
+	else if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2]
 		&& p->lex2[*i + 2][0] != '>' && p->lex2[*i + 2][0] != '<'
 		&& p->lex2[*i + 2][0] != '|')
@@ -76,18 +79,19 @@ void	p_utils(t_paco *p, t_parser *node, int *i)
 		&& p->lex2[*i + 1][0] != '>' && p->lex2[*i + 1][0] != '<'
 		&& p->lex2[*i + 1][0] != '|')
 		read_only(p, node, i);
+	return (EXIT_SUCCESS);
 }
 
 void	pass_tokens(t_paco *p, int *k)
 {
 	if (p->lex2[*k] && ((p->lex2[*k][0] == '>' && p->lex2[*k + 1]
-		&& p->lex2[*k + 1][0] == '>' && p->lex2[*k + 2] != NULL)
+			&& p->lex2[*k + 1][0] == '>' && p->lex2[*k + 2] != NULL)
 		|| (p->lex2[*k][0] == '<' && p->lex2[*k + 1]
 		&& p->lex2[*k + 1][0] == '<' && p->lex2[*k + 2] != NULL)))
 		*k += 3;
 	else if ((p->lex2[*k] && p->lex2[*k][0] == '>' && p->lex2[*k + 1] != NULL)
 		|| (p->lex2[*k] && p->lex2[*k][0] == '<' && p->lex2[*k + 1] != NULL))
 		*k += 2;
-	/*else
-		(*k)++;*/
+	else if (p->lex2[*k] != NULL)
+		(*k)++;
 }

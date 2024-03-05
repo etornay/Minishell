@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/04 21:03:15 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:05:19 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,15 @@ void	free_cmd_list(t_list **lst)
 		if (((t_parser *)((*lst)->content))->full_cmd)
 		{
 			while (((t_parser *)((*lst)->content))->full_cmd[++i])
+			{
 				free(((t_parser *)((*lst)->content))->full_cmd[i]);
+				((t_parser *)((*lst)->content))->full_cmd[i] = NULL;
+			}
 		}
 		free(((t_parser *)((*lst)->content))->full_cmd);
+		((t_parser *)((*lst)->content))->full_cmd = NULL;
 		free(((t_parser *)((*lst)->content))->full_path);
+		((t_parser *)((*lst)->content))->full_path = NULL;
 		if (((t_parser *)((*lst)->content))->infile != 0)
 			close(((t_parser *)((*lst)->content))->infile);
 		if (((t_parser *)((*lst)->content))->outfile != 1)

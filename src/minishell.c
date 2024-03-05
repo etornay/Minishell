@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 13:29:30 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 14:55:57 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	input(char *input, t_paco *p, char **env)
 		aux = aux->next;
 	}
 	exec_builtins(p);
+	free_cmd_list(&p->lst_cmd);
 	return (EXIT_SUCCESS);
 }
 
@@ -96,7 +97,6 @@ int	minishell(t_paco *p, char **env)
 			free(p->line);
 			p->line = NULL;
 		}
-		free_cmd_list(&p->lst_cmd);
 	}
 	return (EXIT_SUCCESS);
 }

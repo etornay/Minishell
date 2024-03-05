@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/04 19:57:53 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/05 15:51:27 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ void	restart_index(t_paco *p);
 void	parser_cmd(t_paco *p, int i);
 void	get_cmd(t_paco *p, t_parser *node, int *i);
 int		path_cmd(t_paco *p, t_parser *node);
-void	p_utils(t_paco *p, t_parser *node, int *i);
+int		p_utils(t_paco *p, t_parser *node, int *i);
 int		check_builtin(t_paco *p);
 void	exec_append(t_paco *p, t_parser *node, int *i);
 void	exec_trunc(t_paco *p, t_parser *node, int *i);
@@ -140,6 +140,7 @@ void	pass_tokens(t_paco *p, int *k);
 
 /*--- <TOKEN ERROR> ---*/
 int		token_errors(t_paco *p, int *i);
+int		token_errors5(t_paco *p, int *i);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
