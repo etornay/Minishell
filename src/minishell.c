@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/04 22:02:35 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/05 13:29:30 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static int	exec_builtins(t_paco *p)
 		exec_cd(p, p->lex2, 0);
 	if (ft_strncmp(p->lex2[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
-		free_cmd_list(&p->lst_cmd);
-		//free_path(p);
+		//free_cmd_list(&p->lst_cmd);
+		free_path(p);
 		exit(EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);
