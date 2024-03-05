@@ -120,3 +120,24 @@ void	parser_cmd(t_paco *p, int i)
 			break ;
 	}
 }
+
+/*t_list	*aux;
+	aux = p->lst_cmd;
+	int	j;
+	while (aux != NULL)
+	{
+		j = 0;
+		printf("Nodo \n");
+		printf("path: %s\n", ((t_parser *)(aux->content))->full_path);
+		if (((t_parser *)(aux->content))->full_cmd != NULL)
+		{
+			while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
+			{
+				printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
+				j++;
+			}
+		}
+		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
+		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
+		aux = aux->next;
+	}*/

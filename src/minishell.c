@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 17:00:07 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:41:23 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ static int	exec_builtins(t_paco *p)
 		exec_cd(p, p->lex2, 0);
 	if (ft_strncmp(p->lex2[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
-		//free_cmd_list(&p->lst_cmd);
 		free_path(p);
 		exit(EXIT_SUCCESS);
 	}
@@ -50,29 +49,11 @@ int	input(char *input, t_paco *p, char **env)
 		p->lex2 = split_pipe(p->lex, p, -1, 0);
 		free_lex(p);
 	}
+	if (p->lex2 == NULL)
+		return (EXIT_SUCCESS);
 	parser_cmd(p, 0);
-	t_list	*aux;
-	aux = p->lst_cmd;
-	int	j;
-	while (aux != NULL)
-	{
-		j = 0;
-		printf("Nodo \n");
-		printf("path: %s\n", ((t_parser *)(aux->content))->full_path);
-		if (((t_parser *)(aux->content))->full_cmd != NULL)
-		{
-			while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
-			{
-				printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
-				j++;
-			}
-		}
-		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
-		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
-		aux = aux->next;
-	}
 	exec_builtins(p);
-	free_cmd_list(&p->lst_cmd);
+	/* free_cmd_list(&p->lst_cmd); */
 	return (EXIT_SUCCESS);
 }
 
