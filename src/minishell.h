@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 15:51:27 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:33:01 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,6 @@ void	pass_tokens(t_paco *p, int *k);
 
 /*--- <TOKEN ERROR> ---*/
 int		token_errors(t_paco *p, int *i);
-int		token_errors5(t_paco *p, int *i);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);

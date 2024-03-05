@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 15:51:07 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 17:34:36 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,10 @@ int	p_utils(t_paco *p, t_parser *node, int *i)
 		&& p->lex2[*i + 1] && p->lex2[*i + 1][0] == '<'
 		&& p->lex2[*i + 2] && p->lex2[*i + 2][0] != '>'
 		&& p->lex2[*i + 2][0] != '<' && p->lex2[*i + 2][0] != '|')
+	{
 		exec_heredoc(p, node, i);
+		unlink("here_doc.tmp");
+	}
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] != '>' && p->lex2[*i + 1][0] != '<'
 		&& p->lex2[*i + 1][0] != '|')

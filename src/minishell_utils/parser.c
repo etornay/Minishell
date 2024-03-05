@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/05 15:54:09 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/05 16:22:17 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,10 @@ void	parser_cmd(t_paco *p, int i)
 				&& p->lex2[i][0] != '>' && p->lex2[i] != NULL)
 				get_node(p, node, &i);
 			if (p_utils(p, node, &i) == EXIT_FAILURE)
+			{
+				ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 				return ;
+			}
 			pass_tokens(p, &i);
 			ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 		}

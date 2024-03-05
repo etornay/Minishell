@@ -13,7 +13,6 @@ src/minishell_utils/prompt.c\
 src/minishell_utils/split.c\
 src/minishell_utils/split_token.c\
 src/minishell_utils/token_error.c\
-src/minishell_utils/token_error2.c\
 src/builtins/builtins.c\
 src/builtins/builtins2.c\
 src/builtins/builtins_utils/builtins_utils.c\
