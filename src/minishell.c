@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 18:41:23 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:11:59 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,6 @@
 void	ft_leaks()
 {
 	system("leaks -q minishell");
-}
-
-static int	exec_builtins(t_paco *p)
-{
-	if (ft_strncmp(p->lex2[0], "pwd\0", 4) == EXIT_SUCCESS)
-		exec_pwd(p);
-	if (ft_strncmp(p->lex2[0], "env\0", 4) == EXIT_SUCCESS)
-		exec_env(p);
-	if (ft_strncmp(p->lex2[0], "export\0", 7) == EXIT_SUCCESS)
-		exec_export(p, p->lex2, 1);
-	if (ft_strncmp(p->lex2[0], "unset\0", 6) == EXIT_SUCCESS)
-		exec_unset(p, p->lex2[1]);
-	if (ft_strncmp(p->lex2[0], "echo\0", 5) == EXIT_SUCCESS)
-		flag_echo(p->lex2, 0, p);
-	if (ft_strncmp(p->lex2[0], "cd\0", 3) == EXIT_SUCCESS)
-		exec_cd(p, p->lex2, 0);
-	if (ft_strncmp(p->lex2[0], "exit\0", 5) == EXIT_SUCCESS)
-	{
-		free_path(p);
-		exit(EXIT_SUCCESS);
-	}
-	return (EXIT_SUCCESS);
 }
 
 int	input(char *input, t_paco *p, char **env)
@@ -49,11 +27,32 @@ int	input(char *input, t_paco *p, char **env)
 		p->lex2 = split_pipe(p->lex, p, -1, 0);
 		free_lex(p);
 	}
-	if (p->lex2 == NULL)
+	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
 	parser_cmd(p, 0);
-	exec_builtins(p);
-	/* free_cmd_list(&p->lst_cmd); */
+	/*t_list	*aux;
+	aux = p->lst_cmd;
+	int	j;
+	while (aux != NULL)
+	{
+		j = 0;
+		printf("Nodo \n");
+		printf("path: %s\n", ((t_parser *)(aux->content))->full_path);
+		if (((t_parser *)(aux->content))->full_cmd != NULL)
+		{
+			while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
+			{
+				printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
+				j++;
+			}
+		}
+		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
+		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
+		aux = aux->next;
+	}*/
+	if (executer(p, env) == EXIT_FAILURE)
+		//;
+	free_cmd_list(&p->lst_cmd);
 	return (EXIT_SUCCESS);
 }
 

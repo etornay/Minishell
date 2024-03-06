@@ -3,6 +3,14 @@ NAME = minishell
 MINISHELL = minishell.a
 
 FILES = src/minishell.c\
+src/builtins/builtins.c\
+src/builtins/builtins2.c\
+src/builtins/builtins_utils/builtins_utils.c\
+src/builtins/builtins_utils/cd_utils.c\
+src/builtins/builtins_utils/export_utils.c\
+src/builtins/env_utils/get_path.c\
+src/exec_cmd/exec.c\
+src/exec_cmd/exec_utils.c\
 src/minishell_utils/expand.c\
 src/minishell_utils/heredoc.c\
 src/minishell_utils/init_struct.c\
@@ -13,12 +21,6 @@ src/minishell_utils/prompt.c\
 src/minishell_utils/split.c\
 src/minishell_utils/split_token.c\
 src/minishell_utils/token_error.c\
-src/builtins/builtins.c\
-src/builtins/builtins2.c\
-src/builtins/builtins_utils/builtins_utils.c\
-src/builtins/builtins_utils/cd_utils.c\
-src/builtins/builtins_utils/export_utils.c\
-src/builtins/env_utils/get_path.c\
 src/free/free.c\
 src/free/free2.c\
 

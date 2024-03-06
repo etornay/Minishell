@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/28 12:22:16 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/06 16:44:39 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,10 @@ static void	init_struct2(t_paco *p)
 	p->double_flag = 0;
 	p->heredoc_flag = 0;
 	p->n_split = 0;
+	p->pid = 0;
 	p->pipe_flag = 0;
 	p->simple_flag = 0;
+	p->wait = 0;
 	p->wc = 1;
 	p->wordle = 0;
 	p->dup_stdin = dup(STDIN_FILENO);

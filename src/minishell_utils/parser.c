@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/05 16:22:17 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/06 14:02:23 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ void	parser_cmd(t_paco *p, int i)
 
 	while (p->lex2[i])
 	{
-		while (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i] != NULL)
+		while (p->lex2[i] && p->lex2[i][0] != '|')
 		{
 			node = ft_calloc(1, sizeof(t_parser));
 			node->outfile = 1;
 			node->infile = 0;
 			while (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
-				&& p->lex2[i][0] != '>' && p->lex2[i] != NULL)
+				&& p->lex2[i][0] != '>')
 				get_node(p, node, &i);
 			if (p_utils(p, node, &i) == EXIT_FAILURE)
 			{

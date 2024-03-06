@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 16:33:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:19:11 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ typedef struct s_paco
 	int		heredoc_tmp;
 	int		heredoc_flag;
 	int		pipe_flag;
+	int		wait;
+	int		fd[2];
+	pid_t	pid;
 	size_t	wordle;
 	t_env	*l_env;
 	t_env	*aux;
@@ -141,6 +144,15 @@ void	pass_tokens(t_paco *p, int *k);
 /*--- <TOKEN ERROR> ---*/
 int		token_errors(t_paco *p, int *i);
 
+/*--- <EXECUTER> ---*/
+int		executer(t_paco *p, char **env);
+int		exec_father(t_paco *p, t_parser *node, t_list *aux);
+int		exec_child(t_paco *p, t_parser *node, t_list *aux, char **env);
+void	exec_cmd2(t_paco *p, char **env, t_parser *node);
+
+/*--- <EXECUTER ERROR> ---*/
+int		exec_errors(t_paco *p, t_parser *node);
+
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
 void	free_lex(t_paco *p);
@@ -150,5 +162,6 @@ void	free_path(t_paco *p);
 void	free_split(char **tmp);
 void	free_cd_error(t_paco *p);
 void	free_cmd_list(t_list **lst);
+
 
 #endif
