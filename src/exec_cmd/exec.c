@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/06 18:26:43 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:37:45 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	exec_builtins(t_parser *node, t_paco *p)
 		&& ft_strncmp(node->full_cmd[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
 		free_path(p);
-		exit(EXIT_SUCCESS);
+		exit(g_status);
 	}
 	return (EXIT_SUCCESS);
 }
@@ -50,11 +50,14 @@ static int	exec_cmd(t_paco *p, char **env)
 	while (aux)
 	{
 		node = ((t_parser *)aux->content);
-		if (exec_error(p, node) == EXIT_FAILURE)
+		if (node->full_path == NULL)
+			return (printf("PACOSHELL: %s: command not found\n",
+					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
+		if (exec_errors(p, node, aux) == EXIT_FAILURE)
 			continue ;
 		p->pid = fork();
 		if (p->pid == -1)
-			return (EXIT_FAILURE);
+			return (msg_err("fork"), EXIT_FAILURE);
 		if (p->pid == 0)
 			exec_cmd2(p, env, node);
 		else
@@ -75,22 +78,27 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 	while (aux)
 	{
 		node = ((t_parser *)aux->content);
-		if (exec_error(p, node) == EXIT_FAILURE)
-			continue ; //esto se tendra que cambiar
+		if (node->full_path == NULL)
+			return (printf("PACOSHELL: %s: command not found\n",
+					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
+		if (exec_errors(p, node, aux) == EXIT_FAILURE)
+			continue ;
 		if (pipe(p->fd) == -1)
-			return (/*error pipe cmds*/);
+			msg_err("pipe_cmds");
 		p->pid = fork();
 		if (p->pid == -1)
 		{
 			close(p->fd[0]);
 			close(p->fd[1]);
-			return (/*error fork cmds*/);
+			msg_err("fork_cmds");
 		}
 		if (p->pid == 0)
+		{
 			if (exec_child(p, node, aux, env) == EXIT_FAILURE)
 				return (EXIT_FAILURE);
+		}
 		else
-			exec_father(p, node, aux);
+			exec_father(p, aux);
 		aux = aux->next;
 	}
 	return (EXIT_SUCCESS);
@@ -100,25 +108,26 @@ int	executer(t_paco *p, char **env)
 {
 	if (p->lst_cmd && ((t_parser *)p->lst_cmd->content)->full_cmd
 		&& ((t_parser *)p->lst_cmd->content)->full_cmd[0]
-		&& ((t_parser *)p->lst_cmd->content)->full_path[0] == NULL) //probablemente hay que usar el check builtins
-		/*status =*/exec_builtins(p->lst_cmd, p);
+		&& check_builtin(p) == EXIT_SUCCESS)
+		g_status = exec_builtins(((t_parser *)p->lst_cmd->content), p);
 	else if (p->lst_cmd && ((t_parser *)p->lst_cmd->content)->full_cmd
 		&& ((t_parser *)p->lst_cmd->content)->full_cmd[0]
-		&& ((t_parser *)p->lst_cmd->content)->full_path[0] != NULL)//probablemente hay que usar el check builtins
+		&& check_builtin(p) == EXIT_FAILURE)
 	{
 		if (p->pipe_flag)
-			/*status =*/exec_pipe_cmd(p, env);
+			g_status = exec_pipe_cmd(p, env);
 		else if (!p->pipe_flag)
-			/*status =*/exec_cmd(p, env);
+			g_status = exec_cmd(p, env);
 	}
 	else if (p->lst_cmd && !((t_parser *)p->lst_cmd->content)->full_cmd
 		&& !((t_parser *)p->lst_cmd->content)->full_path)
-		return (/*status,*/EXIT_SUCCESS);
+		return (g_status = 0, EXIT_SUCCESS);
 	else
 	{
 		if (p->lst_cmd && !((t_parser *)p->lst_cmd->content)->full_cmd)
-			/*error de cmd 127*/
-		return (EXIT_FAILURE);
+			printf("PACOSHELL: %s: command not found\n",
+				((t_parser *)p->lst_cmd->content)->full_cmd[0]);
+		return (g_status = 127, EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

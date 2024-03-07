@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/05 17:33:16 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:38:09 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ void	exec_heredoc(t_paco *p, t_parser *node, int *i)
 		p->heredoc_flag = 1;
 		ft_heredoc(p, p->lex2[*i + 2]);
 		node->infile = p->heredoc_tmp;
-		(*i) += 3;
 	}
 	else
 	{

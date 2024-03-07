@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/06 18:11:59 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:31:01 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	input(char *input, t_paco *p, char **env)
 	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
 	parser_cmd(p, 0);
-	/*t_list	*aux;
+	t_list	*aux;
 	aux = p->lst_cmd;
 	int	j;
 	while (aux != NULL)
@@ -49,9 +49,9 @@ int	input(char *input, t_paco *p, char **env)
 		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
 		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
 		aux = aux->next;
-	}*/
+	}
 	if (executer(p, env) == EXIT_FAILURE)
-		//;
+		return (EXIT_SUCCESS);
 	free_cmd_list(&p->lst_cmd);
 	return (EXIT_SUCCESS);
 }

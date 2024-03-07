@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/06 16:44:39 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/07 16:53:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	init_struct2(t_paco *p)
 	p->wc = 1;
 	p->wordle = 0;
 	p->dup_stdin = dup(STDIN_FILENO);
+	p->dup_stdout = dup(STDOUT_FILENO);
 }
 
 void	init_struct(t_paco *p)

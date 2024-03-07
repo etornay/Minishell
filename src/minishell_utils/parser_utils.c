@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/06 12:45:04 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/07 15:59:52 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,9 @@ void	get_cmd(t_paco *p, t_parser *node, int *k)
 
 int	p_utils(t_paco *p, t_parser *node, int *i)
 {
-	if (token_errors(p, i))
-		return (EXIT_FAILURE);
-	else if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
+	/*if (token_errors(p, i))
+		return (EXIT_FAILURE);*/
+	if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2]
 		&& p->lex2[*i + 2][0] != '>' && p->lex2[*i + 2][0] != '<'
 		&& p->lex2[*i + 2][0] != '|')
@@ -74,10 +74,7 @@ int	p_utils(t_paco *p, t_parser *node, int *i)
 		&& p->lex2[*i + 1] && p->lex2[*i + 1][0] == '<'
 		&& p->lex2[*i + 2] && p->lex2[*i + 2][0] != '>'
 		&& p->lex2[*i + 2][0] != '<' && p->lex2[*i + 2][0] != '|')
-	{
 		exec_heredoc(p, node, i);
-		unlink("here_doc.tmp");
-	}
 	else if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] != '>' && p->lex2[*i + 1][0] != '<'
 		&& p->lex2[*i + 1][0] != '|')
@@ -95,6 +92,6 @@ void	pass_tokens(t_paco *p, int *k)
 	else if ((p->lex2[*k] && p->lex2[*k][0] == '>' && p->lex2[*k + 1] != NULL)
 		|| (p->lex2[*k] && p->lex2[*k][0] == '<' && p->lex2[*k + 1] != NULL))
 		*k += 2;
-	else if (p->lex2[*k] != NULL)
+	else if (p->lex2[*k] && p->lex2[*k][0] != '|')
 		(*k)++;
 }
