@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/07 16:53:54 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:45:47 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
 
 /*--- <PARSER> ---*/
-void	parser_cmd(t_paco *p, int i);
+int		parser_cmd(t_paco *p, int i);
 void	get_cmd(t_paco *p, t_parser *node, int *i);
 int		path_cmd(t_paco *p, t_parser *node);
 int		p_utils(t_paco *p, t_parser *node, int *i);

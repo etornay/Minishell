@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:25:07 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/05 18:03:39 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:52:31 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,8 @@ int	token_errors5(t_paco *p, int *i)
 		return (EXIT_FAILURE);
 	}
 	else if (p->lex2[*i] && (p->lex2[*i][0] == '<'
-		|| p->lex2[*i][0] == '>') && (!p->lex2[*i + 2]
-		|| (p->lex2[*i + 2][0] == '|')))
-	{
-		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
-		return (EXIT_FAILURE);
-	}
-	else if (p->lex2[*i] && (p->lex2[*i][0] == '<'
-		|| p->lex2[*i][0] == '>') && (!p->lex2[*i + 1]
-		|| (p->lex2[*i + 1][0] == '|')))
+		|| p->lex2[*i][0] == '>') && (p->lex2[*i + 1] == NULL
+		|| (p->lex2[*i + 1] && p->lex2[*i + 1][0] == '|')))
 	{
 		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
 		return (EXIT_FAILURE);

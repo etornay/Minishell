@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 14:21:46 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 15:18:06 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	exec_unset(t_paco *p, char *name)
 		return ;
 	p->aux = p->l_env;
 	prev = NULL;
+	ft_printf("aqui llego\n");
 	while (p->aux != NULL)
 	{
 		if (!ft_strncmp(p->aux->name, name, ft_strlen(name)))
@@ -30,10 +31,12 @@ void	exec_unset(t_paco *p, char *name)
 				prev->next_env = p->aux->next_env;
 			else
 				p->l_env = p->aux->next_env;
-			free(del->name);
+			if (del->name)
+				free(del->name);
 			if (del->content != NULL)
 				free(del->content);
-			free(del);
+			if (del)
+				free(del);
 			break ;
 		}
 		prev = p->aux;

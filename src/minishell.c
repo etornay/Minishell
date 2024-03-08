@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/08 12:24:54 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:59:14 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	ft_leaks()
 
 int	input(char *input, t_paco *p, char **env)
 {
-	(void)env;
 	p->lex = split_line(input, ' ', p);
 	expand(p);
 	if (p->lex != NULL)
@@ -29,7 +28,8 @@ int	input(char *input, t_paco *p, char **env)
 	}
 	if (p->lex2[0] == NULL)
 		return (EXIT_SUCCESS);
-	parser_cmd(p, 0);
+	if (parser_cmd(p, 0) == EXIT_FAILURE)
+		return (EXIT_SUCCESS);
 	t_list	*aux;
 	aux = p->lst_cmd;
 	int	j;
@@ -52,9 +52,11 @@ int	input(char *input, t_paco *p, char **env)
 	}
 	if (executer(p, env) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
-	free_cmd_list(&p->lst_cmd);
-	if (p->lex2 != NULL)
-		free_lex2(p);
+	if (p->heredoc_flag == 1)
+	{
+		unlink("here_doc.tmp");
+		p->heredoc_flag = 0;
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -77,11 +79,9 @@ int	minishell(t_paco *p, char **env)
 			free(p->line);
 			p->line = NULL;
 		}
-		if (p->heredoc_flag == 1)
-		{
-			unlink("here_doc.tmp");
-			p->heredoc_flag = 0;
-		}
+		if (p->lex2 != NULL)
+			free_lex2(p);
+		free_cmd_list(&p->lst_cmd);
 	}
 	return (EXIT_SUCCESS);
 }

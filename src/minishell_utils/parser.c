@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/07 18:04:19 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:46:09 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,21 @@ static void	get_node(t_paco *p, t_parser *node, int *i)
 		(*i)++;
 }
 
-static void	get_tokens(t_paco *p, t_parser *node, int *i)
+static int	get_tokens(t_paco *p, t_parser *node, int *i)
 {
 	while (p->lex2[*i] && (p->lex2[*i][0] == '<' || p->lex2[*i][0] == '>'))
 	{
 		if (p_utils(p, node, i) == EXIT_FAILURE)
 		{
 			ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
-			return ;
+			return (EXIT_FAILURE);
 		}
 		pass_tokens(p, i);
 	}
+	return (EXIT_SUCCESS);
 }
 
-void	parser_cmd(t_paco *p, int i)
+int	parser_cmd(t_paco *p, int i)
 {
 	t_parser	*node;
 
@@ -53,12 +54,14 @@ void	parser_cmd(t_paco *p, int i)
 			while (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
 				&& p->lex2[i][0] != '>')
 				get_node(p, node, &i);
-			get_tokens(p, node, &i);
+			if (get_tokens(p, node, &i) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
 			ft_lstadd_back(&p->lst_cmd, ft_lstnew(node));
 		}
 		if (flag_pipe(p, &i) == EXIT_FAILURE)
-			return ;
+			return (EXIT_FAILURE);
 		if (i >= p->count)
 			break ;
 	}
+	return (EXIT_SUCCESS);
 }

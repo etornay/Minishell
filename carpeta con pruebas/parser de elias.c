@@ -141,3 +141,13 @@ void	parser_cmd(t_paco *p, int i)
 		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
 		aux = aux->next;
 	}*/
+
+
+	/*else if (p->lex2[*i] && (p->lex2[*i][0] == '<'
+		|| p->lex2[*i][0] == '>') && (p->lex2[*i + 2]
+		|| (p->lex2[*i + 2] && p->lex2[*i + 2][0] == '|')))
+	{
+		printf("PACOSHELL: syntax error near unexpected token `newline'\n");
+		return (EXIT_FAILURE);
+	}*/
+	
