@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/07 17:31:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:24:54 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	input(char *input, t_paco *p, char **env)
 	if (executer(p, env) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
 	free_cmd_list(&p->lst_cmd);
+	if (p->lex2 != NULL)
+		free_lex2(p);
 	return (EXIT_SUCCESS);
 }
 
@@ -70,12 +72,15 @@ int	minishell(t_paco *p, char **env)
 			add_history(p->line);
 		if (input(p->line, p, env) == EXIT_FAILURE)
 			return (EXIT_FAILURE);
-		if (p->lex2 != NULL)
-			free_lex2(p);
 		if (p->line != NULL)
 		{
 			free(p->line);
 			p->line = NULL;
+		}
+		if (p->heredoc_flag == 1)
+		{
+			unlink("here_doc.tmp");
+			p->heredoc_flag = 0;
 		}
 	}
 	return (EXIT_SUCCESS);

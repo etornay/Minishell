@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/07 17:37:45 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:58:49 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	exec_cmd(t_paco *p, char **env)
 			return (printf("PACOSHELL: %s: command not found\n",
 					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
 		if (exec_errors(p, node, aux) == EXIT_FAILURE)
-			continue ;
+			break ;
 		p->pid = fork();
 		if (p->pid == -1)
 			return (msg_err("fork"), EXIT_FAILURE);
@@ -64,8 +64,6 @@ static int	exec_cmd(t_paco *p, char **env)
 			waitpid(p->pid, &p->wait, 0);
 		aux = aux->next;
 	}
-	if (p->heredoc_flag)
-		unlink("here_doc.tmp");
 	return (EXIT_SUCCESS);
 }
 

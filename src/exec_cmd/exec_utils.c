@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/07 18:19:18 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/08 12:58:43 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	exec_cmd2(t_paco *p, char **env, t_parser *node)
 	if (node->outfile != STDOUT_FILENO)
 		dup2(node->outfile, STDOUT_FILENO);
 	if (p->heredoc_flag)
+	{
 		unlink("here_doc.tmp");
+		p->heredoc_flag = 0;
+	}
 	execve(node->full_path, node->full_cmd, env);
 }
 
