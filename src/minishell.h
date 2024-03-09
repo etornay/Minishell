@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/09 13:44:05 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 17:39:12 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,12 +153,13 @@ void	exec_father(t_paco *p, t_list *aux);
 int		exec_child(t_paco *p, t_parser *node, t_list *aux, char **env);
 void	exec_cmd2(t_paco *p, char **env, t_parser *node);
 
-/*--- <SIGNALS> ---*/
-void	signals(int sig);
-
 /*--- <EXECUTER ERROR> ---*/
 int		exec_errors(t_paco *p, t_parser *node, t_list *aux);
 int		msg_err(char *str);
+
+/*--- <SIGNALS> ---*/
+void	signals(int sig);
+void	eof_handler(int sig);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);

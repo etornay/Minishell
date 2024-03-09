@@ -31,14 +31,16 @@ FLAGS = -Wall -Werror -Wextra -g
 
 LIBFT = ./Libft/libft.a
 
-LIB_SYS = -Iinclude -lreadline -L "/Users/etornay-/.brew/opt/readline/include"
+INC_SYS = -I ./include -I /Users/etornay-/.brew/opt/readline/include
 
-$(NAME):			$(OBJECTS) $(LIBFT)
+LIB_SYS = -L /Users/etornay-/.brew/opt/readline/lib -lreadline
+
+$(NAME):			$(LIBFT) $(OBJECTS)
 						@ ar rcs $(MINISHELL) $(OBJECTS)
-						@ gcc $(FLAGS) $(MINISHELL) $(LIBFT) $(LIB_SYS) -o $(NAME) -lreadline
+						@ gcc $(INC_SYS) $(LIB_SYS) $(FLAGS) $(LIBFT) $(MINISHELL) -o $(NAME)
 
 $(OBJECTS):			src/%.o : src/%.c
-						@ gcc $(FLAGS) -c $< -o $@
+						@ gcc $(INC_SYS) $(FLAGS) -c $< -o $@
 
 $(LIBFT):
 					@ make -s -C ./Libft
