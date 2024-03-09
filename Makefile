@@ -18,6 +18,7 @@ src/minishell_utils/parser.c\
 src/minishell_utils/parser_utils.c\
 src/minishell_utils/parser_utils2.c\
 src/minishell_utils/prompt.c\
+src/minishell_utils/signals.c\
 src/minishell_utils/split.c\
 src/minishell_utils/split_token.c\
 src/minishell_utils/token_error.c\

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/08 17:28:32 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:11:18 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ int	path_cmd(t_paco *p, t_parser *node)
 			node->full_path = ft_strdup(p->tmp_path);
 			free(p->tmp_path);
 			p->tmp_path = NULL;
-			break ;
+			return (EXIT_SUCCESS);
 		}
 		free(p->tmp_path);
 	}
+	if (access(node->full_cmd[0], F_OK) == 0
+		&& access(node->full_cmd[0], X_OK) == 0)
+		node->full_path = ft_strdup(node->full_cmd[0]);
 	return (EXIT_SUCCESS);
 }
 

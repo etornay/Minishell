@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/08 17:56:40 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:11:52 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,12 @@ int	flag_pipe(t_paco *p, int *i)
 		printf("PACOSHELL: syntax error near unexpected token `||'\n");
 		return (EXIT_FAILURE);
 	}
-	else if (p->lex2[*i] && p->lex2[*i][0] == '|')
+	else if (p->lex2[*i] && p->lex2[*i][0] == '|' && p->lex2[*i + 1] == NULL)
+	{
+		printf("PACOSHELL: syntax error near unexpected token `|'\n");
+		return (EXIT_FAILURE);
+	}
+	else if (p->lex2[*i] == NULL && p->lex2[*i - 1][0] == '|')
 	{
 		printf("PACOSHELL: syntax error near unexpected token `|'\n");
 		return (EXIT_FAILURE);

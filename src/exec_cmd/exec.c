@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/08 14:38:27 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:46:27 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 			return (printf("PACOSHELL: %s: command not found\n",
 					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
 		if (exec_errors(p, node, aux) == EXIT_FAILURE)
-			continue ;
+			break ;
 		if (pipe(p->fd) == -1)
 			msg_err("pipe_cmds");
 		p->pid = fork();
@@ -104,6 +104,8 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 
 int	executer(t_paco *p, char **env)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (p->lst_cmd && ((t_parser *)p->lst_cmd->content)->full_cmd
 		&& ((t_parser *)p->lst_cmd->content)->full_cmd[0]
 		&& check_builtin(p) == EXIT_SUCCESS)

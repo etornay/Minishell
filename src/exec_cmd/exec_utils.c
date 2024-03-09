@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/08 15:25:40 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:45:52 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	exec_father(t_paco *p, t_list *aux)
 
 int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (node->infile != STDIN_FILENO)
 	{
 		if (dup2(node->infile, STDIN_FILENO) == -1)
@@ -56,6 +58,8 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 
 void	exec_cmd2(t_paco *p, char **env, t_parser *node)
 {
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 	if (p->heredoc_flag)
 		dup2(p->heredoc_tmp, STDIN_FILENO);
 	else
@@ -83,3 +87,4 @@ int	exec_errors(t_paco *p, t_parser *node, t_list *aux)
 	}
 	return (EXIT_SUCCESS);
 }
+

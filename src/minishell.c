@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/08 17:59:14 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:43:07 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	input(char *input, t_paco *p, char **env)
 		return (EXIT_SUCCESS);
 	if (parser_cmd(p, 0) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
-	t_list	*aux;
+	/*t_list	*aux;
 	aux = p->lst_cmd;
 	int	j;
 	while (aux != NULL)
@@ -49,7 +49,7 @@ int	input(char *input, t_paco *p, char **env)
 		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
 		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
 		aux = aux->next;
-	}
+	}*/
 	if (executer(p, env) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
 	if (p->heredoc_flag == 1)
@@ -68,6 +68,8 @@ int	minishell(t_paco *p, char **env)
 	init_env(p, env, 0);
 	while (33)
 	{
+		signal(SIGINT, signals);
+		signal(SIGQUIT, SIG_IGN);
 		if (prompt(p) == EXIT_FAILURE)
 			exit(EXIT_FAILURE);
 		if (ft_strncmp(p->line, "\0", 1) == EXIT_FAILURE)

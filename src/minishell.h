@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/08 17:45:47 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/09 13:44:05 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,6 +152,9 @@ int		executer(t_paco *p, char **env);
 void	exec_father(t_paco *p, t_list *aux);
 int		exec_child(t_paco *p, t_parser *node, t_list *aux, char **env);
 void	exec_cmd2(t_paco *p, char **env, t_parser *node);
+
+/*--- <SIGNALS> ---*/
+void	signals(int sig);
 
 /*--- <EXECUTER ERROR> ---*/
 int		exec_errors(t_paco *p, t_parser *node, t_list *aux);
