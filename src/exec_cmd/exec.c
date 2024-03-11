@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/11 17:59:25 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:16:47 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	exec_builtins(t_parser *node, t_paco *p)
 	if (node->full_cmd[0]
 		&& ft_strncmp(node->full_cmd[0], "exit\0", 5) == EXIT_SUCCESS)
 	{
-		free_path(p);
-		exit(g_status);
+		if (final_exit(p, node) == EXIT_FAILURE)
+			return (EXIT_SUCCESS);
 	}
 	return (EXIT_SUCCESS);
 }

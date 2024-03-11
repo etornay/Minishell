@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/11 17:56:07 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/11 19:17:21 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	exec_export(t_paco *p, char **s, int index);
 void	exec_unset(t_paco *p, char *name);
 void	exec_cd(t_paco *p, char **s, int flag);
 void	flag_echo(char **s, int flag, t_paco *p);
+int		final_exit(t_paco *p, t_parser *node);
 
 /*--- <BUILTINS UTILS> ---*/
 void	lst_addenv_back(t_env **lst, t_env *new, char **tmp);
