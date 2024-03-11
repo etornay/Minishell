@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/09 17:39:12 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:41:14 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	pass_tokens(t_paco *p, int *k);
 int		token_errors(t_paco *p, int *i);
 
 /*--- <EXECUTER> ---*/
-int		executer(t_paco *p, char **env);
+int		executer(t_paco *p, char **env, t_parser *node);
 void	exec_father(t_paco *p, t_list *aux);
 int		exec_child(t_paco *p, t_parser *node, t_list *aux, char **env);
 void	exec_cmd2(t_paco *p, char **env, t_parser *node);

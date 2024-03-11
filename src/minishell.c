@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/09 17:54:24 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:39:49 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	ft_leaks()
 
 int	input(char *input, t_paco *p, char **env)
 {
+	t_parser	*node;
+
 	p->lex = split_line(input, ' ', p);
 	expand(p);
 	if (p->lex != NULL)
@@ -30,27 +32,8 @@ int	input(char *input, t_paco *p, char **env)
 		return (EXIT_SUCCESS);
 	if (parser_cmd(p, 0) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
-	/*t_list	*aux;
-	aux = p->lst_cmd;
-	int	j;
-	while (aux != NULL)
-	{
-		j = 0;
-		printf("Nodo \n");
-		printf("path: %s\n", ((t_parser *)(aux->content))->full_path);
-		if (((t_parser *)(aux->content))->full_cmd != NULL)
-		{
-			while (((t_parser *)(aux->content))->full_cmd[j] != NULL)
-			{
-				printf("cmd: %s\n", ((t_parser *)(aux->content))->full_cmd[j]);
-				j++;
-			}
-		}
-		printf("infile: %d\n", ((t_parser *)(aux->content))->infile);
-		printf("outfile: %d\n", ((t_parser *)(aux->content))->outfile);
-		aux = aux->next;
-	}*/
-	if (executer(p, env) == EXIT_FAILURE)
+	node = ((t_parser *)p->lst_cmd->content);
+	if (executer(p, env, node) == EXIT_FAILURE)
 		return (EXIT_SUCCESS);
 	if (p->heredoc_flag == 1)
 	{
