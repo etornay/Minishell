@@ -31,9 +31,9 @@ FLAGS = -Wall -Werror -Wextra -g
 
 LIBFT = ./Libft/libft.a
 
-INC_SYS = -I ./include -I /Users/etornay-/.brew/opt/readline/include
+INC_SYS = -I ./include -I /Users/ncruz-ga/.brew/opt/readline/include
 
-LIB_SYS = -L /Users/etornay-/.brew/opt/readline/lib -lreadline
+LIB_SYS = -L /Users/ncruz-ga/.brew/opt/readline/lib -lreadline
 
 $(NAME):			$(LIBFT) $(OBJECTS)
 						@ ar rcs $(MINISHELL) $(OBJECTS)

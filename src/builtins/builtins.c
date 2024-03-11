@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/09 12:24:48 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:14:21 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ static void	exec_export2(t_paco *p, char *s, char **tmp)
 
 void	exec_export(t_paco *p, char **s, int index)
 {
+	restart_index(p);
+	set_env_index(p);
 	p->aux = p->l_env;
 	if (s[1] != NULL)
 		exec_export2(p, s[1], NULL);
@@ -65,8 +67,6 @@ void	exec_export(t_paco *p, char **s, int index)
 				p->aux = p->aux->next_env;
 		}
 	}
-	restart_index(p);
-	set_env_index(p);
 }
 
 static void	exec_echo2(char **s, int size, t_paco *p, int *j)

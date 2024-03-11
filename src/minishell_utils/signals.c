@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:36:13 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/09 17:54:40 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/11 12:15:21 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,4 @@ void	eof_handler(int sig)
 		rl_redisplay();
 		rl_replace_line("", 0);
 	}
-}   ESTO ES UNA MIERDA
+}
