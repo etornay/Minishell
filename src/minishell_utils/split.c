@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:15:18 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/16 13:00:49 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:30:17 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,8 @@ static int	count_words(char *s, char d)
 			s++;
 		}
 	}
+	if (fq_simple == 1 || fq_double == 1)
+		return (-1);
 	return (count);
 }
 
@@ -110,6 +112,8 @@ char	**split_line(char *s, char limit, t_paco *p)
 	if (!s)
 		return (NULL);
 	p->i = 0;
+	if (count_words(s, limit) == -1)
+		return (NULL);
 	str = malloc((count_words(s, limit) + 1) * sizeof(char **));
 	if (!str)
 		return (NULL);

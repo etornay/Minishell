@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/08 17:46:09 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 16:07:47 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-static void	get_node(t_paco *p, t_parser *node, int *i)
-{
-	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
-		&& p->lex2[*i][0] != '>' && p->lex2[*i] && *i <= p->count)
-		get_cmd(p, node, i);
-	if (node->full_cmd && check_builtin(p) == EXIT_FAILURE)
-		path_cmd(p, node);
-	else if (check_builtin(p) == EXIT_SUCCESS)
-		node->full_path = NULL;
-	while (p->lex2[*i] && p->lex2[*i][0] != '|'
-		&& p->lex2[*i][0] != '<' && p->lex2[*i][0] != '>')
-		(*i)++;
-}
 
 static int	get_tokens(t_paco *p, t_parser *node, int *i)
 {
@@ -40,6 +26,20 @@ static int	get_tokens(t_paco *p, t_parser *node, int *i)
 	return (EXIT_SUCCESS);
 }
 
+static void	get_node(t_paco *p, t_parser *node, int *i)
+{
+	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
+		&& p->lex2[*i][0] != '>' && p->lex2[*i] && *i <= p->count)
+		get_cmd(p, node, i);
+	if (node->full_cmd && check_builtin(p) == EXIT_FAILURE)
+		path_cmd(p, node);
+	else if (check_builtin(p) == EXIT_SUCCESS)
+		node->full_path = NULL;
+	while (p->lex2[*i] && p->lex2[*i][0] != '|'
+		&& p->lex2[*i][0] != '<' && p->lex2[*i][0] != '>')
+		(*i)++;
+}
+
 int	parser_cmd(t_paco *p, int i)
 {
 	t_parser	*node;
@@ -51,6 +51,8 @@ int	parser_cmd(t_paco *p, int i)
 			node = ft_calloc(1, sizeof(t_parser));
 			node->outfile = 1;
 			node->infile = 0;
+			if (get_tokens(p, node, &i) == EXIT_FAILURE)
+				return (EXIT_FAILURE);
 			while (p->lex2[i] && p->lex2[i][0] != '|' && p->lex2[i][0] != '<'
 				&& p->lex2[i][0] != '>')
 				get_node(p, node, &i);

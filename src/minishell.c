@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/11 12:39:49 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 18:42:45 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ int	input(char *input, t_paco *p, char **env)
 	t_parser	*node;
 
 	p->lex = split_line(input, ' ', p);
+	if (p->lex == NULL)
+		return (printf("Unclosed quotes\n"), EXIT_SUCCESS);
 	expand(p);
 	if (p->lex != NULL)
 	{
@@ -43,6 +45,18 @@ int	input(char *input, t_paco *p, char **env)
 	return (EXIT_SUCCESS);
 }
 
+static int	minishell_exit(t_paco *p)
+{
+	signal(SIGINT, signals);
+	signal(SIGQUIT, SIG_IGN);
+	if (prompt(p) == EXIT_FAILURE)
+	{
+		printf("exit\n");
+		exit(EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
 int	minishell(t_paco *p, char **env)
 {
 	ft_paco_sanz();
@@ -51,10 +65,7 @@ int	minishell(t_paco *p, char **env)
 	init_env(p, env, 0);
 	while (33)
 	{
-		signal(SIGINT, signals);
-		signal(SIGQUIT, SIG_IGN);
-		if (prompt(p) == EXIT_FAILURE)
-			exit(EXIT_FAILURE);
+		minishell_exit(p);
 		if (ft_strncmp(p->line, "\0", 1) == EXIT_FAILURE)
 			add_history(p->line);
 		if (input(p->line, p, env) == EXIT_FAILURE)

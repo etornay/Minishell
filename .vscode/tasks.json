@@ -7,6 +7,8 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
+                "-I /Users/etornay-/.brew/opt/readline/include",
+                "-L /Users/etornay-/.brew/opt/readline/lib",
                 "-lreadline",
                 "../Libft/libft.a",
                 "../minishell.a",

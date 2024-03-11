@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 13:36:13 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/11 12:23:36 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:55:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	cat_ctrlc(int sig)
+{
+	if (sig == SIGINT)
+	{
+		printf("\033[K\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+	}
+}
 
 void	signals(int sig)
 {
@@ -18,24 +28,20 @@ void	signals(int sig)
 	{
 		rl_on_new_line();
 		rl_redisplay();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		printf("\033[K\n");
 		rl_on_new_line();
 		rl_redisplay();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 	}
 }
 
-void	eof_handler(int sig)
+void	cat_ctrlbackslash(int sig)
 {
 	if (sig == SIGQUIT)
 	{
+		printf("Quit: 3\n");
 		rl_on_new_line();
-		rl_redisplay();
-		//rl_replace_line("", 0);
-		printf("exit\n");
-		rl_on_new_line();
-		rl_redisplay();
-		//rl_replace_line("", 0);
+		rl_replace_line("", 0);
 	}
 }

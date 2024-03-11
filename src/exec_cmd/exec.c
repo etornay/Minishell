@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/11 12:42:57 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:59:25 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,8 +111,8 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 
 int	executer(t_paco *p, char **env, t_parser *node)
 {
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
+	signal(SIGINT, cat_ctrlc);
+	signal(SIGQUIT, cat_ctrlbackslash);
 	if (node && node->full_cmd && node->full_cmd[0]
 		&& check_builtin(p) == EXIT_SUCCESS)
 		g_status = exec_builtins(((t_parser *)p->lst_cmd->content), p);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/09 13:45:52 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:14:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,13 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-	if (node->infile != STDIN_FILENO)
+	if (p->heredoc_flag)
+	{
+		if (dup2(p->heredoc_tmp, STDIN_FILENO) == -1)
+			return (msg_err("dup infile"));
+		close(p->heredoc_tmp);
+	}
+	else if (node->infile != STDIN_FILENO)
 	{
 		if (dup2(node->infile, STDIN_FILENO) == -1)
 			return (msg_err("dup infile"));
@@ -41,7 +47,7 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 	}
 	if (node->outfile != STDOUT_FILENO)
 	{
-		if (dup2(node->outfile, STDIN_FILENO) == -1)
+		if (dup2(node->outfile, STDOUT_FILENO) == -1)
 			return (msg_err("dup outfile"));
 		close(node->outfile);
 	}

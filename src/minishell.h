@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/11 12:41:14 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:56:07 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,7 +159,8 @@ int		msg_err(char *str);
 
 /*--- <SIGNALS> ---*/
 void	signals(int sig);
-void	eof_handler(int sig);
+void	cat_ctrlbackslash(int sig);
+void	cat_ctrlc(int sig);
 
 /*--- <FREE MINISHELL> ---*/
 void	free_mini_split(char **s, int j);
