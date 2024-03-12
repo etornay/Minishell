@@ -3,42 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 19:07:02 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/11 19:51:10 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:15:48 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	final_exit(t_paco *p, t_parser *node)
+int	exec_errors(t_paco *p, t_parser *node, t_list *aux)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (node->full_cmd[i] != NULL)
-		i++;
-	if (i > 2)
+	if (node->infile == -1 || node->outfile == -1)
 	{
-		printf("exit\nPACOSHELL: exit: too many arguments\n");
+		if (p->lex2[0][0] == '<' || p->lex2[0][0] == '>')
+			printf("PACOSHELL: %s: No such file or directory\n", p->lex2[1]);
+		else
+			printf("PACOSHELL: %s: No such file or directory\n", p->lex2[2]);
+		aux = aux->next;
 		return (EXIT_FAILURE);
 	}
-	if (i >= 2)
-	{
-		while (node->full_cmd[1][j] != '\0')
-		{
-			if (ft_isdigit(node->full_cmd[1][j]) == 0)
-			{
-				printf("PACOSHELL: exit: %s: numeric argument required\n",
-					node->full_cmd[1]);
-				break ;
-			}
-			j++;
-		}
-	}
-	free_path(p);
-	exit(g_status);
+	return (EXIT_SUCCESS);
+}
+
+int	msg_err(char *str)
+{
+	perror(str);
+	unlink("here_doc.tmp");
+	return (EXIT_FAILURE);
 }

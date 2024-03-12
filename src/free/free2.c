@@ -6,11 +6,24 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/08 16:14:12 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:41:18 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	free_cmd(t_list **lst)
+{
+	free(((t_parser *)((*lst)->content))->full_cmd);
+	((t_parser *)((*lst)->content))->full_cmd = NULL;
+	free(((t_parser *)((*lst)->content))->full_path);
+	((t_parser *)((*lst)->content))->full_path = NULL;
+	if (((t_parser *)((*lst)->content))->infile != 0)
+		close(((t_parser *)((*lst)->content))->infile);
+	if (((t_parser *)((*lst)->content))->outfile != 1)
+		close(((t_parser *)((*lst)->content))->outfile);
+	free(((t_parser *)((*lst)->content)));
+}
 
 void	free_cmd_list(t_list **lst)
 {
@@ -31,15 +44,7 @@ void	free_cmd_list(t_list **lst)
 				((t_parser *)((*lst)->content))->full_cmd[i] = NULL;
 			}
 		}
-		free(((t_parser *)((*lst)->content))->full_cmd);
-		((t_parser *)((*lst)->content))->full_cmd = NULL;
-		free(((t_parser *)((*lst)->content))->full_path);
-		((t_parser *)((*lst)->content))->full_path = NULL;
-		if (((t_parser *)((*lst)->content))->infile != 0)
-			close(((t_parser *)((*lst)->content))->infile);
-		if (((t_parser *)((*lst)->content))->outfile != 1)
-			close(((t_parser *)((*lst)->content))->outfile);
-		free(((t_parser *)((*lst)->content)));
+		free_cmd(lst);
 		free((*lst));
 		*lst = aux;
 	}

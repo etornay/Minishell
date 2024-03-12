@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/11 12:11:53 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:15:14 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,33 @@ void	exec_cd(t_paco *p, char **s, int flag)
 			free_cd_error(p);
 		}
 	}
+}
+
+int	final_exit(t_paco *p, t_parser *node)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	while (node->full_cmd[i] != NULL)
+		i++;
+	if (i > 2)
+		return (printf("exit\nPACOSHELL: exit: too many arguments\n"),
+			EXIT_FAILURE);
+	if (i >= 2)
+	{
+		while (node->full_cmd[1][j] != '\0')
+		{
+			if (ft_isdigit(node->full_cmd[1][j]) == 0)
+			{
+				printf("PACOSHELL: exit: %s: numeric argument required\n",
+					node->full_cmd[1]);
+				break ;
+			}
+			j++;
+		}
+	}
+	free_path(p);
+	exit(g_status);
 }

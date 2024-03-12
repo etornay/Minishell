@@ -3,36 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/11 17:14:50 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/12 12:25:45 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	msg_err(char *str)
+static int	exec_child2(t_paco *p, t_parser *node, t_list *aux)
 {
-	perror(str);
-	unlink("here_doc.tmp");
-	return (EXIT_FAILURE);
-}
-
-void	exec_father(t_paco *p, t_list *aux)
-{
-	if (aux->next && !((t_parser *)aux->next->content)->infile)
-		((t_parser *)aux->next->content)->infile = p->fd[0];
-	else
-		close(p->fd[0]);
-	close(p->fd[1]);
-	waitpid(p->pid, &p->wait, 0);
-}
-
-int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
-{
-	signal(SIGINT, SIG_DFL);
-	signal(SIGQUIT, SIG_DFL);
 	if (p->heredoc_flag)
 	{
 		if (dup2(p->heredoc_tmp, STDIN_FILENO) == -1)
@@ -56,10 +37,29 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 		if (dup2(p->fd[1], STDOUT_FILENO) == -1)
 			return (msg_err("dup pipe out"));
 	}
+	return (EXIT_SUCCESS);
+}
+
+int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
+{
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	if (exec_child2(p, node, aux) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	close(p->fd[1]);
 	close(p->fd[0]);
 	execve(node->full_path, node->full_cmd, env);
 	exit(g_status);
+}
+
+void	exec_father(t_paco *p, t_list *aux)
+{
+	if (aux->next && !((t_parser *)aux->next->content)->infile)
+		((t_parser *)aux->next->content)->infile = p->fd[0];
+	else
+		close(p->fd[0]);
+	close(p->fd[1]);
+	waitpid(p->pid, &p->wait, 0);
 }
 
 void	exec_cmd2(t_paco *p, char **env, t_parser *node)
@@ -79,18 +79,3 @@ void	exec_cmd2(t_paco *p, char **env, t_parser *node)
 	}
 	execve(node->full_path, node->full_cmd, env);
 }
-
-int	exec_errors(t_paco *p, t_parser *node, t_list *aux)
-{
-	if (node->infile == -1 || node->outfile == -1)
-	{
-		if (p->lex2[0][0] == '<' || p->lex2[0][0] == '>')
-			printf("PACOSHELL: %s: No such file or directory\n", p->lex2[1]);
-		else
-			printf("PACOSHELL: %s: No such file or directory\n", p->lex2[2]);
-		aux = aux->next;
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
-}
-
