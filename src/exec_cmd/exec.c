@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/11 19:16:47 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:09:27 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,29 +51,34 @@ static int	exec_cmd(t_paco *p, char **env)
 	{
 		node = ((t_parser *)aux->content);
 		if (node->full_path == NULL)
+		{
+			g_status = 127;
 			return (printf("PACOSHELL: %s: command not found\n",
-					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
+					((t_parser *)p->lst_cmd->content)->full_cmd[0]), 127);
+		}
 		if (exec_errors(p, node, aux) == EXIT_FAILURE)
 			break ;
 		p->pid = fork();
 		if (p->pid == -1)
-			return (msg_err("fork"), EXIT_FAILURE);
+			return (msg_err("fork"), g_status = 1, EXIT_FAILURE);
 		if (p->pid == 0)
 			exec_cmd2(p, env, node);
 		else
 			waitpid(p->pid, &p->wait, 0);
+		if (!check_f_d(node))
+			g_status = 1;
 		aux = aux->next;
 	}
-	return (EXIT_SUCCESS);
+	return (g_status);
 }
 
 static int	exec_pipe_cmd2(t_paco *p, char **env, t_parser *node, t_list *aux)
 {
 	if (node->full_path == NULL)
 		return (printf("PACOSHELL: %s: command not found\n",
-				((t_parser *)p->lst_cmd->content)->full_cmd[0]), 1);
+				((t_parser *)p->lst_cmd->content)->full_cmd[0]), 127);
 	if (exec_errors(p, node, aux) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (g_status);
 	if (pipe(p->fd) == -1)
 		msg_err("pipe_cmds");
 	p->pid = fork();
@@ -86,11 +91,11 @@ static int	exec_pipe_cmd2(t_paco *p, char **env, t_parser *node, t_list *aux)
 	if (p->pid == 0)
 	{
 		if (exec_child(p, node, aux, env) == EXIT_FAILURE)
-			return (EXIT_FAILURE);
+			return (g_status);
 	}
 	else
 		exec_father(p, aux);
-	return (EXIT_SUCCESS);
+	return (g_status);
 }
 
 static int	exec_pipe_cmd(t_paco *p, char **env)
@@ -106,7 +111,7 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 			break ;
 		aux = aux->next;
 	}
-	return (EXIT_SUCCESS);
+	return (g_status);
 }
 
 int	executer(t_paco *p, char **env, t_parser *node)
@@ -120,7 +125,9 @@ int	executer(t_paco *p, char **env, t_parser *node)
 		&& check_builtin(p) == EXIT_FAILURE)
 	{
 		if (p->pipe_flag)
+		{
 			g_status = exec_pipe_cmd(p, env);
+		}
 		else if (!p->pipe_flag)
 			g_status = exec_cmd(p, env);
 	}
@@ -129,8 +136,10 @@ int	executer(t_paco *p, char **env, t_parser *node)
 	else
 	{
 		if (node && !node->full_cmd)
+		{
 			printf("PACOSHELL: %s: command not found\n", node->full_cmd[0]);
-		return (g_status = 127, EXIT_FAILURE);
+			return (g_status = 127, EXIT_FAILURE);
+		}
 	}
 	return (EXIT_SUCCESS);
 }

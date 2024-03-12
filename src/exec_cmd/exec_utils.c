@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/12 12:25:45 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 16:02:39 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	exec_child2(t_paco *p, t_parser *node, t_list *aux)
 		if (dup2(p->fd[1], STDOUT_FILENO) == -1)
 			return (msg_err("dup pipe out"));
 	}
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
 int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
@@ -45,7 +45,7 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (exec_child2(p, node, aux) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (g_status);
 	close(p->fd[1]);
 	close(p->fd[0]);
 	execve(node->full_path, node->full_cmd, env);
@@ -77,5 +77,5 @@ void	exec_cmd2(t_paco *p, char **env, t_parser *node)
 		unlink("here_doc.tmp");
 		p->heredoc_flag = 0;
 	}
-	execve(node->full_path, node->full_cmd, env);
+	g_status = execve(node->full_path, node->full_cmd, env);
 }

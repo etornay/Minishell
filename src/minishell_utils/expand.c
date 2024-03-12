@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:59 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/09 12:23:41 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 14:23:11 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,14 @@
 
 static char	*get_env_content(t_paco *p, char *s)
 {
+	char	*status;
+
 	p->aux = p->l_env;
+	if (ft_strncmp(s, "?", 1) == EXIT_SUCCESS)
+	{
+		status = ft_itoa(g_status);
+		return (ft_strdup(status));
+	}
 	while (p->aux)
 	{
 		if (ft_strncmp(p->aux->name, s, ft_strlen(s)) == EXIT_SUCCESS)
