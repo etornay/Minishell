@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 12:15:14 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 13:20:37 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	exec_unset(t_paco *p, char *name)
 			else
 				p->l_env = p->aux->next_env;
 			free(del->name);
-			if (del->content != NULL)
-				free(del->content);
+			/* if (del->content != NULL)
+				free(del->content); */
 			free(del);
 			break ;
 		}
