@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/12 16:09:27 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:55:36 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ static int	exec_cmd(t_paco *p, char **env)
 	while (aux)
 	{
 		node = ((t_parser *)aux->content);
+		/* if (g_status == 2)
+			break ; */
 		if (node->full_path == NULL)
 		{
 			g_status = 127;
@@ -118,16 +120,20 @@ int	executer(t_paco *p, char **env, t_parser *node)
 {
 	signal(SIGINT, cat_ctrlc);
 	signal(SIGQUIT, cat_ctrlbackslash);
-	if (node && node->full_cmd && node->full_cmd[0]
+	/* if (g_status == 2)
+	{
+		if (expr_dollar(node) == EXIT_SUCCESS)
+			return (EXIT_SUCCESS);
+		return (EXIT_FAILURE);
+	}
+	else  */if (node && node->full_cmd && node->full_cmd[0]
 		&& check_builtin(p) == EXIT_SUCCESS)
 		g_status = exec_builtins(((t_parser *)p->lst_cmd->content), p);
 	else if (node && node->full_cmd && node->full_cmd[0]
 		&& check_builtin(p) == EXIT_FAILURE)
 	{
 		if (p->pipe_flag)
-		{
 			g_status = exec_pipe_cmd(p, env);
-		}
 		else if (!p->pipe_flag)
 			g_status = exec_cmd(p, env);
 	}
@@ -141,5 +147,7 @@ int	executer(t_paco *p, char **env, t_parser *node)
 			return (g_status = 127, EXIT_FAILURE);
 		}
 	}
+	if (expr_dollar(node) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

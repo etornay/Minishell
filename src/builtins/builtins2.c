@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 13:20:37 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/12 17:33:56 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ void	exec_unset(t_paco *p, char *name)
 			else
 				p->l_env = p->aux->next_env;
 			free(del->name);
-			/* if (del->content != NULL)
-				free(del->content); */
+			if (del->content != NULL)
+				free(del->content);
 			free(del);
 			break ;
 		}
@@ -98,7 +98,7 @@ int	final_exit(t_paco *p, t_parser *node)
 		{
 			if (ft_isdigit(node->full_cmd[1][j]) == 0)
 			{
-				printf("PACOSHELL: exit: %s: numeric argument required\n",
+				printf("exit\nPACOSHELL: exit: %s: numeric argument required\n",
 					node->full_cmd[1]);
 				break ;
 			}

@@ -10,6 +10,7 @@ src/builtins/builtins_utils/cd_utils.c\
 src/builtins/builtins_utils/export_utils.c\
 src/builtins/env_utils/get_env.c\
 src/exec_cmd/exec.c\
+src/exec_cmd/exec2.c\
 src/exec_cmd/exec_utils.c\
 src/exec_cmd/exec_utils2.c\
 src/minishell_utils/expand.c\

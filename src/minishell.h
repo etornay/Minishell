@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 15:52:58 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:12:56 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	exec_father(t_paco *p, t_list *aux);
 int		exec_child(t_paco *p, t_parser *node, t_list *aux, char **env);
 void	exec_cmd2(t_paco *p, char **env, t_parser *node);
 int		check_f_d(t_parser *node);
+int		expr_dollar(t_parser *node);
 
 /*--- <EXECUTER ERROR> ---*/
 int		exec_errors(t_paco *p, t_parser *node, t_list *aux);
