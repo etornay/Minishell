@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 12:30:16 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:17:04 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@ int	input(char *input, t_paco *p, char **env)
 {
 	t_parser	*node;
 
+	check_path(p);
+	if (p->path_flag == 0)
+		free_path(p);
+	if (p->path_flag)
+		re_path(p);
 	p->lex = split_line(input, ' ', p);
 	if (p->lex == NULL)
 		return (printf("Unclosed quotes\n"), EXIT_SUCCESS);

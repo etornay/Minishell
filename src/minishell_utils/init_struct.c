@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 12:38:32 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:18:24 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	init_struct2(t_paco *p)
 	p->double_flag = 0;
 	p->heredoc_flag = 0;
 	p->n_split = 0;
+	p->path_flag = 1;
 	p->pid = 0;
 	p->pipe_flag = 0;
 	p->simple_flag = 0;
@@ -49,5 +50,3 @@ void	init_struct(t_paco *p)
 	p->tmp = NULL;
 	init_struct2(p);
 }
-
-

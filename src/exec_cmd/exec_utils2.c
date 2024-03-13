@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 19:07:02 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 15:44:48 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:40:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	check_f_d(t_parser *node)
 	i = 1;
 	while (node->full_cmd[i] && ft_strchr(node->full_cmd[i], '-'))
 		i++;
-	if (stat(node->full_cmd[i], &file_info) == 0 || node->full_cmd[i] == 0)
+	if (node->full_cmd[i] == 0 || stat(node->full_cmd[i], &file_info) == 0)
 		return (1);
 	return (0);
 }

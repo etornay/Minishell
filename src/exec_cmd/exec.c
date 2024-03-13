@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 15:56:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:31:06 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static int	exec_cmd(t_paco *p, char **env)
 		waitpid(p->pid, &p->wait, 0);
 	if (!check_f_d(node))
 		g_status = 1;
-	return (g_status);
+	return (EXIT_SUCCESS);
 }
 
 static int	exec_pipe_cmd2(t_paco *p, char **env, t_parser *node, t_list *aux)
@@ -123,7 +123,7 @@ int	executer(t_paco *p, char **env, t_parser *node)
 		if (p->pipe_flag)
 			exec_pipe_cmd(p, env);
 		else if (!p->pipe_flag)
-			g_status = exec_cmd(p, env);
+			exec_cmd(p, env);
 	}
 	else if (node && !node->full_cmd && !node->full_path)
 		return (g_status = 0, EXIT_SUCCESS);

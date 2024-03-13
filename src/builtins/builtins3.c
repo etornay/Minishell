@@ -1,47 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signals.c                                          :+:      :+:    :+:   */
+/*   builtins3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 13:36:13 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 17:54:35 by etornay-         ###   ########.fr       */
+/*   Created: 2024/03/13 16:03:57 by etornay-          #+#    #+#             */
+/*   Updated: 2024/03/13 16:41:35 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	cat_ctrlc(int sig)
+void	re_path(t_paco *p)
 {
-	if (sig == SIGINT)
+	t_env	*aux;
+
+	aux = p->l_env;
+	if (p->path != NULL)
+		free_path(p);
+	while (aux)
 	{
-		printf("\033[K\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		if (!ft_strncmp("PATH", aux->name, 4))
+			break ;
+		aux = aux->next_env;
 	}
+	p->path = ft_split(aux->content, ':');
+	if (!p->path)
+		return ;
 }
 
-void	signals(int sig)
+void	check_path(t_paco *p)
 {
-	if (sig == SIGINT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-		rl_replace_line("", 0);
-		printf("\033[K\n");
-		rl_on_new_line();
-		rl_redisplay();
-		rl_replace_line("", 0);
-	}
-}
+	t_env	*aux;
 
-void	cat_ctrlbackslash(int sig)
-{
-	if (sig == SIGQUIT)
+	aux = p->l_env;
+	while (aux)
 	{
-		printf("Quit: 3\n");
-		rl_on_new_line();
-		rl_replace_line("", 0);
+		if (!ft_strncmp(aux->name, "PATH", 4))
+		{
+			p->path_flag = 1;
+			return ;
+		}
+		else
+			p->path_flag = 0;
+		aux = aux->next_env;
 	}
 }

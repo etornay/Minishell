@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:17 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/14 12:33:01 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:20:12 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,12 @@ void	free_path(t_paco *p)
 	if (p->path != NULL)
 	{
 		while (p->path[i])
-			free(p->path[i++]);
+		{
+			free(p->path[i]);
+			p->path[i++] = NULL;
+		}
 		free(p->path);
+		p->path = NULL;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:34:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 12:40:53 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:21:50 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct s_paco
 	int		heredoc_tmp;
 	int		heredoc_flag;
 	int		pipe_flag;
+	int		path_flag;
 	int		wait;
 	int		fd[2];
 	int		total_expr;
@@ -131,6 +132,8 @@ void	ft_env_clear(t_env **lst);
 void	ft_lstdel_env(t_env *lst);
 int		check_oldpwd(t_paco *p);
 void	restart_index(t_paco *p);
+void	check_path(t_paco *p);
+void	re_path(t_paco *p);
 
 /*--- <PARSER> ---*/
 int		parser_cmd(t_paco *p, int i);

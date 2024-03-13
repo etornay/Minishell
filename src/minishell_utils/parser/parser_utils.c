@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 12:26:08 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 17:19:41 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	path_cmd(t_paco *p, t_parser *node)
 
 	k = 0;
 	p->j = -1;
-	while (p->path[++p->j] != NULL)
+	while (p->path && p->path[++p->j] != NULL)
 	{
 		p->tmp_cmd = ft_strjoin(p->path[p->j], "/");
 		p->tmp_path = ft_strjoin(p->tmp_cmd, node->full_cmd[k]);

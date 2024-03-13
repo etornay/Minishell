@@ -5,6 +5,7 @@ MINISHELL = minishell.a
 FILES = src/minishell.c\
 src/builtins/builtins.c\
 src/builtins/builtins2.c\
+src/builtins/builtins3.c\
 src/builtins/builtins_utils/builtins_utils.c\
 src/builtins/builtins_utils/cd_utils.c\
 src/builtins/builtins_utils/export_utils.c\
