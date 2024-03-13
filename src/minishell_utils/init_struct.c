@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_struct.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/07 16:53:15 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 12:38:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	init_struct2(t_paco *p)
 	p->pid = 0;
 	p->pipe_flag = 0;
 	p->simple_flag = 0;
+	p->total_expr = 0;
 	p->wait = 0;
 	p->wc = 1;
 	p->wordle = 0;

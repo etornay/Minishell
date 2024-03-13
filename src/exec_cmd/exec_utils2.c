@@ -6,7 +6,7 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 19:07:02 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 15:51:16 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 14:16:44 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	check_f_d(t_parser *node)
 	i = 1;
 	while (node->full_cmd[i] && ft_strchr(node->full_cmd[i], '-'))
 		i++;
-	if (stat(node->full_cmd[i], &file_info) == 0)
+	if (stat(node->full_cmd[i], &file_info) == 0 || node->full_cmd[i] == 0)
 		return (1);
 	return (0);
 }
