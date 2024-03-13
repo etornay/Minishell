@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/12 18:00:38 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 13:21:04 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:21:36 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	expr_dollar(t_paco *p, t_parser *node)
+/* int	expr_dollar(t_paco *p, t_parser *node)
 {
 	if (node && node->full_cmd && strcmp(node->full_cmd[0], "expr") == 0
 		&& node->full_cmd[1] && strcmp(node->full_cmd[1], "$?") == 0
@@ -25,4 +25,4 @@ int	expr_dollar(t_paco *p, t_parser *node)
 		return (EXIT_SUCCESS);
 	}
 	return (EXIT_FAILURE);
-}
+} */

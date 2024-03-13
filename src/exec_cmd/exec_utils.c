@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/12 16:02:39 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:33:25 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	exec_child2(t_paco *p, t_parser *node, t_list *aux)
 		if (dup2(p->fd[1], STDOUT_FILENO) == -1)
 			return (msg_err("dup pipe out"));
 	}
-	return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
@@ -45,11 +45,11 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (exec_child2(p, node, aux) == EXIT_FAILURE)
-		return (g_status);
+		return (g_status = 1, EXIT_FAILURE);
 	close(p->fd[1]);
 	close(p->fd[0]);
-	execve(node->full_path, node->full_cmd, env);
-	exit(g_status);
+	g_status = execve(node->full_path, node->full_cmd, env);
+	exit(EXIT_SUCCESS);
 }
 
 void	exec_father(t_paco *p, t_list *aux)
