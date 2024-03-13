@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/20 16:09:52 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:56:56 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	change_pwd(t_paco *p)
 		}
 		p->aux = p->aux->next_env;
 	}
+	g_status = 0;
 }
 
 void	change_oldpwd(t_paco *p)
@@ -87,4 +88,5 @@ void	change_cd(t_paco *p)
 	get_cd_path(p, "HOME\0");
 	chdir(p->tmp);
 	change_pwd(p);
+	g_status = 0;
 }

@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/12 12:41:18 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:54:44 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,4 +85,5 @@ void	free_cd_error(t_paco *p)
 {
 	free(p->tmp);
 	free(p->cd_error);
+	g_status = 1;
 }

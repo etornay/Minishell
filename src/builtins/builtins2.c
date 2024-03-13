@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 17:33:56 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/13 16:01:30 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+static void	exec_unset_continue(t_env *del)
+{
+	free(del->name);
+	if (del->content != NULL)
+		free(del->content);
+	free(del);
+}
 
 void	exec_unset(t_paco *p, char *name)
 {
@@ -30,15 +38,15 @@ void	exec_unset(t_paco *p, char *name)
 				prev->next_env = p->aux->next_env;
 			else
 				p->l_env = p->aux->next_env;
-			free(del->name);
-			if (del->content != NULL)
-				free(del->content);
-			free(del);
-			break ;
+			exec_unset_continue(del);
+			del = NULL;
+			g_status = 0;
+			return ;
 		}
 		prev = p->aux;
 		p->aux = p->aux->next_env;
 	}
+	g_status = 1;
 }
 
 void	exec_pwd(t_paco *p)
@@ -49,6 +57,7 @@ void	exec_pwd(t_paco *p)
 	if (p->act_dir == NULL)
 		return ;
 	ft_printf("%s\n", p->act_dir);
+	g_status = 0;
 }
 
 void	exec_cd(t_paco *p, char **s, int flag)

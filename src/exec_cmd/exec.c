@@ -6,7 +6,7 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 15:38:41 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/13 15:56:15 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	executer(t_paco *p, char **env, t_parser *node)
 	signal(SIGQUIT, cat_ctrlbackslash);
 	if (node && node->full_cmd && node->full_cmd[0]
 		&& check_builtin(p) == EXIT_SUCCESS)
-		g_status = exec_builtins(((t_parser *)p->lst_cmd->content), p);
+		exec_builtins(((t_parser *)p->lst_cmd->content), p);
 	else if (node && node->full_cmd && node->full_cmd[0]
 		&& check_builtin(p) == EXIT_FAILURE)
 	{
