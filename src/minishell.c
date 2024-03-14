@@ -6,16 +6,16 @@
 /*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/14 11:50:37 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:09:25 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_leaks()
+/*void	ft_leaks()
 {
 	system("leaks -q minishell");
-} 
+}*/
 
 void	path(t_paco *p)
 {
