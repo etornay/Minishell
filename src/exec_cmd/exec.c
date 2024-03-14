@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 17:31:06 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 12:27:38 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ static int	exec_cmd(t_paco *p, char **env)
 		exec_cmd2(p, env, node);
 	else
 		waitpid(p->pid, &p->wait, 0);
-	if (!check_f_d(node))
+	if (check_f_d(node) == 0)
 		g_status = 1;
 	return (EXIT_SUCCESS);
 }

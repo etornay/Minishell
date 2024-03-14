@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 17:17:04 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:50:37 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,22 @@
 void	ft_leaks()
 {
 	system("leaks -q minishell");
+} 
+
+void	path(t_paco *p)
+{
+	check_path(p);
+	if (p->path_flag == 0)
+		free_path(p);
+	if (p->path_flag)
+		re_path(p);
 }
 
 int	input(char *input, t_paco *p, char **env)
 {
 	t_parser	*node;
 
-	check_path(p);
-	if (p->path_flag == 0)
-		free_path(p);
-	if (p->path_flag)
-		re_path(p);
+	path(p);
 	p->lex = split_line(input, ' ', p);
 	if (p->lex == NULL)
 		return (printf("Unclosed quotes\n"), EXIT_SUCCESS);
@@ -91,11 +96,9 @@ int	main(int argc, char **argv, char **env)
 {
 	t_paco	*p;
 
-	if (argc > 1)
-		return (EXIT_FAILURE);
+	atexit(ft_leaks);
 	(void)argc;
 	(void)argv;
-	atexit(ft_leaks);
 	p = ft_calloc(1, sizeof(t_paco));
 	if (p == NULL)
 		exit (EXIT_FAILURE);

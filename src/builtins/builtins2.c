@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 17:20:56 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 11:31:27 by ncruz-ga         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static void	exec_unset_continue(t_env *del)
 	if (del->content != NULL)
 		free(del->content);
 	free(del);
+	del = NULL;
 }
 
 void	exec_unset(t_paco *p, char *name)
@@ -39,7 +40,6 @@ void	exec_unset(t_paco *p, char *name)
 			else
 				p->l_env = p->aux->next_env;
 			exec_unset_continue(del);
-			del = NULL;
 			g_status = 0;
 			return ;
 		}
