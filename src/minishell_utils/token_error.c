@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   token_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/29 16:25:07 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/08 17:52:31 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:27:14 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	token_errors5(t_paco *p, int *i)
+int	token_errors5(t_data *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] == '>')
@@ -30,7 +30,7 @@ int	token_errors5(t_paco *p, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static int	token_errors4(t_paco *p, int *i)
+static int	token_errors4(t_data *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i][0] == '>' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] == '>' && p->lex2[*i + 2] == NULL)
@@ -55,7 +55,7 @@ static int	token_errors4(t_paco *p, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static int	token_errors3(t_paco *p, int *i)
+static int	token_errors3(t_data *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i][0] == '<'
 		&& p->lex2[*i + 1] && p->lex2[*i + 1][0] == '>'
@@ -83,7 +83,7 @@ static int	token_errors3(t_paco *p, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static int	token_errors2(t_paco *p, int *i)
+static int	token_errors2(t_data *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i][0] == '<' && p->lex2[*i + 1]
 		&& p->lex2[*i + 1][0] == '>'
@@ -111,7 +111,7 @@ static int	token_errors2(t_paco *p, int *i)
 	return (EXIT_SUCCESS);
 }
 
-int	token_errors(t_paco *p, int *i)
+int	token_errors(t_data *p, int *i)
 {
 	if (p->lex2[*i] && p->lex2[*i] == NULL)
 	{

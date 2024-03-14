@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 09:38:29 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/12 12:26:17 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:28:40 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-static int	get_tokens(t_paco *p, t_parser *node, int *i)
+static int	get_tokens(t_data *p, t_parser *node, int *i)
 {
 	while (p->lex2[*i] && (p->lex2[*i][0] == '<' || p->lex2[*i][0] == '>'))
 	{
@@ -26,7 +26,7 @@ static int	get_tokens(t_paco *p, t_parser *node, int *i)
 	return (EXIT_SUCCESS);
 }
 
-static void	get_node(t_paco *p, t_parser *node, int *i)
+static void	get_node(t_data *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i][0] != '|' && p->lex2[*i][0] != '<'
 		&& p->lex2[*i][0] != '>' && p->lex2[*i] && *i <= p->count)
@@ -40,7 +40,7 @@ static void	get_node(t_paco *p, t_parser *node, int *i)
 		(*i)++;
 }
 
-int	parser_cmd(t_paco *p, int i)
+int	parser_cmd(t_data *p, int i)
 {
 	t_parser	*node;
 

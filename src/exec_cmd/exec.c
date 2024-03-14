@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/05 17:38:55 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/14 12:27:38 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:30:03 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	exec_builtins(t_parser *node, t_paco *p)
+static int	exec_builtins(t_parser *node, t_data *p)
 {
 	if (node->full_cmd[0]
 		&& ft_strncmp(node->full_cmd[0], "pwd\0", 4) == EXIT_SUCCESS)
@@ -41,7 +41,7 @@ static int	exec_builtins(t_parser *node, t_paco *p)
 	return (EXIT_SUCCESS);
 }
 
-static int	exec_cmd(t_paco *p, char **env)
+static int	exec_cmd(t_data *p, char **env)
 {
 	t_parser	*node;
 	t_list		*aux;
@@ -68,7 +68,7 @@ static int	exec_cmd(t_paco *p, char **env)
 	return (EXIT_SUCCESS);
 }
 
-static int	exec_pipe_cmd2(t_paco *p, char **env, t_parser *node, t_list *aux)
+static int	exec_pipe_cmd2(t_data *p, char **env, t_parser *node, t_list *aux)
 {
 	if (node->full_path == NULL)
 		return (printf("PACOSHELL: %s: command not found\n", node->full_cmd[0]),
@@ -94,7 +94,7 @@ static int	exec_pipe_cmd2(t_paco *p, char **env, t_parser *node, t_list *aux)
 	return (g_status);
 }
 
-static int	exec_pipe_cmd(t_paco *p, char **env)
+static int	exec_pipe_cmd(t_data *p, char **env)
 {
 	t_parser	*node;
 	t_list		*aux;
@@ -110,7 +110,7 @@ static int	exec_pipe_cmd(t_paco *p, char **env)
 	return (EXIT_SUCCESS);
 }
 
-int	executer(t_paco *p, char **env, t_parser *node)
+int	executer(t_data *p, char **env, t_parser *node)
 {
 	signal(SIGINT, cat_ctrlc);
 	signal(SIGQUIT, cat_ctrlbackslash);

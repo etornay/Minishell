@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 09:01:33 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 17:18:24 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:25:06 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	init_struct2(t_paco *p)
+static void	init_struct2(t_data *p)
 {
 	p->c = 0;
 	p->i = 0;
@@ -34,7 +34,7 @@ static void	init_struct2(t_paco *p)
 	p->dup_stdout = dup(STDOUT_FILENO);
 }
 
-void	init_struct(t_paco *p)
+void	init_struct(t_data *p)
 {
 	p->act_dir = NULL;
 	p->aux = NULL;

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/23 08:51:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 16:03:55 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:30:19 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	exec_export2(t_paco *p, char *s, char **tmp)
+static void	exec_export2(t_data *p, char *s, char **tmp)
 {
 	t_env	*new;
 
@@ -41,7 +41,7 @@ static void	exec_export2(t_paco *p, char *s, char **tmp)
 	free_split(tmp);
 }
 
-void	exec_export(t_paco *p, char **s, int index)
+void	exec_export(t_data *p, char **s, int index)
 {
 	restart_index(p);
 	set_env_index(p);
@@ -70,7 +70,7 @@ void	exec_export(t_paco *p, char **s, int index)
 	g_status = 0;
 }
 
-static void	exec_echo2(char **s, int size, t_paco *p, int *j)
+static void	exec_echo2(char **s, int size, t_data *p, int *j)
 {
 	while (s[size][*j])
 	{
@@ -89,7 +89,7 @@ static void	exec_echo2(char **s, int size, t_paco *p, int *j)
 	g_status = 0;
 }
 
-static void	exec_echo(char **s, int size, t_paco *p)
+static void	exec_echo(char **s, int size, t_data *p)
 {
 	int	j;
 
@@ -109,7 +109,7 @@ static void	exec_echo(char **s, int size, t_paco *p)
 	exec_echo2(s, size, p, &j);
 }
 
-void	flag_echo(char **s, int flag, t_paco *p)
+void	flag_echo(char **s, int flag, t_data *p)
 {
 	while (s[p->j])
 		p->j++;

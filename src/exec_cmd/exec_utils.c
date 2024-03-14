@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/06 17:00:03 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/14 12:23:29 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:29:32 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	exec_child2(t_paco *p, t_parser *node, t_list *aux)
+static int	exec_child2(t_data *p, t_parser *node, t_list *aux)
 {
 	if (p->heredoc_flag)
 	{
@@ -40,7 +40,7 @@ static int	exec_child2(t_paco *p, t_parser *node, t_list *aux)
 	return (EXIT_SUCCESS);
 }
 
-int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
+int	exec_child(t_data *p, t_parser *node, t_list *aux, char **env)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
@@ -52,7 +52,7 @@ int	exec_child(t_paco *p, t_parser *node, t_list *aux, char **env)
 	exit(EXIT_SUCCESS);
 }
 
-void	exec_father(t_paco *p, t_list *aux)
+void	exec_father(t_data *p, t_list *aux)
 {
 	if (aux->next && !((t_parser *)aux->next->content)->infile)
 		((t_parser *)aux->next->content)->infile = p->fd[0];
@@ -62,7 +62,7 @@ void	exec_father(t_paco *p, t_list *aux)
 	waitpid(p->pid, &p->wait, 0);
 }
 
-void	exec_cmd2(t_paco *p, char **env, t_parser *node)
+void	exec_cmd2(t_data *p, char **env, t_parser *node)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);

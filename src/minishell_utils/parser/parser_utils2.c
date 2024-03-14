@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parser_utils2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 13:04:59 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 12:26:13 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:28:22 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	flag_pipe(t_paco *p, int *i)
+int	flag_pipe(t_data *p, int *i)
 {
 	if (p->lex2[0][0] == '|' && p->lex2[*i + 1] && p->lex2[*i + 1][0] == '|')
 	{
@@ -37,14 +37,14 @@ int	flag_pipe(t_paco *p, int *i)
 	return (EXIT_SUCCESS);
 }
 
-void	read_only(t_paco *p, t_parser *node, int *i)
+void	read_only(t_data *p, t_parser *node, int *i)
 {
 	node->infile = open(p->lex2[*i + 1], O_RDONLY);
 	if (node->infile < 0)
 		return ;
 }
 
-void	exec_trunc(t_paco *p, t_parser *node, int *i)
+void	exec_trunc(t_data *p, t_parser *node, int *i)
 {
 	node->outfile = open(p->lex2[*i + 1], O_WRONLY | O_CREAT
 			| O_TRUNC, 0644);
@@ -52,7 +52,7 @@ void	exec_trunc(t_paco *p, t_parser *node, int *i)
 		return ;
 }
 
-void	exec_append(t_paco *p, t_parser *node, int *i)
+void	exec_append(t_data *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i + 2])
 	{
@@ -70,7 +70,7 @@ void	exec_append(t_paco *p, t_parser *node, int *i)
 	}
 }
 
-int	check_builtin(t_paco *p)
+int	check_builtin(t_data *p)
 {
 	if (ft_strncmp(p->lex2[0], "pwd\0", 4) == EXIT_SUCCESS)
 		return (EXIT_SUCCESS);

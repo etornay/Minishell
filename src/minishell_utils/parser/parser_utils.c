@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 17:30:18 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 17:19:41 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:27:53 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	path_cmd(t_paco *p, t_parser *node)
+int	path_cmd(t_data *p, t_parser *node)
 {
 	int	k;
 
@@ -41,7 +41,7 @@ int	path_cmd(t_paco *p, t_parser *node)
 	return (EXIT_SUCCESS);
 }
 
-void	get_cmd(t_paco *p, t_parser *node, int *k)
+void	get_cmd(t_data *p, t_parser *node, int *k)
 {
 	int	j;
 	int	i;
@@ -60,7 +60,7 @@ void	get_cmd(t_paco *p, t_parser *node, int *k)
 	node->full_cmd[j] = NULL;
 }
 
-int	p_utils(t_paco *p, t_parser *node, int *i)
+int	p_utils(t_data *p, t_parser *node, int *i)
 {
 	if (token_errors(p, i))
 		return (EXIT_FAILURE);
@@ -85,7 +85,7 @@ int	p_utils(t_paco *p, t_parser *node, int *i)
 	return (EXIT_SUCCESS);
 }
 
-void	pass_tokens(t_paco *p, int *k)
+void	pass_tokens(t_data *p, int *k)
 {
 	if (p->lex2[*k] && ((p->lex2[*k][0] == '>' && p->lex2[*k + 1]
 			&& p->lex2[*k + 1][0] == '>' && p->lex2[*k + 2] != NULL)

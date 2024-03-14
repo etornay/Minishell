@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/14 16:11:16 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:32:16 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 	system("leaks -q minishell");
 }*/
 
-void	path(t_paco *p)
+void	path(t_data *p)
 {
 	check_path(p);
 	if (p->path_flag == 0)
@@ -26,7 +26,7 @@ void	path(t_paco *p)
 		re_path(p);
 }
 
-int	input(char *input, t_paco *p, char **env)
+int	input(char *input, t_data *p, char **env)
 {
 	t_parser	*node;
 
@@ -55,7 +55,7 @@ int	input(char *input, t_paco *p, char **env)
 	return (EXIT_SUCCESS);
 }
 
-static int	minishell_exit(t_paco *p)
+static int	minishell_exit(t_data *p)
 {
 	signal(SIGINT, signals);
 	signal(SIGQUIT, SIG_IGN);
@@ -67,7 +67,7 @@ static int	minishell_exit(t_paco *p)
 	return (EXIT_SUCCESS);
 }
 
-int	minishell(t_paco *p, char **env)
+int	minishell(t_data *p, char **env)
 {
 	ft_paco_sanz();
 	if (get_path(p, env) == EXIT_FAILURE)
@@ -94,11 +94,11 @@ int	minishell(t_paco *p, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_paco	*p;
+	t_data	*p;
 
 	(void)argc;
 	(void)argv;
-	p = ft_calloc(1, sizeof(t_paco));
+	p = ft_calloc(1, sizeof(t_data));
 	if (p == NULL)
 		exit (EXIT_FAILURE);
 	init_struct(p);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cd_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 12:50:53 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 15:56:56 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:31:28 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	get_cd_path(t_paco *p, char *s)
+void	get_cd_path(t_data *p, char *s)
 {
 	p->aux = p->l_env;
 	while (p->aux)
@@ -26,7 +26,7 @@ void	get_cd_path(t_paco *p, char *s)
 	}
 }
 
-void	change_pwd(t_paco *p)
+void	change_pwd(t_data *p)
 {
 	char	dir[500];
 
@@ -46,7 +46,7 @@ void	change_pwd(t_paco *p)
 	g_status = 0;
 }
 
-void	change_oldpwd(t_paco *p)
+void	change_oldpwd(t_data *p)
 {
 	char	dir[500];
 
@@ -65,7 +65,7 @@ void	change_oldpwd(t_paco *p)
 	}
 }
 
-void	change_oldpwd2(t_paco *p, char *dir)
+void	change_oldpwd2(t_data *p, char *dir)
 {
 	p->aux = p->l_env;
 	while (p->aux)
@@ -82,7 +82,7 @@ void	change_oldpwd2(t_paco *p, char *dir)
 	}
 }
 
-void	change_cd(t_paco *p)
+void	change_cd(t_data *p)
 {
 	change_oldpwd(p);
 	get_cd_path(p, "HOME\0");

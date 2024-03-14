@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 11:10:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/12 12:26:02 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:27:42 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	msg_error(char *str)
 	return (EXIT_FAILURE);
 }
 
-void	ft_heredoc(t_paco *p, char *limit)
+void	ft_heredoc(t_data *p, char *limit)
 {
 	p->eof = ft_strjoin(limit, "\n");
 	p->heredoc_tmp = open("here_doc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -46,7 +46,7 @@ void	ft_heredoc(t_paco *p, char *limit)
 	p->dup_stdin = dup(STDIN_FILENO);
 }
 
-void	exec_heredoc(t_paco *p, t_parser *node, int *i)
+void	exec_heredoc(t_data *p, t_parser *node, int *i)
 {
 	if (p->lex2[*i + 2] && p->lex2[*i + 2][0] == '<')
 		return ;

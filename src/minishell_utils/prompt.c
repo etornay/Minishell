@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 16:44:25 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/16 13:00:38 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:25:42 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_paco_sanz(void)
 	ft_paco_sanz2();
 }
 
-int	prompt(t_paco *p)
+int	prompt(t_data *p)
 {
 	p->shell = ft_strdup("PACOSHELL: ");
 	if (p->shell == NULL)

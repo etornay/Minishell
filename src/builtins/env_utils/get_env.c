@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 09:11:15 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 16:02:14 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:31:09 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	get_path(t_paco *p, char **env)
+int	get_path(t_data *p, char **env)
 {
 	int	i;
 
@@ -53,7 +53,7 @@ void	lst_addenv_back(t_env **lst, t_env *new, char **tmp)
 	return ;
 }
 
-void	init_env(t_paco *p, char **env, int i)
+void	init_env(t_data *p, char **env, int i)
 {
 	char	**tmp;
 
@@ -82,7 +82,7 @@ void	init_env(t_paco *p, char **env, int i)
 	set_env_index(p);
 }
 
-void	exec_env(t_paco *p)
+void	exec_env(t_data *p)
 {
 	p->aux = p->l_env;
 	while (p->aux != NULL)

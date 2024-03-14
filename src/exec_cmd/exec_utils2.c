@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/11 19:07:02 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/14 13:16:29 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:29:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	exec_errors(t_paco *p, t_parser *node, t_list *aux)
+int	exec_errors(t_data *p, t_parser *node, t_list *aux)
 {
 	int	i;
 

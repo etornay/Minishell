@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 10:09:40 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 15:54:44 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:29:19 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	free_cmd_list(t_list **lst)
 	*lst = NULL;
 }
 
-void	free_lex2(t_paco *p)
+void	free_lex2(t_data *p)
 {
 	int	i;
 
@@ -81,7 +81,7 @@ void	free_split(char **tmp)
 	free (tmp);
 }
 
-void	free_cd_error(t_paco *p)
+void	free_cd_error(t_data *p)
 {
 	free(p->tmp);
 	free(p->cd_error);

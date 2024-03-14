@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 14:27:59 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 16:57:52 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:24:57 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static char	*get_env_content(t_paco *p, char *s)
+static char	*get_env_content(t_data *p, char *s)
 {
 	char	*status;
 
@@ -31,7 +31,7 @@ static char	*get_env_content(t_paco *p, char *s)
 	return (ft_strdup(""));
 }
 
-static void	expand_1(t_paco *p, int	*i, int *flag, char **expand)
+static void	expand_1(t_data *p, int	*i, int *flag, char **expand)
 {
 	char	*tmp;
 
@@ -58,7 +58,7 @@ static void	expand_1(t_paco *p, int	*i, int *flag, char **expand)
 	}
 }
 
-static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
+static void	expand_2(t_data *p, int *i, int *flag, char **exp)
 {
 	if ((!*flag && p->lex[p->i][p->k] == '~')
 		&& ((p->lex[p->i][p->k - 1] == ' ' && p->lex[p->i][p->k + 1] == ' ')
@@ -84,7 +84,7 @@ static void	expand_2(t_paco *p, int *i, int *flag, char **exp)
 	}
 }
 
-void	expand(t_paco *p)
+void	expand(t_data *p)
 {
 	int		i;
 	int		flag;

@@ -6,13 +6,13 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/13 16:03:57 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/13 16:41:35 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:30:54 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	re_path(t_paco *p)
+void	re_path(t_data *p)
 {
 	t_env	*aux;
 
@@ -30,7 +30,7 @@ void	re_path(t_paco *p)
 		return ;
 }
 
-void	check_path(t_paco *p)
+void	check_path(t_data *p)
 {
 	t_env	*aux;
 

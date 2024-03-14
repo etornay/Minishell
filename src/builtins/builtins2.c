@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:19:31 by etornay-          #+#    #+#             */
-/*   Updated: 2024/03/14 11:31:27 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:30:39 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	exec_unset_continue(t_env *del)
 	del = NULL;
 }
 
-void	exec_unset(t_paco *p, char *name)
+void	exec_unset(t_data *p, char *name)
 {
 	t_env	*del;
 	t_env	*prev;
@@ -50,7 +50,7 @@ void	exec_unset(t_paco *p, char *name)
 	g_status = 1;
 }
 
-void	exec_pwd(t_paco *p)
+void	exec_pwd(t_data *p)
 {
 	char	dir[500];
 
@@ -61,7 +61,7 @@ void	exec_pwd(t_paco *p)
 	g_status = 0;
 }
 
-void	exec_cd(t_paco *p, char **s, int flag)
+void	exec_cd(t_data *p, char **s, int flag)
 {
 	char	dir[500];
 
@@ -90,7 +90,7 @@ void	exec_cd(t_paco *p, char **s, int flag)
 	}
 }
 
-int	final_exit(t_paco *p, t_parser *node)
+int	final_exit(t_data *p, t_parser *node)
 {
 	int	i;
 	int	j;

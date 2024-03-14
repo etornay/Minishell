@@ -6,20 +6,20 @@
 /*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/08 13:18:17 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/03/13 17:20:12 by etornay-         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:29:06 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	free_all(t_paco *p)
+void	free_all(t_data *p)
 {
 	free_lex(p);
 	ft_env_clear(&p->l_env);
 	free(p);
 }
 
-void	free_path(t_paco *p)
+void	free_path(t_data *p)
 {
 	int	i;
 
@@ -36,7 +36,7 @@ void	free_path(t_paco *p)
 	}
 }
 
-void	free_lex(t_paco *p)
+void	free_lex(t_data *p)
 {
 	int	i;
 

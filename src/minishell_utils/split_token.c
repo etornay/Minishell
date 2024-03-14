@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_token.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 15:01:04 by etornay-          #+#    #+#             */
-/*   Updated: 2024/02/28 12:19:56 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:26:08 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static int	word_len(char *s, t_paco *p)
+static int	word_len(char *s, t_data *p)
 {
 	size_t	len;
 	int		fq_simple;
@@ -40,7 +40,7 @@ static int	word_len(char *s, t_paco *p)
 	return (len);
 }
 
-static void	count_words2(char **s, int *fq_simple, int *fq_double, t_paco *p)
+static void	count_words2(char **s, int *fq_simple, int *fq_double, t_data *p)
 {
 	if (s[p->i][p->j] == '\'' && !*fq_double)
 	{
@@ -69,7 +69,7 @@ static void	count_words2(char **s, int *fq_simple, int *fq_double, t_paco *p)
 	}
 }
 
-static int	count_words(char **s, t_paco *p)
+static int	count_words(char **s, t_data *p)
 {
 	int		fq_simple;
 	int		fq_double;
@@ -98,7 +98,7 @@ static int	count_words(char **s, t_paco *p)
 	return (p->count);
 }
 
-char	**split_pipe(char **s, t_paco *p, int i, int j)
+char	**split_pipe(char **s, t_data *p, int i, int j)
 {
 	char	**str;
 

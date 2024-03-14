@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ncruz-ga <ncruz-ga@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: etornay- <etornay-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 09:40:49 by ncruz-ga          #+#    #+#             */
-/*   Updated: 2024/02/12 10:11:17 by ncruz-ga         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:31:38 by etornay-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	restart_index(t_paco *p)
+void	restart_index(t_data *p)
 {
 	p->aux = p->l_env;
 	while (p->aux)
@@ -22,7 +22,7 @@ void	restart_index(t_paco *p)
 	}
 }
 
-static t_env	*get_first(t_paco *p)
+static t_env	*get_first(t_data *p)
 {
 	t_env	*first;
 	int		i;
@@ -40,7 +40,7 @@ static t_env	*get_first(t_paco *p)
 	return (first);
 }
 
-void	set_env_index(t_paco *p)
+void	set_env_index(t_data *p)
 {
 	int		index;
 
@@ -73,7 +73,7 @@ static void	change_content(t_env *node, char *s)
 		node->content = ft_strdup(s);
 }
 
-int	check_node(t_paco *p, char **s)
+int	check_node(t_data *p, char **s)
 {
 	p->aux = p->l_env;
 	while (p->aux)
