@@ -24,15 +24,15 @@ entrecomillada exceptuando $ (signo de dólar).
 
 • Implementar redirecciones:
 
-◦ < debe redirigir input.
+_**◦ < debe redirigir input.**_
 
-◦ > debe redirigir output.
+_**◦ > debe redirigir output.**_
 
-◦ “<<” debe recibir un delimitador, después leer del input de la fuente actual
+_**◦ “<<” debe recibir un delimitador, después leer del input de la fuente actual
 hasta que una línea que contenga solo el delimitador aparezca. Sin embargo,
-no necesita actualizar el historial.
+no necesita actualizar el historial.**_
 
-◦ “>>” debe redirigir el output en modo append.
+_**◦ “>>” debe redirigir el output en modo append.**_
 
 • Implementar pipes (carácter |). El output de cada comando en la pipeline se
 conecta a través de un pipe al input del siguiente comando.
@@ -46,27 +46,27 @@ ejecutado en la pipeline.
 
 • Cuando sea interactivo:
 
-_◦ ctrl-C imprime una nueva entrada en una línea nueva._
+_**◦ ctrl-C imprime una nueva entrada en una línea nueva.**_
 
-_◦ ctrl-D termina el shell._
+_**◦ ctrl-D termina el shell.**_
 
-_◦ ctrl-\ no hace nada._
+_**◦ ctrl-\ no hace nada.**_
 
 • Deberá implementar los built-ins:
 
-_◦ echo con la opción -n._
+_**◦ echo con la opción -n.**_
 
-_◦ cd solo con una ruta relativa o absoluta._
+_**◦ cd solo con una ruta relativa o absoluta.**_
 
-_◦ pwd sin opciones._
+_**◦ pwd sin opciones.**_
 
-_◦ export sin opciones._
+_**◦ export sin opciones.**_
 
-_◦ unset sin opciones._
+_**◦ unset sin opciones.**_
 
-_◦ env sin opciones o argumentos._
+_**◦ env sin opciones o argumentos.**_
 
-_◦ exit sin opciones._
+_**◦ exit sin opciones.**_
 
 La función readline puede producir algunos leaks que no necesitas arreglar. Eso no
 significa que tu código, sí, el código que has escrito, pueda producir leaks.
